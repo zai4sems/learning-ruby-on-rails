@@ -1,0 +1,19 @@
+<h1>Add an ingredient</h1>
+
+
+<%= form_for @ingredient do |f| %>
+<p>
+    <%= f.label :ingredient %>
+    <%= f.text_field :ingredient_name %>
+</p>
+
+<p>
+    <%= f.label :purchase_price %>
+    <%= f.number_field :purchase_price %>
+</p>
+
+<p>
+    <%= f.submit %>
+</p>
+
+<% end %>
