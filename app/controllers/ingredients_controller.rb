@@ -6,8 +6,16 @@ class IngredientsController < ApplicationController
     
     def create
         @ingredient = Ingredient.new(ingredient_params)
-        @ingredient.save
-        redirect_to ingredients_show(@ingredient)
+        if @ingredient.save
+            flash[:notice] = "Ingredient was successfully created"
+            redirect_to ingredient_path(@ingredient)
+        else
+            render 'new'
+        end
+    end
+    
+    def show
+        @ingredient = Ingredient.find(params[:id])
     end
     
     private
