@@ -7,3 +7,6 @@
 <p>
     Purchase price: <%= @ingredient.purchase_price %>
 </p>
+
+<%= link_to "Edit this ingredient", edit_ingredient_path(@ingredient) %>  |
+<%= link_to "Back to ingredients listing", ingredients_path %>

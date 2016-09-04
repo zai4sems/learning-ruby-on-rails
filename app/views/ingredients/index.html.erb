@@ -1,0 +1,21 @@
+<h1>Listing all ingredients</h1>
+<p>
+    <%= link_to "Create new ingredient", new_ingredient_path %>
+</p>
+<table>
+    <tr>
+        <th>Ingredient Name</th>
+        <th>Purchase price</th>
+    </tr>
+    
+    <% @ingredients.each do |ingredient| %>
+        <tr>
+            <td><%= ingredient.ingredient_name %></td>
+            <td><%= ingredient.purchase_price %></td>
+            <td><%= link_to 'Edit', edit_ingredient_path(ingredient) %></td>
+            <td><%= link_to 'Show', ingredient_path(ingredient) %></td>
+        </tr>
+    <% end %>
+    
+    
+</table>

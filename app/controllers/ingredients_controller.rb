@@ -1,7 +1,15 @@
 class IngredientsController < ApplicationController
     
+    def index
+       @ingredients = Ingredient.all 
+    end
+    
     def new
         @ingredient = Ingredient.new
+    end
+    
+    def edit
+        @ingredient = Ingredient.find(params[:id])
     end
     
     def create
@@ -12,6 +20,16 @@ class IngredientsController < ApplicationController
         else
             render 'new'
         end
+    end
+    
+    def update
+       @ingredient = Ingredient.find(params[:id]) 
+       if @ingredient.update(ingredient_params)
+           flash[:notice] = "Ingredient was successfully updated"
+           redirect_to ingredient_path(@ingredient)
+       else
+           render 'edit'
+       end
     end
     
     def show
