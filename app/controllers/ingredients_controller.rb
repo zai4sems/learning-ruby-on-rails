@@ -1,5 +1,8 @@
 class IngredientsController < ApplicationController
     
+    before_action :set_ingredient, only: [:edit, :update, :show, :destroy]
+   
+    
     def index
        @ingredients = Ingredient.all 
     end
@@ -9,11 +12,11 @@ class IngredientsController < ApplicationController
     end
     
     def edit
-        @ingredient = Ingredient.find(params[:id])
     end
     
     def create
         @ingredient = Ingredient.new(ingredient_params)
+        @ingredient.price = @ingredient.calculate_price_per_unit
         if @ingredient.save
             flash[:notice] = "Ingredient was successfully created"
             redirect_to ingredient_path(@ingredient)
@@ -23,7 +26,7 @@ class IngredientsController < ApplicationController
     end
     
     def update
-       @ingredient = Ingredient.find(params[:id]) 
+       @ingredient.price = @ingredient.calculate_price_per_unit
        if @ingredient.update(ingredient_params)
            flash[:notice] = "Ingredient was successfully updated"
            redirect_to ingredient_path(@ingredient)
@@ -33,19 +36,25 @@ class IngredientsController < ApplicationController
     end
     
     def show
-        @ingredient = Ingredient.find(params[:id])
+        @ingredient.price = @ingredient.calculate_price_per_unit
     end
     
     def destroy
-        @ingredient = Ingredient.find(params[:id])
         @ingredient.destroy
         flash[:notice] = "Ingredient was successfully deleted"
         redirect_to ingredients_path
     end
     
     private
-    def ingredient_params
-        params.require(:ingredient).permit(:ingredient_name, :purchase_price)
+    def set_ingredient
+        @ingredient = Ingredient.find(params[:id])
     end
+    
+    def ingredient_params
+        params.require(:ingredient).permit(:ingredient_name, :purchase_price, :volume, :unit, :price)
+    end
+    
+
+
     
 end

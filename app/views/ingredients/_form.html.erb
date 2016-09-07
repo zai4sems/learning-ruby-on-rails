@@ -15,7 +15,17 @@
 
 <p>
     <%= f.label :purchase_price %>
-    <%= f.number_field :purchase_price %>
+    <%= f.number_field :purchase_price, step: 'any' %>
+</p>
+
+<p>
+    <%= f.label :purchase_weight_or_volume %>
+    <%= f.number_field :volume %>
+</p>
+
+<p>
+    <%= f.label :unit %>
+    <%= f.text_field :unit %>
 </p>
 
 <p>
