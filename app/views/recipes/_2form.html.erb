@@ -1,0 +1,45 @@
+<% if@recipe.errors.any? %>
+<h2>The following errors prevented the recipe from getting created</h2>
+<ul>
+    <% @recipe.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+</ul>
+<% end %>
+
+<%= form_for @recipe do |f| %>
+<p>
+    <%= f.label :recipe %>
+    <%= f.text_field :title %>
+</p>
+
+<p>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+</p>
+
+<p>
+    <%= f.label :instructions %>
+    <%= f.text_area :instructions %>
+</p>
+
+<p>
+    <%#= f.simple_fields_for :ingredients, @recipe.ingredients_for_form do |ingredient| %>
+    <%#= ingredient.input :ingredient_name, label: "Ingredient Name" %>
+    <%#= ingredient.input :recipe_id, input_html: {value: @recipe.id}, as: :hidden %>
+    <%# end %>
+</p>
+
+<p>
+    <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :ingredient_name do |cb| %>
+        <% cb.label {cb.check_box + cb.text} %>
+    <% end %>
+</p>
+
+<p>
+    <%= f.submit %>
+</p>
+
+<% end %>
+
+<%= link_to "Back to recipes listing", recipes_path %>

@@ -1,0 +1,17 @@
+<h1>Showing selected recipe_ingredient</h1>
+
+<p>
+    Recipe ID: <%= @recipe_ingredient.recipe_id %>
+</p>
+
+<p>
+    Ingredient ID: <%= @recipe_ingredient.ingredient_id %>
+</p>
+
+<p>
+    Quantity: <%= @recipe_ingredient.quantity %>
+</p>
+
+
+<%= link_to "Edit this recipe-ingredient", edit_recipe_ingredient_path(@recipe_ingredient) %>  |
+<%= link_to "Back to recipe_ingredients listing", recipe_ingredients_path %>

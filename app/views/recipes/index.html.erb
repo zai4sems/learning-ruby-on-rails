@@ -1,0 +1,43 @@
+<h1>Listing all recipes</h1>
+<p>
+    <%= link_to "Create new recipe", new_recipe_path %>
+</p>
+<table>
+    <tr>
+        <th>Recipe Name</th>
+        <th>Description</th>
+        <th>Instructions</th>
+        <th>Cost</th>
+    </tr>
+    
+    <% @recipes.each do |recipe| %>
+        <tr>
+            <td><%= recipe.title %></td>
+            <td><%= recipe.description %></td>
+            <td><%= recipe.instructions %></td>
+            <td><%= number_to_currency(recipe.cost) %></td>
+            <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+            <td><%= link_to 'Show', recipe_path(recipe) %></td>
+            <td><%= link_to 'Delete', recipe_path(recipe), method: :delete, data: {confirm: "Are you sure?"} %></td>
+        </tr>
+    <% end %>
+</table>
+
+<table>
+    <tr>
+        <th>Recipe name</th>
+        <th>Recipe ID</th>
+        <th>Ingredient ID</th>
+        <th>Quantity</th>
+    </tr>
+    <% for recipe in @recipes %>
+    <% for recipe_ingredient in recipe.recipe_ingredients %>
+    <tr><td><%= recipe.title %></td>
+    
+        <td><%= recipe_ingredient.recipe_id %></td>
+        <td><%= recipe_ingredient.ingredient_id %></td>
+        <td><%= recipe_ingredient.quantity %></td>
+        </tr>
+    <% end %><br>
+    <% end %>
+</table>

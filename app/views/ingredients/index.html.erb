@@ -26,3 +26,8 @@
 
    
 </table>
+<br><br>
+
+    <% @ingredients.each do |ingredient| %>
+        <%= link_to "#{ingredient.ingredient_name}", ingredient_path(ingredient) %>
+    <% end %>

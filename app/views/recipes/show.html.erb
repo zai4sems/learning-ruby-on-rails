@@ -1,0 +1,29 @@
+<h1>Showing selected recipe</h1>
+
+<p>
+    Recipe name: <%= @recipe.title %>
+</p>
+
+<p>
+    Description: <%= @recipe.description %>
+</p>
+
+<p>
+    Instructions: <%= @recipe.instructions %>
+</p>
+
+<p>
+    Cost of recipe: <%= @recipe.cost %>
+</p>
+
+<% if @recipe.ingredients.any? %>
+<p>
+    Ingredients: <%= render @recipe.ingredients %><br>
+    Quantity: <%= render @recipe.recipe_ingredients %>
+</p>
+<% end %>
+
+
+
+<%= link_to "Edit this recipe", edit_recipe_path(@recipe) %>  |
+<%= link_to "Back to recipes listing", recipes_path %>

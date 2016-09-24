@@ -1,0 +1,26 @@
+<% if@recipe_ingredient.errors.any? %>
+<h2>The following errors prevented the recipe_ingredient from getting created</h2>
+<ul>
+    <% @recipe_ingredient.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+</ul>
+<% end %>
+
+<%= form_for @recipe_ingredient do |f| %>
+
+
+
+<p>
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity %>
+</p>
+
+
+<p>
+    <%= f.submit %>
+</p>
+
+<% end %>
+
+<%= link_to "Back to recipe_ingredients listing", recipe_ingredients_path %>

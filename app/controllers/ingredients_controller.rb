@@ -1,10 +1,11 @@
 class IngredientsController < ApplicationController
     
     before_action :set_ingredient, only: [:edit, :update, :show, :destroy]
-   
     
     def index
        @ingredients = Ingredient.all 
+       
+       #@ingredients = Ingredient.paginate(page: params[:page], per_pages: 5)
     end
     
     def new
@@ -16,17 +17,17 @@ class IngredientsController < ApplicationController
     
     def create
         @ingredient = Ingredient.new(ingredient_params)
-        @ingredient.price = @ingredient.calculate_price_per_unit
         if @ingredient.save
             flash[:notice] = "Ingredient was successfully created"
             redirect_to ingredient_path(@ingredient)
+            #redirect_to ingredients_path
         else
             render 'new'
         end
     end
     
     def update
-       @ingredient.price = @ingredient.calculate_price_per_unit
+        @ingredient.price = @ingredient.calculate_price_per_unit
        if @ingredient.update(ingredient_params)
            flash[:notice] = "Ingredient was successfully updated"
            redirect_to ingredient_path(@ingredient)
@@ -45,16 +46,19 @@ class IngredientsController < ApplicationController
         redirect_to ingredients_path
     end
     
+    def set_calculated_price
+        @ingredient.price = @ingredient.calculate_price_per_unit
+    end
+    
     private
     def set_ingredient
         @ingredient = Ingredient.find(params[:id])
     end
     
+   
+    
     def ingredient_params
         params.require(:ingredient).permit(:ingredient_name, :purchase_price, :volume, :unit, :price)
     end
-    
-
-
     
 end
