@@ -1,3 +1,4 @@
+/* global $ */
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -16,3 +17,12 @@
 //= require turbolinks
 //= require_tree .
 //= require cocoon
+
+
+var hide_spinner = function(){
+    $('#spinner').hide();
+}
+
+var show_spinner = function(){
+    $('#spinner').show();
+}

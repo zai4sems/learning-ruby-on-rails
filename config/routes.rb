@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   
   root 'pages#home'
   get 'about', to: 'pages#about'
-  
+  get 'my_recipe', to: "recipes#my_recipe"
+  get 'search_ingredients', to: "ingredients#search"
   
   resources :ingredients
   

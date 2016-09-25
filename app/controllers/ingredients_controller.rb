@@ -2,6 +2,19 @@ class IngredientsController < ApplicationController
     
     before_action :set_ingredient, only: [:edit, :update, :show, :destroy]
     
+    def search
+        if params[:ingredient]
+           @ingredient = Ingredient.find_by_name(params[:ingredient]) 
+        end
+        
+        if @ingredient
+            #render json: @ingredient
+            render partial: 'lookup'
+        else
+           render status: :not_found, nothing: true
+        end
+    end
+    
     def index
        @ingredients = Ingredient.all 
        
@@ -58,7 +71,7 @@ class IngredientsController < ApplicationController
    
     
     def ingredient_params
-        params.require(:ingredient).permit(:ingredient_name, :purchase_price, :volume, :unit, :price)
+        params.require(:ingredient).permit(:name, :purchase_price, :volume, :unit, :price)
     end
     
 end

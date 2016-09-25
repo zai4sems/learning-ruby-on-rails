@@ -1,7 +1,7 @@
 class RecipeIngredient < ActiveRecord::Base
     belongs_to :ingredient 
     belongs_to :recipe
-    validates :quantity, presence: true
+    #validates :quantity, presence: true
     
     before_create do |need|
     #need.quantity = ingredient.quantity #temporary quantity

@@ -1,0 +1,26 @@
+<div id="ingredient-lookup">
+    <h3>Search for Ingredients</h3>
+    <%= form_tag search_ingredients_path, remote: true, method: :get, id: 'ingredient-lookup-form' do %>
+    <div class="form-group row no_padding text-center col-md-12">
+        <div class="col-md-10">
+            <%= text_field_tag :ingredient, params[:ingredient], placeholder: "Ingredient name", autofocus: true,
+                                                                        class: 'form-control search-box input-lg' %>
+        </div>
+        <div class="col-md-2">
+            <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+                <i class="fa fa-search"></i> Look up an ingredient</i>
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+    <%= render 'common/spinner' %>
+    <% if @ingredient %>
+        <div id="ingredient-lookup-results" class="well results-block">
+            <strong>Name:</strong> <%= @ingredient.name %>
+            <strong>Purchase Price:</strong> <%= @ingredient.purchase_price %>
+            <strong>Unit:</strong> <%= @ingredient.unit %>
+            <strong>Price per unit:</strong> <%= @ingredient.price %>
+        </div>
+    <% end %>
+    <div id="ingredient-lookup-errors"></div>
+</div>

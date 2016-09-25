@@ -1,6 +1,6 @@
 class Recipe < ActiveRecord::Base
     
-    has_many :recipe_ingredients, inverse_of: :recipe
+    has_many :recipe_ingredients
     has_many :ingredients, through: :recipe_ingredients#, :class_name => 'Ingredient'
     
     #def ingredients_for_form

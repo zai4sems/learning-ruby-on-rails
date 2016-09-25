@@ -1,7 +1,7 @@
 class Ingredient < ActiveRecord::Base
-    has_many :recipe_ingredients, dependent: :destroy
+    has_many :recipe_ingredients
     has_many :recipes, through: :recipe_ingredients
-    validates :ingredient_name, presence: true, length: { minimum: 3, maximum: 50}
+    validates :name, presence: true, length: { minimum: 3, maximum: 50}
     validates_uniqueness_of :ingredient_name
     validates :purchase_price, presence: true
     validates :volume, presence: true
@@ -14,4 +14,8 @@ class Ingredient < ActiveRecord::Base
     self.purchase_price.to_f / self.volume.to_f
    end
    
+   def find_by_name(ingredient_name)
+       where(name: ingredient_name).first
+   
+   end
 end

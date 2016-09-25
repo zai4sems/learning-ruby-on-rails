@@ -13,7 +13,7 @@
     
     <% @ingredients.each do |ingredient| %>
         <tr>
-            <td><%= ingredient.ingredient_name %></td>
+            <td><%= ingredient.name %></td>
             <td><%= ingredient.purchase_price %></td>
             <td><%= ingredient.volume %></td>
             <td><%= ingredient.unit %></td>
@@ -29,5 +29,5 @@
 <br><br>
 
     <% @ingredients.each do |ingredient| %>
-        <%= link_to "#{ingredient.ingredient_name}", ingredient_path(ingredient) %>
+        <%= link_to "#{ingredient.name}", ingredient_path(ingredient) %>
     <% end %>
