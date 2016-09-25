@@ -59,10 +59,7 @@ class IngredientsController < ApplicationController
         redirect_to ingredients_path
     end
     
-    def set_calculated_price
-        @ingredient.price = @ingredient.calculate_price_per_unit
-    end
-    
+   
     private
     def set_ingredient
         @ingredient = Ingredient.find(params[:id])
