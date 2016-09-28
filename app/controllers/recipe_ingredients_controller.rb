@@ -15,14 +15,26 @@ class RecipeIngredientsController < ApplicationController
     end
     
     def create
-        @recipe_ingredient = RecipeIngredient.new(recipe_ingredient_params)
-        if @recipe_ingredient.save
-            flash[:notice] = "Recipe Ingredient was successfully created"
-            #redirect_to recipe_ingredient_path(@recipe_ingredient)
-            redirect_to recipe_recipe_ingredients_path
+        if params[:ingredient_id].present?
+           @recipe_ingredient = RecipeIngredient.new(ingredient_id: params[:ingredient_id], recipe_id: params[:recipe_id])
         else
-            render 'new'
+            ingredient = Ingredient.find_by_name(params[:ingredient_name])
+            #if ingredient
+                @recipe_ingredient = RecipeIngredient.new(recipe: params[:recipe_id], ingredient: ingredient)
+            #else
+                #ingredient = Ingredient.new(params[:ingredient])
+                #rujuk vids many to many user-stock
         end
+    
+    respond_to do |format|
+        if @recipe_ingredient.save
+            format.html { redirect_to recipes_path, notice: "Ingredient #{@recipe_ingredient.ingredient.name} was successfully added"}
+            format.json { render :show, status: :created, location: @recipe_ingredient }
+        else
+            format.html { render 'new' }
+            format.json { render json: @recipe_ingredient.errors, status: :unprocessable_entity }
+        end
+    end
     end
     
     def update
@@ -41,7 +53,7 @@ class RecipeIngredientsController < ApplicationController
     def destroy
         @recipe_ingredient.destroy
         flash[:notice] = "Recipe Ingredient was successfully deleted"
-        redirect_to recipe_recipe_ingredients_path
+        redirect_to recipe_ingredients_path
     end
     
     private

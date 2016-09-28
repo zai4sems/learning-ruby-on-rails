@@ -31,10 +31,8 @@ class RecipesController < ApplicationController
     
     def create
         @recipe = Recipe.new(recipe_params)
-        
         #@recipe.cost = @recipe.calculate_cost
         if @recipe.save 
-            @recipe.recipe_ingredients.create(recipe_params)
             flash[:notice] = "recipe was successfully created"
             redirect_to recipe_path(@recipe)
         else
@@ -44,7 +42,7 @@ class RecipesController < ApplicationController
     
     def update
        #@recipe.cost = @recipe.calculate_cost
-       @recipe.ingredients.build
+       #@recipe.ingredients.build
        if @recipe.update(recipe_params)
            flash[:notice] = "recipe was successfully updated"
            redirect_to recipe_path(@recipe)
@@ -69,10 +67,10 @@ class RecipesController < ApplicationController
     end
     
     def recipe_params
-        params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :ingredient_name, :purchase_price, :volume, :unit, :_destroy, recipe_ingredient_attributes: [:quantity]])
-        #params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :ingredient_name, :purchase_price, :volume, :unit, :_destroy],
+        params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy])
+        #params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy],
         #recipe_ingredients_attributes: [:id, :recipe_id, :ingredient_id, :quantity, :_destroy]) #dapat tapi row x selari
         #params.require(:recipe).permit(:id, :title, :description, :instructions, recipe_ingredients_attributes: [:id, :recipe_id, :ingredient_id, :quantity, :_destroy, 
-        #ingredient_attributes: [:id, :ingredient_name, :purchase_price, :volume, :unit, :_destroy]]) #quantity masuk, ingredient x masuk
+        #ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]]) #quantity masuk, ingredient x masuk
     end
 end

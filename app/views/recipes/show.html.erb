@@ -1,8 +1,8 @@
 <h1>Showing selected recipe</h1>
 
-<p>
+<h3>
     Recipe name: <%= @recipe.title %>
-</p>
+</h3>
 
 <p>
     Description: <%= @recipe.description %>
@@ -15,15 +15,22 @@
 <p>
     Cost of recipe: <%= @recipe.cost %>
 </p>
-
+<h2>Ingredients</h2>
+<% @recipe.ingredients.each do |ingredient| %>
+    <li><%= ingredient.name %></li>
+<% end %>
+<h4>preview testing</h4>
 <% if @recipe.ingredients.any? %>
 <p>
-    Ingredients: <%= render @recipe.ingredients %><br>
+    Ingredients: <li><%= render @recipe.ingredients %></li><br>
     Quantity: <%= render @recipe.recipe_ingredients %>
 </p>
 <% end %>
 
+<h2>Choose ingredients</h2>
+<%#= render 'ingredients/lookup', {recipe: @recipe} %>
+<%= render 'ingredients/lookup', recipe: @recipe %>
+<%#= render partial: "ingredients/lookup", object: @recipe %>
 
 
-<%= link_to "Edit this recipe", edit_recipe_path(@recipe) %>  |
-<%= link_to "Back to recipes listing", recipes_path %>
+<%= link_to "Edit this recipe", edit_recipe_path(@recipe) %>  |  <%= link_to "Back to recipes listing", recipes_path %>

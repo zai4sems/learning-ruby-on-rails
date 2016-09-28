@@ -1,42 +1,20 @@
-<div class='nested-fields'>
-<p>
-      <%= f.label :ingredient_name %>
-      <%= f.text_field :ingredient_name %>
-
-
-
-    <%= f.label :purchase_price %>
-    <%= f.number_field :purchase_price, step: 'any' %>
-
-
-
-    <%= f.label :purchase_weight_or_volume %>
-    <%= f.number_field :volume %>
-
-
-
-    <%= f.label :unit %>
-    <%= f.text_field :unit %>
+  <div class='nested-fields'>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      
+        <%= f.label :purchase_price %>
+        <%= f.number_field :purchase_price, step: 'any' %>
     
-    <%#= f.fields_for :recipe_ingredients do |quantity_ingredient| %>
-      <%#= f.label :quantity %>
-      <%#= quantity_ingredient.number_field :quantity, step: 'any' %>
-    <%# end %>
+        <%= f.label :purchase_weight_or_volume %>
+        <%= f.number_field :volume %>
     
-    <%# x masuk %>
-    <div id = 'recipe_ingredients'>
-    <%=f.fields_for :recipe_ingredients do |recipe_ingredient| %>
-    <%#= recipe_ingredient.label :quantity %>
-    <%#= recipe_ingredient.number_field :quantity, step: 'any' %>
-     <%#= render 'recipe_ingredient_fields', :f => recipe_ingredient %>
-    <% end %>
-        <div class='links'>
-          <%#= link_to_add_association 'add quantity', f, :recipe_ingredients %>
-        </div>
+        <%= f.label :unit %>
+        <%= f.text_field :unit %>
     </div>
-
-</p>
-<p>
-    <%= link_to_remove_association "remove ingredient", f %>
-</p>
-</div>
+    <div class="field">
+      <%#= f.check_box :done %>
+      <%#= f.label :done %>
+    </div>
+    <%= link_to_remove_association "remove ingredient", f , class:'btn btn-xs btn-success'%>
+  </div>

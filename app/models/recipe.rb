@@ -11,7 +11,9 @@ class Recipe < ActiveRecord::Base
     validates :title, presence: true, length: { minimum: 3, maximum: 50}
     
     accepts_nested_attributes_for :recipe_ingredients, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :ingredients
+    accepts_nested_attributes_for :ingredients,
+                                    reject_if: proc { |attributes| attributes['name'].blank? }, 
+                                    allow_destroy: true
    
    def calculate_cost
     
