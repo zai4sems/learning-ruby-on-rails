@@ -12,9 +12,14 @@
   <dd><%= @recipe.instructions %></dd>
   <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
   <dd><%= @recipe.cost %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:need) %>:</strong></dt>
-  <dd><%= @recipe.need %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:need) %>:</strong></dt>
+  <dd><%#= @recipe.need %></dd>
+    <dt><strong>Ingredients</strong></dt>
+    <% @recipe.ingredients.each do |ingredient| %>
+        <dd><li><%= ingredient.name %></li></dd>
+    <% end %>
 </dl>
+
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               recipes_path, :class => 'btn btn-default'  %>
