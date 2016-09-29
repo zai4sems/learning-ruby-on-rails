@@ -1,4 +1,4 @@
-.form-group
+.form-horizontal
 = simple_form_for @recipe do |f|
   = f.input :title
   = f.input :description
@@ -6,8 +6,9 @@
   #ingredients
     = f.simple_fields_for :recipe_ingredients do |recipe_ingredient|
       = render 'recipe_ingredient_fields', :f => recipe_ingredient
-    = link_to_add_association 'add a ingredient', f, :recipe_ingredients
+    = link_to_add_association 'add a ingredient', f, :recipe_ingredients, :class => 'btn btn-default btn-xs'
  
-
-  = f.button :submit, :disable_with => 'Please wait ...'
+  = f.button :submit, :disable_with => 'Please wait ...', :class => 'btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")),
+                recipes_path, :class => 'btn btn-default'
   
