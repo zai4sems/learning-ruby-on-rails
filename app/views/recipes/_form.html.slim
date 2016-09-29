@@ -1,0 +1,13 @@
+.form-group
+= simple_form_for @recipe do |f|
+  = f.input :title
+  = f.input :description
+
+  #ingredients
+    = f.simple_fields_for :recipe_ingredients do |recipe_ingredient|
+      = render 'recipe_ingredient_fields', :f => recipe_ingredient
+    = link_to_add_association 'add a ingredient', f, :recipe_ingredients
+ 
+
+  = f.button :submit, :disable_with => 'Please wait ...'
+  

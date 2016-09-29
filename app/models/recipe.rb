@@ -1,7 +1,7 @@
 class Recipe < ActiveRecord::Base
     
     has_many :recipe_ingredients
-    has_many :ingredients, through: :recipe_ingredients#, :class_name => 'Ingredient'
+    has_many :ingredients, through: :recipe_ingredients, :class_name => 'Ingredient'
     
     #def ingredients_for_form
        #collection = ingredients.where(recipe_id: id) 

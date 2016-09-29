@@ -8,7 +8,7 @@ class Ingredient < ActiveRecord::Base
     validates :unit, presence: true
     
     
-   accepts_nested_attributes_for :recipe_ingredients, reject_if: :all_blank, allow_destroy: true
+   #accepts_nested_attributes_for :recipe_ingredients, reject_if: :all_blank, allow_destroy: true
    
     before_create do |calc_price|
     calc_price.price = self.purchase_price.to_f / self.volume.to_f

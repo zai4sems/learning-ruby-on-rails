@@ -1,0 +1,8 @@
+.nested-fields.recipe-ingredient-fields
+  .ingredient_from_list
+    = f.association :ingredient, collection: Ingredient.order(:name), :prompt => 'Choose an existing ingredient', label: false
+    br
+  = link_to_add_association 'or create a new ingredient', f, :ingredient
+  br
+  br
+  = link_to_remove_association "remove ingredient", f

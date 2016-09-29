@@ -27,10 +27,7 @@
 </p>
 <% end %>
 
-<h2>Choose ingredients</h2>
-<%#= render 'ingredients/lookup', {recipe: @recipe} %>
-<%= render 'ingredients/lookup', recipe: @recipe %>
-<%#= render partial: "ingredients/lookup", object: @recipe %>
+
 
 
 <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %>  |  <%= link_to "Back to recipes listing", recipes_path %>

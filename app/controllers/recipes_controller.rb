@@ -67,10 +67,12 @@ class RecipesController < ApplicationController
     end
     
     def recipe_params
-        params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy])
+        #params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy])
         #params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy],
         #recipe_ingredients_attributes: [:id, :recipe_id, :ingredient_id, :quantity, :_destroy]) #dapat tapi row x selari
         #params.require(:recipe).permit(:id, :title, :description, :instructions, recipe_ingredients_attributes: [:id, :recipe_id, :ingredient_id, :quantity, :_destroy, 
         #ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]]) #quantity masuk, ingredient x masuk
+        
+        params.require(:recipe).permit(:id, :title, :description, :instructions, recipe_ingredients_attributes: [:id, :_destroy, :ingredient_id, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]])
     end
 end

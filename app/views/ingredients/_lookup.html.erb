@@ -21,7 +21,7 @@
             <strong>Purchase Price:</strong> <%= @ingredient.purchase_price %>
             <strong>Unit:</strong> <%= @ingredient.unit %>
             <strong>Price per unit:</strong> <%= @ingredient.price %>
-            <%= link_to "Add to this recipe", recipe_ingredients_path(recipe_id: params[:recipe], ingredient_name: @ingredient.name, 
+            <%#= link_to "view", recipe_ingredients_path(recipe_id: params[:recipe], ingredient_name: @ingredient.name, 
                 ingredient_id: @ingredient.id ? @ingredient.id : ''), class:'btn btn-xs btn-success', method: :post %>
         </div>
         <%# end %>

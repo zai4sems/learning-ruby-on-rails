@@ -28,7 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 
-gem 'simple_form', '~> 3.3', '>= 3.3.1'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
 
 gem 'slim', '~> 3.0', '>= 3.0.7'
 
