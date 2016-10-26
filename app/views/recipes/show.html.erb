@@ -11,14 +11,33 @@
   <dt><strong><%= model_class.human_attribute_name(:instructions) %>:</strong></dt>
   <dd><%= @recipe.instructions %></dd>
   <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
-  <dd><%= @recipe.cost %></dd>
-  <dt><strong><%#= model_class.human_attribute_name(:need) %>:</strong></dt>
-  <dd><%#= @recipe.need %></dd>
-    <dt><strong>Ingredients</strong></dt>
-    <% @recipe.ingredients.each do |ingredient| %>
-        <dd><li><%= ingredient.name %></li></dd>
-    <% end %>
+  <dd><%= number_to_currency(@recipe.cost) %></dd>
 </dl>
+    <h3>Ingredient Cost Summary</h3>
+    <table class = "table table-condensed">
+      <thead>
+        <tr>
+          <td><strong>Ingredients</strong></td>
+          <td><strong>Unit</strong></strong></td>
+          <td><strong>Quantity</strong></td>
+          <td><strong>Cost to buy ingredients</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
+        <tr>
+          <td><%= recipe_ingredient.ingredient_name %></td>
+          <td><%= recipe_ingredient.ingredient_unit %></td>
+          <td><%= recipe_ingredient.quantity %></td>
+          <td><%= number_to_currency(recipe_ingredient.ingredient_price.to_f * recipe_ingredient.quantity.to_f) %></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td colspan="3" align="right"><strong>Total cost</strong></td>
+          <td colspan="1"><%= number_to_currency(@recipe.cost) %> </td>
+        </tr>
+      </tbody>
+    </table>
 
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

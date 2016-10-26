@@ -12,11 +12,15 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require turbolinks
-//= require_tree .
 //= require cocoon
+//= require global
+
+//= require twitter/bootstrap
+//= require_tree .
+//= require turbolinks
+
 
 
 var hide_spinner = function(){

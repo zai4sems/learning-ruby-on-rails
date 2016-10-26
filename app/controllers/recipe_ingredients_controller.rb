@@ -15,6 +15,14 @@ class RecipeIngredientsController < ApplicationController
     end
     
     def create
+        @recipe_ingredient = RecipeIngredient.new
+        if @ingredient.save
+            flash[:notice] = "Ingredient was successfully created"
+            redirect_to ingredient_path(@ingredient)
+            #redirect_to ingredients_path
+        else
+            render 'new'
+        end
         if params[:ingredient_id].present?
            @recipe_ingredient = RecipeIngredient.new(ingredient_id: params[:ingredient_id], recipe_id: params[:recipe_id])
         else

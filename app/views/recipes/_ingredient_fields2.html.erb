@@ -1,0 +1,24 @@
+
+  <div class="form-group">
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+          <div class="nested-fields">
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+            
+            <%= f.label :purchase_price %>
+            <%= f.text_field :purchase_price %>
+            
+            <%= f.label :volume %>
+            <%= f.text_field :volume %>
+            
+            <%= f.label :unit %>
+            <%= f.text_field :unit %>
+            
+            <%= link_to_remove_association "cancel new ingredient", f, :class => 'btn btn-default btn-xs' %>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>

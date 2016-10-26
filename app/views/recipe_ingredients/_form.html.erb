@@ -1,26 +1,12 @@
-<% if@recipe_ingredient.errors.any? %>
-<h2>The following errors prevented the recipe_ingredient from getting created</h2>
-<ul>
-    <% @recipe_ingredient.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-</ul>
+<%= simple_form_for @recipe_ingredient, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :recipe_id %>
+  <%= error_span(@recipe_ingredient[:recipe_id]) %>
+  <%= f.input :ingredient_id %>
+  <%= error_span(@recipe_ingredient[:ingredient_id]) %>
+  <%= f.input :quantity %>
+  <%= error_span(@recipe_ingredient[:quantity]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                recipe_ingredients_path, :class => 'btn btn-default' %>
 <% end %>
-
-<%= form_for @recipe_ingredient do |f| %>
-
-
-
-<p>
-    <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
-</p>
-
-
-<p>
-    <%= f.submit %>
-</p>
-
-<% end %>
-
-<%= link_to "Back to recipe_ingredients listing", recipe_ingredients_path %>

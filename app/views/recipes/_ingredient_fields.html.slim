@@ -1,6 +1,7 @@
-.nested-fields
-  = f.input :name
-  = f.input :purchase_price
-  = f.input :volume
-  = f.input :unit
-  = link_to_remove_association "cancel new ingredient", f, :class => 'btn btn-default btn-xs'
+.panel-body
+  .form-group
+    .nested-fields.rows
+        = f.input :name,label: '', placeholder: 'New ingredient name', input_html: {class:'form-control'}
+        = f.input :purchase_price, placeholder: 'RM', input_html: {class:'form-group form-control'}
+        = f.input :volume, input_html: {class:'form-group form-control'}
+        = f.input :unit, input_html: {class:'form-group form-control'}

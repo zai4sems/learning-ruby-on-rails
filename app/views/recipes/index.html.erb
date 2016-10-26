@@ -25,7 +25,7 @@
         <td><%= recipe.title %></td>
         <td><%= recipe.description %></td>
         <td><%= recipe.instructions %></td>
-        <td><%= recipe.cost %></td>
+        <td><%= number_to_currency(recipe.cost) %></td>
         <td><%#= recipe.need %></td>
         <td><%#=l recipe.created_at %></td>
         <td>

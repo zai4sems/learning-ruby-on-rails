@@ -1,29 +1,42 @@
-<h1>Listing all recipe_ingredients</h1>
-<p>
-    <%= link_to "Create new recipe_ingredient", new_recipe_ingredient_path %>
-</p>
-<table>
+<%- model_class = RecipeIngredient -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
     <tr>
-        <th>Recipe ID</th>
-        <th>Ingredient ID</th>
-        <th>Quantity</th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:recipe_id) %></th>
+      <th><%= model_class.human_attribute_name(:ingredient_id) %></th>
+      <th><%= model_class.human_attribute_name(:quantity) %></th>
+      <th><%= model_class.human_attribute_name(:cost) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
-    
+  </thead>
+  <tbody>
     <% @recipe_ingredients.each do |recipe_ingredient| %>
-        <tr>
-            <td><%= recipe_ingredient.recipe_id %></td>
-            <td><%= recipe_ingredient.ingredient_id %></td>
-            <td><%= recipe_ingredient.quantity %></td>
-            <td><%= link_to 'Edit', edit_recipe_ingredient_path(recipe_ingredient) %></td>
-            <td><%= link_to 'Show', recipe_ingredient_path(recipe_ingredient) %></td>
-            <td><%= link_to 'Delete', recipe_ingredient_path(recipe_ingredient), method: :delete, data: {confirm: "Are you sure?"} %></td>
-        </tr>
+      <tr>
+        <td><%= link_to recipe_ingredient.id, recipe_ingredient_path(recipe_ingredient) %></td>
+        <td><%= recipe_ingredient.recipe_id %></td>
+        <td><%= recipe_ingredient.ingredient_id %></td>
+        <td><%= recipe_ingredient.quantity %></td>
+        <td><%= recipe_ingredient.cost %></td>
+        <td><%=l recipe_ingredient.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_recipe_ingredient_path(recipe_ingredient), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      recipe_ingredient_path(recipe_ingredient),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
     <% end %>
-
-   
+  </tbody>
 </table>
-<br><br>
 
-    <% @recipe_ingredients.each do |recipe_ingredient| %>
-        <%= link_to "#{recipe_ingredient.recipe_id}", recipe_ingredient_path(recipe_ingredient) %>
-    <% end %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_recipe_ingredient_path,
+            :class => 'btn btn-primary' %>

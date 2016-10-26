@@ -1,29 +1,17 @@
 class RecipesController < ApplicationController
    
-    before_action :set_recipe, only: [:edit, :update, :show, :destroy]
+    before_action :set_recipe, only: [:edit, :update, :destroy]
    
     def my_recipe
         
     end
     
     def index
-       @recipes = Recipe.all 
+       @recipes = Recipe.all
     end
     
     def new
         @recipe = Recipe.new
-        
-        #@recipe.recipe_ingredients.build.build_ingredient #new 21/9
-        #@recipe.recipe_ingredients.each do |recipe_ingredient|
-            #recipe_ingredient.ingredients_build
-        #end
-         
-        #@recipe.recipe_ingredients.build
-        @recipe.ingredients.build.recipe_ingredients.build
-        #@recipe.ingredients.each do |ingredient|
-            #ingredient.recipe_ingredients.build
-        #end
-       
     end
     
     def edit
@@ -52,7 +40,8 @@ class RecipesController < ApplicationController
     end
     
     def show
-        #@recipe.cost = @recipe.calculate_cost
+        @recipe = Recipe.includes(:recipe_ingredients).find(params[:id])
+        @recipe.calculate_cost
     end
     
     def destroy
@@ -67,12 +56,6 @@ class RecipesController < ApplicationController
     end
     
     def recipe_params
-        #params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy])
-        #params.require(:recipe).permit(:id, :title, :description, :instructions, ingredients_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy],
-        #recipe_ingredients_attributes: [:id, :recipe_id, :ingredient_id, :quantity, :_destroy]) #dapat tapi row x selari
-        #params.require(:recipe).permit(:id, :title, :description, :instructions, recipe_ingredients_attributes: [:id, :recipe_id, :ingredient_id, :quantity, :_destroy, 
-        #ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]]) #quantity masuk, ingredient x masuk
-        
-        params.require(:recipe).permit(:id, :title, :description, :instructions, recipe_ingredients_attributes: [:id, :_destroy, :ingredient_id, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]])
+        params.require(:recipe).permit(:id, :title, :description, :instructions, :_destroy, recipe_ingredients_attributes: [:id, :_destroy, :ingredient_id, :quantity, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]])
     end
 end

@@ -1,11 +1,5 @@
 /* global $ */
-$("#ingredients a.add_fields").
-  data("association-insertion-position", 'before').
-  data("association-insertion-node", 'this');
-
-
-     
-     
+$(document).ready(function() {
 $("#ingredients a.add_fields").
   data("association-insertion-position", 'before').
   data("association-insertion-node", 'this');
@@ -21,3 +15,4 @@ $('#ingredients').on('cocoon:after-insert',
                 $(this).children("a.add_fields").hide();
               });
      });
+});

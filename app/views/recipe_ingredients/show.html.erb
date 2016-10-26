@@ -1,17 +1,23 @@
-<h1>Showing selected recipe_ingredient</h1>
+<%- model_class = RecipeIngredient -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-    Recipe ID: <%= @recipe_ingredient.recipe_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:recipe_id) %>:</strong></dt>
+  <dd><%= @recipe_ingredient.recipe_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ingredient_id) %>:</strong></dt>
+  <dd><%= @recipe_ingredient.ingredient_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quantity) %>:</strong></dt>
+  <dd><%= @recipe_ingredient.quantity %></dd>
+</dl>
 
-<p>
-    Ingredient ID: <%= @recipe_ingredient.ingredient_id %>
-</p>
-
-<p>
-    Quantity: <%= @recipe_ingredient.quantity %>
-</p>
-
-
-<%= link_to "Edit this recipe-ingredient", edit_recipe_ingredient_path(@recipe_ingredient) %>  |
-<%= link_to "Back to recipe_ingredients listing", recipe_ingredients_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              recipe_ingredients_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_recipe_ingredient_path(@recipe_ingredient), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              recipe_ingredient_path(@recipe_ingredient),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
