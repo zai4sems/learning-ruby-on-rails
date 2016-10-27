@@ -26,4 +26,6 @@ class Ingredient < ActiveRecord::Base
    def find_by_name(ingredient_name)
        where(name: ingredient_name).first
    end
+   
+
 end

@@ -21,12 +21,14 @@
   <tbody>
     <% @recipes.each do |recipe| %>
       <tr>
+        <% @recipe = Recipe.includes(:recipe_ingredients).find(recipe.id) %>
+        <% @recipe.calculate_cost %>
         <td><%= link_to recipe.id, recipe_path(recipe) %></td>
         <td><%= recipe.title %></td>
         <td><%= recipe.description %></td>
         <td><%= recipe.instructions %></td>
-        <td><%= number_to_currency(recipe.cost) %></td>
-        <td><%#= recipe.need %></td>
+        <td><%= number_to_currency(@recipe.cost) %></td>
+        <td><%#=  %></td>
         <td><%#=l recipe.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -38,6 +40,7 @@
                       :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>
+
     <% end %>
   </tbody>
 </table>

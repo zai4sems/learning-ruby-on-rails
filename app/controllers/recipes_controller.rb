@@ -7,7 +7,8 @@ class RecipesController < ApplicationController
     end
     
     def index
-       @recipes = Recipe.all
+        @recipes = Recipe.all
+        @recipe = Recipe.includes(:recipe_ingredients)
     end
     
     def new
