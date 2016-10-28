@@ -7,7 +7,6 @@ class RecipeIngredient < ActiveRecord::Base
     delegate :name, to: :ingredient, prefix: true
     delegate :unit, to: :ingredient, prefix: true
     delegate :price, to: :ingredient, prefix: true
-    delegate :id, to: :ingredient, prefix: true
     delegate :price, to: :recipe, prefix: true
     
  
