@@ -26,14 +26,14 @@
       <tbody>
         <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
         <tr>
-          <td><%= recipe_ingredient.ingredient_name %></td>
+          <td><%#= recipe_ingredient.ingredient_name %> <%= link_to "#{recipe_ingredient.ingredient_name}", ingredient_path(recipe_ingredient.ingredient_id)%></td>
           <td><%= recipe_ingredient.ingredient_unit %></td>
           <td><%= recipe_ingredient.quantity %></td>
           <td><%= number_to_currency(recipe_ingredient.ingredient_price.to_f * recipe_ingredient.quantity.to_f) %></td>
         </tr>
         <% end %>
         <tr>
-          <td colspan="3" align="right"><strong>Total cost</strong></td>
+          <td colspan="3" align="right"><strong>Total ingredients cost</strong></td>
           <td colspan="1"><%= number_to_currency(@recipe.cost) %> </td>
         </tr>
       </tbody>

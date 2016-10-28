@@ -20,14 +20,23 @@ class RecipesController < ApplicationController
     
     def create
         @recipe = Recipe.new(recipe_params)
-        #@recipe.cost = @recipe.calculate_cost
-        if @recipe.save 
+        begin
+            if @recipe.save
             flash[:notice] = "recipe was successfully created"
             redirect_to recipe_path(@recipe)
-        else
-            render 'new'
+            else
+                render 'new'
+            end
+        rescue ActiveRecord::RecordNotUnique
+            respond_to do |format|
+            format.html { render :action => 'new' }
+            format.html
+            flash[:notice] = "unable to proceed because there were same ingredient being used"
+            end
         end
     end
+    
+
     
     def update
        #@recipe.cost = @recipe.calculate_cost
@@ -39,6 +48,7 @@ class RecipesController < ApplicationController
            render 'edit'
        end
     end
+    
     
     def show
         @recipe = Recipe.includes(:recipe_ingredients).find(params[:id])

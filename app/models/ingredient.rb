@@ -1,11 +1,12 @@
 class Ingredient < ActiveRecord::Base
-    has_many :recipe_ingredients
+    has_many :recipe_ingredients, dependent:  :destroy
     has_many :recipes, through: :recipe_ingredients
     validates :name, presence: true, length: { minimum: 3, maximum: 50}
     validates_uniqueness_of :name
     validates :purchase_price, presence: true
     validates :volume, presence: true
     validates :unit, presence: true
+    
     
     
    #accepts_nested_attributes_for :recipe_ingredients, reject_if: :all_blank, allow_destroy: true

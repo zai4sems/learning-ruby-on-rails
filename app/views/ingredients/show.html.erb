@@ -1,24 +1,24 @@
 <h1>Showing selected ingredient</h1>
 
-<p>
-    Ingredient name: <%= @ingredient.name %>
-</p>
 
-<p>
-    Purchase price: <%= @ingredient.purchase_price %>
-</p>
+    <p><strong>Ingredient name:</strong> <%= @ingredient.name %></p>
 
-<p>
-    Purchased weight or volume: <%= @ingredient.volume %>
-</p>
 
-<p>
-    Unit: <%= @ingredient.unit %>
-</p>
+    <p><strong>Purchase price: </strong> <%= @ingredient.purchase_price %></p>
 
-<p>
-    Price per single unit: <%= @ingredient.price %>
-</p>
+    <p><strong>Purchased weight or volume: </strong><%= @ingredient.volume %></p>
 
-<%= link_to "Edit this ingredient", edit_ingredient_path(@ingredient) %>  |
-<%= link_to "Back to ingredients listing", ingredients_path %>
+    <p><strong>Unit:</strong><%= @ingredient.unit %></p>
+    
+    <p><strong>Price per single unit: </strong> <%= @ingredient.price %></p>
+
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              ingredients_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_recipe_path(@ingredient), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              recipe_path(@ingredient),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
