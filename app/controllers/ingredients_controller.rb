@@ -17,7 +17,7 @@ class IngredientsController < ApplicationController
     
     def index
        @ingredients = Ingredient.all 
-       
+       @ingredient = Ingredient.new
        #@ingredients = Ingredient.paginate(page: params[:page], per_pages: 5)
     end
     
@@ -30,23 +30,34 @@ class IngredientsController < ApplicationController
     
     def create
         @ingredient = Ingredient.new(ingredient_params)
-        if @ingredient.save
-            flash[:notice] = "Ingredient was successfully created"
-            redirect_to ingredient_path(@ingredient)
-            #redirect_to ingredients_path
-        else
-            render 'new'
+        respond_to do |format|
+            if @ingredient.save 
+                format.html { redirect_to @ingredient, notice: "Ingredient was successfully created" }
+                format.json {render :show, status: :created, location: @ingredient }
+                format.js 
+                
+            else
+                format.html {render 'new'}
+                format.json {render json: @ingredient.errors, status: :unprocessable_entity }
+                format.js 
+            end
         end
     end
     
     def update
         @ingredient.price = @ingredient.calculate_price_per_unit
-       if @ingredient.update(ingredient_params)
-           flash[:notice] = "Ingredient was successfully updated"
-           redirect_to ingredient_path(@ingredient)
-       else
-           render 'edit'
-       end
+        respond_to do |format|
+            if @ingredient.update(ingredient_params)
+                format.html { redirect_to @ingredient, notice: "Ingredient was successfully updated" }
+                format.json {render :show, status: :ok, location: @ingredient }
+                format.js 
+                
+            else
+                format.html {render 'edit'}
+                format.json {render json: @ingredient.errors, status: :unprocessable_entity }
+                format.js 
+            end
+        end
     end
     
     def show
@@ -55,8 +66,11 @@ class IngredientsController < ApplicationController
     
     def destroy
         @ingredient.destroy
-        flash[:notice] = "Ingredient was successfully deleted"
-        redirect_to ingredients_path
+        respond_to do |format|
+           format.html { redirect_to ingredients_path, notice: "Ingredient was successfully deleted"}
+           format.json { head :no_content}
+           format.js
+        end
     end
     
    

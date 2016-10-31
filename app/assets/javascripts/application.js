@@ -18,8 +18,10 @@
 //= require global
 
 //= require twitter/bootstrap
+//= require twitter/bootstrap/modal
 //= require_tree .
 //= require turbolinks
+
 
 
 
@@ -30,3 +32,8 @@ var hide_spinner = function(){
 var show_spinner = function(){
     $('#spinner').show();
 }
+
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});

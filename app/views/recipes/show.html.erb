@@ -8,12 +8,14 @@
   <dd><%= @recipe.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @recipe.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:instructions) %>:</strong></dt>
-  <dd><%= @recipe.instructions %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
-  <dd><%= number_to_currency(@recipe.cost) %></dd>
-</dl>
-    <h3>Ingredient Cost Summary</h3>
+  <dt><strong><%#= model_class.human_attribute_name(:instructions) %>:</strong></dt>
+  <dd><%#= @recipe.instructions %></dd></dl>
+  
+ 
+
+
+
+    <h3>Ingredients</h3><%= render 'ingredients/popup' %>
     <table class = "table table-condensed">
       <thead>
         <tr>
@@ -38,6 +40,45 @@
         </tr>
       </tbody>
     </table>
+    
+ <h3>Summary</h3>   
+  <div class="row">
+    <div class="col-md-3"><strong>Rate Per Hour:</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_currency(@recipe.rate_per_hour) %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"><strong>Time spent in hour:</strong></div>
+    <div class="col-md-1 text-right"><%= @recipe.time_spent_in_hour %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"><strong>Overhead Cost Per Hour:</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_currency(Overhead.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)) %></div>
+    <div class="col-md-6 text-right"><strong>Labour Cost:</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_currency(@labour) %></div>
+  </div>
+    <div class="row">
+    <div class="col-md-3"><strong>Percentage profit to add:</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_percentage(@recipe.percentage_profit) %></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-10 text-right"><strong>Ingredients Cost:</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_currency(@recipe.cost) %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 text-right"><strong>Total Cost of CAKE(S):</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_currency(@cake_cost) %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 text-right"><strong>Profit to add to price:</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_currency(@profit) %></div>
+  </div>
+    <div class="row">
+    <div class="col-md-10 text-right"><strong>TOTAL COST OF CAKE INCLUDING PROFIT:</strong></div>
+    <div class="col-md-1 text-right"><%= number_to_currency(@total) %></div>
+  </div>
+
+
 
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

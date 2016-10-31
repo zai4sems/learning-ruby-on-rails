@@ -1,0 +1,11 @@
+
+$("#errors_div").html("<%= @ingredient.errors.full_messages %>")
+$("#mynewingredient").modal('hide');
+$(".ingredient_name").val('');
+$(".ingredient_purchase_price").val('');
+$(".ingredient_volume").val('');
+$(".ingredient_unit").val('');
+
+$("#container_ingredients").append('<%= j render @ingredient %>');
+$("#ingredient_<%= @ingredient.id %>").hide().fadeIn(1000);
+window.location.reload();

@@ -11,8 +11,8 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:instructions) %></th>
-      <th><%= model_class.human_attribute_name(:cost) %></th>
+      <th><%#= model_class.human_attribute_name(:instructions) %></th>
+      <th>Ingredients Cost</th>
       <th><%#= model_class.human_attribute_name(:need) %></th>
       <th><%#= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -44,5 +44,8 @@
     <% end %>
   </tbody>
 </table>
+
+
+
 
 

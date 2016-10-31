@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "user/registrations" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -12,12 +12,15 @@ Rails.application.routes.draw do
   get 'my_recipe', to: "recipes#my_recipe"
   get 'search_ingredients', to: "ingredients#search"
   
+  get "recipe/new_release" => 'recipe#new_release', :as => :new_release
+  
   resources :ingredients
   
   resources :recipes
     
   resources :recipe_ingredients
 
+  resources :overheads
   
 
   # Example of regular route:

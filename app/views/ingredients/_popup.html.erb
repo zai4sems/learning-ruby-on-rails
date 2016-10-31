@@ -1,37 +1,7 @@
-<h1>Listing all ingredients</h1>
-<p>
-    <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_ingredient_path,
-            :class => 'btn btn-primary' %>
-</p>
-
-<%= render 'lookup' %> 
-
-    <table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Ingredient Name</th>
-        <th>Purchase price</th>
-        <th>Purchase weight or volume</th>
-        <th>Unit</th>
-        <th>Price per single unit</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody id="container_ingredients">
-        <%= render @ingredients %>
-    </tbody>
-    </table>
-
-
-
-
-<br><br>
-
 <div class="container">
   <div class="row">
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mynewingredient">
-      New Ingredient PopUP
+      Create New Ingredient Popup
     </button>
   </div>
   <div id="ingredient-popup-errors"></div>

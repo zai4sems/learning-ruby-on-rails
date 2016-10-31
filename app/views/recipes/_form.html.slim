@@ -3,6 +3,9 @@
 = simple_form_for @recipe, defaults: {input_html: {class:'col-sm-10 form-control'}} do |f|
   = f.input :title, label: 'Recipe Name'
   = f.input :description, input_html: {rows:'3'}
+  = f.input :rate_per_hour
+  = f.input :time_spent_in_hour
+  = f.input :percentage_profit
   .row
     br
     br

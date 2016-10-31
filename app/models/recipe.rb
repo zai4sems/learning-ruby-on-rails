@@ -3,10 +3,6 @@ class Recipe < ActiveRecord::Base
     has_many :recipe_ingredients, dependent:  :destroy
     has_many :ingredients, through: :recipe_ingredients, :class_name => 'Ingredient'
     
-    #def ingredients_for_form
-       #collection = ingredients.where(recipe_id: id) 
-       #collection.any? ? collection : ingredients.build
-    #end
     
     validates :title, presence: true, length: { minimum: 3, maximum: 50}
     
@@ -24,8 +20,8 @@ class Recipe < ActiveRecord::Base
     self.cost = total
     self.save
    end
+  
    
-   
- 
+
    
 end

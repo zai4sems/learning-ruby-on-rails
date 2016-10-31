@@ -1,0 +1,91 @@
+<%- model_class = Overhead -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_overhead_path,
+            :class => 'btn btn-primary' %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:month_1) %></th>
+      <th><%= model_class.human_attribute_name(:month_2) %></th>
+      <th><%= model_class.human_attribute_name(:month_3) %></th>
+      <th><%= model_class.human_attribute_name(:month_4) %></th>
+      <th><%= model_class.human_attribute_name(:month_5) %></th>
+      <th><%= model_class.human_attribute_name(:month_6) %></th>
+      <th><%= model_class.human_attribute_name(:month_7) %></th>
+      <th><%= model_class.human_attribute_name(:month_8) %></th>
+      <th><%= model_class.human_attribute_name(:month_9) %></th>
+      <th><%= model_class.human_attribute_name(:month_10) %></th>
+      <th><%= model_class.human_attribute_name(:month_11) %></th>
+      <th><%= model_class.human_attribute_name(:month_12) %></th>
+      <th><%= model_class.human_attribute_name(:total) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @overheads.each do |overhead| %>
+      <tr>
+        <td><%= link_to overhead.id, overhead_path(overhead) %></td>
+        <td><%= overhead.title %></td>
+        <td><%= overhead.month_1 %></td>
+        <td><%= overhead.month_2 %></td>
+        <td><%= overhead.month_3 %></td>
+        <td><%= overhead.month_4 %></td>
+        <td><%= overhead.month_5 %></td>
+        <td><%= overhead.month_6 %></td>
+        <td><%= overhead.month_7 %></td>
+        <td><%= overhead.month_8 %></td>
+        <td><%= overhead.month_9 %></td>
+        <td><%= overhead.month_10 %></td>
+        <td><%= overhead.month_11 %></td>
+        <td><%= overhead.month_12 %></td>
+            <% @total = (overhead.month_1.to_f + overhead.month_2.to_f + overhead.month_3.to_f + overhead.month_4.to_f + overhead.month_5.to_f + overhead.month_6.to_f + overhead.month_7.to_f + overhead.month_8.to_f + overhead.month_9.to_f + overhead.month_10.to_f + overhead.month_11.to_f + overhead.month_12.to_f)  %>
+            <% overhead.save_total_cost(@total) %>
+        <td><%= overhead.total %></td> 
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_overhead_path(overhead), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      overhead_path(overhead),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+        <td></td>
+        <td>Total</td>
+        <td><%= Overhead.sum(:month_1) %></td>
+        <td><%= Overhead.sum(:month_2) %></td>
+        <td><%= Overhead.sum(:month_3) %></td>
+        <td><%= Overhead.sum(:month_4) %></td>
+        <td><%= Overhead.sum(:month_5) %></td>
+        <td><%= Overhead.sum(:month_6) %></td>
+        <td><%= Overhead.sum(:month_7) %></td>
+        <td><%= Overhead.sum(:month_8) %></td>
+        <td><%= Overhead.sum(:month_9) %></td>
+        <td><%= Overhead.sum(:month_10) %></td>
+        <td><%= Overhead.sum(:month_11) %></td>
+        <td><%= Overhead.sum(:month_12) %></td>
+        <td><strong><%= Overhead.sum(:total) %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Overhead Summary</h3>
+<p><strong>Numbers of week per year :  52</strong></p>
+<p><strong>Hours worked per week : </strong>  <%= current_user.hour_worked_per_week %></p>
+<p><strong>No of weeks holiday per year : </strong>  <%= current_user.no_of_week_holiday_per_year %></p>
+<p><strong>No of weeks worked per year : </strong> <%=  (52-current_user.no_of_week_holiday_per_year.to_f) %></p>
+<p><strong>Hours spent per Annum : </strong><%= ((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)  %></p>
+<p><strong>Overhead Cost per hour : </strong> <%= number_to_currency(Overhead.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)) %></p>
+<%# @scph.store %>
+
+
