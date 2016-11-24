@@ -1,0 +1,33 @@
+<% if@material.errors.any? %>
+<h2>The following errors prevented the material from getting created</h2>
+<ul>
+    <% @material.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+</ul>
+<% end %>
+<div class= "panel-body">
+<%= form_for @material do |f| %>
+    <div class = "form-group">
+        <p>
+            <%= f.label :material_name%>
+            <%= f.text_field :material_name, class: "form-control"%>
+        </p>
+        
+        <p>
+            <%= f.label :purchase_price %>
+            <%= f.number_field :purchase_price, step: 'any', class:"form-control" %>
+        </p>
+        
+        <p>
+            <%= f.label :purchase_weight_or_volume %>
+            <%= f.number_field :purchase_quantity, class:"form-control" %>
+        
+        <p>
+            <%= f.submit %>
+        </p>
+    </div>
+</div>
+<% end %>
+
+<%= link_to "Back to materials listing", materials_path %>

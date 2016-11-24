@@ -1,6 +1,7 @@
 class IngredientsController < ApplicationController
     
     before_action :set_ingredient, only: [:edit, :update, :show, :destroy]
+    respond_to :html, :json, :js
     
     def search
         if params[:ingredient]
@@ -15,10 +16,10 @@ class IngredientsController < ApplicationController
         end
     end
     
+    
     def index
-       @ingredients = Ingredient.all 
        @ingredient = Ingredient.new
-       #@ingredients = Ingredient.paginate(page: params[:page], per_pages: 5)
+       @ingredients = current_user.ingredients
     end
     
     def new
@@ -30,6 +31,7 @@ class IngredientsController < ApplicationController
     
     def create
         @ingredient = Ingredient.new(ingredient_params)
+        @ingredient.user = current_user
         respond_to do |format|
             if @ingredient.save 
                 format.html { redirect_to @ingredient, notice: "Ingredient was successfully created" }
@@ -46,16 +48,19 @@ class IngredientsController < ApplicationController
     
     def update
         @ingredient.price = @ingredient.calculate_price_per_unit
+        
         respond_to do |format|
-            if @ingredient.update(ingredient_params)
+            if @ingredient.update_attributes(ingredient_params)
+                #respond_with @ingredient
                 format.html { redirect_to @ingredient, notice: "Ingredient was successfully updated" }
-                format.json {render :show, status: :ok, location: @ingredient }
+                format.json {respond_with_bip(@ingredient) }
+                #format.json {render :show, status: :ok, location: @ingredient }
                 format.js 
                 
             else
                 format.html {render 'edit'}
-                format.json {render json: @ingredient.errors, status: :unprocessable_entity }
-                format.js 
+                format.json {respond_with_bip(@ingredient) }
+                format.js {render layout: false}
             end
         end
     end

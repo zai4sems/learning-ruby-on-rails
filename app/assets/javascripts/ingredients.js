@@ -1,8 +1,8 @@
 /* global $ */
 /* global show_spinner */
 /* global hide_spinner */
+/* global jQuery */
 var init_ingredient_lookup;
-var init_ingredient_popup;
 
 init_ingredient_lookup = function() {
     $('#ingredient-lookup-form').on('ajax:before', function(event, data, status){
@@ -23,29 +23,26 @@ init_ingredient_lookup = function() {
     });
 }
 
-init_ingredient_popup = function() {
-    $('#ingredient-popup-form').on('ajax:before', function(event, data, status){
-        show_spinner();
-    })
-        $('#ingredient-popup-form').on('ajax:after', function(event, data, status){
-        hide_spinner();
-    })
-    $('#ingredient-popup-form').on('ajax:success', function(event, data, status){
-        $('#ingredient-popup').replaceWith(data);
-        init_ingredient_popup();
+var ready;
+ready = function () {
+    init_ingredient_lookup();
+    $('#all_ingredients_list').dataTable();
+    $('.best_in_place').best_in_place();
+    $('.best_in_place').bind("ajax:success", function(){
+        alert('Value updated, Click update to recalculate cost');  /*check update work or not */
     });
-    
-    $('#ingredient-popup-form').on('ajax:error', function(event, xhr, status, error){
-        hide_spinner();
-        $('#ingredient-popup-results').replaceWith(' ');
-        $('#ingredient-popup-errors').replaceWith('Ingredient cannot created.');
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('turbolinks:render', ready);
+
+
+
+jQuery.fn.submitOnCheck = function(){
+    this.find('input[type=submit]').click(function() {
+       $(this).parent('form').submit(); 
     });
+    return this;
 }
 
-
-
-$(document).ready(function(){
-    init_ingredient_lookup();
-    init_ingredient_popup();
-})
 

@@ -1,0 +1,27 @@
+<h1>All Users</h1>
+
+<%= link_to "All Users", :action => "index", :class => 'btn btn-success btn-sm'  %> || 
+<%= link_to "Users awaiting approval", :action => "index", :approved => "false" %>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Approval Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+        <tr>
+            <td><%= user.email %></td>
+            <td><%= user.approved %></td>
+            <td><%#= link_to "Edit", edit_user_path(user) %></td>
+            <td><%= form_for user do |f| %>
+                <%= f.label :approved, 'Approved?' %>
+                <%= f.check_box :approved %>
+                <%= f.submit 'Save', :class => 'btn btn-success btn-sm' %>
+            <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

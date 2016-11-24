@@ -1,49 +1,54 @@
 <%- model_class = Recipe -%>
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_recipe_path,
-            :class => 'btn btn-primary' %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%#= model_class.human_attribute_name(:instructions) %></th>
-      <th>Ingredients Cost</th>
-      <th><%#= model_class.human_attribute_name(:need) %></th>
-      <th><%#= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @recipes.each do |recipe| %>
-      <tr>
-        <% @recipe = Recipe.includes(:recipe_ingredients).find(recipe.id) %>
-        <% @recipe.calculate_cost %>
-        <td><%= link_to recipe.id, recipe_path(recipe) %></td>
-        <td><%= recipe.title %></td>
-        <td><%= recipe.description %></td>
-        <td><%= recipe.instructions %></td>
-        <td><%= number_to_currency(@recipe.cost) %></td>
-        <td><%#=  %></td>
-        <td><%#=l recipe.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_recipe_path(recipe), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      recipe_path(recipe),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
+<%= link_to raw("<i class=\"fa fa-th\" aria-hidden=\"true\"> Grid</i>"), 
+          my_recipes_path, 
+          class: "btn btn-default" %>
+<div class="text-center">
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_recipe_path,
+              :class => 'btn btn-primary' %>
+</div>
 
-    <% end %>
-  </tbody>
-</table>
+<div align="center">
+    <%#= will_paginate %>
+</div>
+    <table class="table table-striped" id="recipes_list">
+      <thead>
+        <tr>
+          <th><%= model_class.human_attribute_name(:title) %></th>
+          <th><%= model_class.human_attribute_name(:image) %></th>
+          <th>Ingredients Cost</th>
+          <th><%=t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipes.each do |recipe| %>
+          <tr>
+            <% @recipe = Recipe.includes(:recipe_ingredients).find(recipe.id) %>
+            <% @recipe.calculate_cost %>
+            <td><%= link_to recipe.title, recipe_path(recipe) %></td>
+            <td><%= image_tag recipe.image.url, size: "100x100" %></td>
+            <td><%= number_to_currency(@recipe.cost, :unit => "RM") %></td>
+            <td>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                          edit_recipe_path(recipe), :class => 'btn btn-default btn-xs' %>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          recipe_path(recipe),
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'btn btn-xs btn-danger' %>
+            </td>
+          </tr>
+    
+        <% end %>
+      </tbody>
+    </table>
+<div align="center">
+    <%#= will_paginate %>
+</div>
 
 
 

@@ -1,0 +1,23 @@
+<div class="col-md-4 blog-main box text-center" id="recipe_<%= recipe.id %>">
+    
+        <div class="panel panel-info">
+            
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong><%= recipe.title %></strong></h3>
+                <h3 class="panel-title"><strong><%#= link_to "#{recipe.title}", recipe_path(recipe.id)%></strong></h3>
+                <%= image_tag recipe.image.url, size: "100x100" %>
+                <p><%= recipe.description %></p>
+                <br>
+                <p><%= number_to_currency(recipe.cost, :unit => "RM") %></p>
+            </div>
+            
+            <div class="panel-body">
+            
+                <div class="btn-group" role="group" aria-label="..." >
+                    <%= link_to 'Edit', edit_recipe_path(recipe.id), :class => "btn btn-default" %>
+                    <%= link_to 'View', recipe_path(recipe.id), :class => "btn btn-default" %>
+                    <%= link_to 'Delete', recipe_path(recipe.id), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-default btn-danger' %>
+                </div>
+            </div>
+        </div>
+</div>

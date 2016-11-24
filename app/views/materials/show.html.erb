@@ -1,0 +1,22 @@
+<h1>Showing selected material</h1>
+
+
+    <p><strong>Ingredient name:</strong> <%= @material.name %></p>
+
+
+    <p><strong>Purchase price: </strong> <%= number_to_currency(@material.purchase_price, :unit => "RM") %></p>
+
+    <p><strong>Purchased weight or volume: </strong><%= @material.purchase_quantity %></p>
+    
+    <p><strong>Price per single unit: </strong> <%= number_to_currency(@material.price, :unit => "RM") %></p>
+
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              materials_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_material_path(@material), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              material_path(@material),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

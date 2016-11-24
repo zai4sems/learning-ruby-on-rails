@@ -1,0 +1,13 @@
+<tr class="nested-fields recipe-ingredient-fields"  id="recipe_ingredients">
+  <td class="ingredient_quantity"><%= f.input :quantity, placeholder: 'amount', input_html: {class:'form-control'} %></td>
+  <td class="ingredient_from_list"><%= f.association :ingredient, collection: current_user.ingredients.order(:name), :prompt => 'Choose an existing ingredient', label: 'Ingredient', input_html: {class:'form-control'} %></td>
+
+    <% if f.object.quantity.nil? %>
+      <td class="nested-field recipe-ingredient-fields">
+      <%= link_to_add_association 'OR Create New', f, :ingredient, :class => 'btn btn-primary btn-sm'%>
+      </td>
+    <% else %>
+    
+    <% end %>
+  <td class="col-md-1"><%= link_to_remove_association "", f, :class => 'btn btn-danger btn-sm fa fa-trash'%></td>
+</tr>

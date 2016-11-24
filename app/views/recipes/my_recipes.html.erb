@@ -1,0 +1,24 @@
+<h1>My recipes</h1>
+<%= link_to raw("<i class=\"fa fa-list\" aria-hidden=\"true\"> List</i>"), 
+          recipes_path, 
+          class: "btn btn-default" %>
+<div class="container">
+    
+    <div class="row">
+        <div class="text-center">
+            <%= link_to 'New', new_recipe_path, :class => 'btn btn-primary' %>
+        </div>
+            <div align="center">
+                <%= will_paginate %>
+            </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="row" id="container_recipes">
+        <%= render @recipes %>
+    </div>
+            <div align="center">
+                <%= will_paginate%>
+            </div>
+</div>

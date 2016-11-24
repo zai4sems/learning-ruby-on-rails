@@ -1,0 +1,9 @@
+var ready;
+ready = function () {
+$("#material_<%= @material.id %>").fadeOut(500, function(){
+   $(this).remove();
+});
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('turbolinks:render', ready);

@@ -12,15 +12,20 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
+//= require jquery.purr
+//= require best_in_place
+//= require best_in_place.purr
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require dataTables/jquery.dataTables
+
 //= require cocoon
 //= require global
-
+//= require turbolinks
 //= require twitter/bootstrap
 //= require twitter/bootstrap/modal
 //= require_tree .
-//= require turbolinks
 
 
 
@@ -37,3 +42,25 @@ $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 });
+
+
+$("#btn").on("click", function(event) {
+        $("#container_recipe_ingredient").hide();
+});
+
+
+
+
+var ready;
+ready = function () {
+    
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+
+
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('turbolinks:render', ready);

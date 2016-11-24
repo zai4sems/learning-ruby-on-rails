@@ -1,0 +1,6 @@
+<%= form_for @user do |f| %>
+    <%= f.label :approved, 'Approved?' %>
+    <%= f.check_box :approved %>
+    <br>
+    <%= f.submit 'Save', :class => 'btn btn-success btn-sm' %>
+<% end %>

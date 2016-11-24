@@ -3,7 +3,7 @@ class OverheadsController < ApplicationController
     before_action :set_overhead, only: [:edit, :show, :update, :destroy]
     
     def index
-        @overheads = Overhead.all
+        @overheads = current_user.overheads
     end
     
     def new
@@ -15,21 +15,27 @@ class OverheadsController < ApplicationController
 
     def create
         @overhead = Overhead.new(overhead_params)
+        @overhead.user = current_user
         if @overhead.save
             flash[:notice] = "overhead was successfully created"
-            redirect_to overhead_path(@overhead)
+            redirect_to overheads_path
         else
             render 'new'
         end
     end
     
     def update
-        if @overhead.update(overhead_params)
-           flash[:notice] = "Overhead was successfully updated"
-           redirect_to overhead_path(@overhead)
-        else
-           render 'edit'
+        
+        respond_to do |format|
+            if @overhead.update_attributes(overhead_params)
+                format.html { redirect_to @overhead, notice: "Overhead was successfully updated" }
+                format.json {respond_with_bip(@overhead) }
+            else
+                format.html {render 'edit'}
+                format.json {respond_with_bip(@overhead) }
+            end
         end
+        
     end
     
     def show

@@ -20,7 +20,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 2.5.3'
+gem 'turbolinks', '~> 5.0.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -37,7 +37,15 @@ gem 'nested_form', '~> 0.3.2'
 
 gem 'jquery-ui-rails'
 
-gem 'jquery-turbolinks'
+gem 'will_paginate', '~> 3.1.0'
+gem 'bootstrap-will_paginate', '0.0.10'
+
+gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'best_in_place', '~> 3.0.1'
+
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

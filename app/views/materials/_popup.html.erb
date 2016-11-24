@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal", data-remote="true", data-target="#mynewmaterial">
+      Create New Ingredient Popup
+    </button>
+  </div>
+  
+
+  
+  <!-- Modal -->
+      <%= form_for(@material, remote: true, id: 'material-popup-form') do |f| %>
+        <div class="modal fade" id="mynewmaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Create new Ingredient</h4>
+            </div>
+            <div class="modal-body">
+              <div class="field">
+                <%= f.label :material_name%><br>
+                <%= f.text_field :name, class: "form-control material_name"%>
+              </div>
+              <div class="field">
+                <%= f.label :purchase_price %>
+                <%= f.number_field :purchase_price, step: 'any', class:"form-control material_purchase_price" %>
+              </div>
+              <div class="field">
+                <%= f.label :purchase_weight_or_volume %>
+                <%= f.number_field :volume, class:"form-control material_volume" %>
+              </div>
+              <div class="field">
+                <%= f.label :unit %>
+                <%= f.text_field :unit, class:"form-control material_unit" %>
+              </div>
+              <div id="errors_div"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewmaterialclose">Close</button>
+              <%= submit_tag "Create", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <!-- Modal -->
+  
+</div>

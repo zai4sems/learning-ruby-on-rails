@@ -1,0 +1,26 @@
+var ready;
+ready = function () {
+<% if @material.errors.any? %>
+   
+    $('#errors_div2').empty();
+    <% str2 = "The following errors prevented the material from getting updated" + "<br/>" %>
+    $("#errors_div2").append("<%= raw j str2 %>");
+    <% str = "" %>
+    <% @material.errors.full_messages.each do |error| %>
+        <% str+= error + "<br/>" %>
+    <% end %>
+    $("#errors_div2").append("<%= raw j str %>");
+<% else %>
+    
+    $("#myupdatematerial_<%= @material.id %>").modal('hide');
+
+      $("#material_<%= @material.id %>").fadeOut(500, function(){
+         $(this).remove();
+         $("#container_materials").append('<%= j render @material %>');
+      });
+<% end %>
+
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('turbolinks:render', ready);

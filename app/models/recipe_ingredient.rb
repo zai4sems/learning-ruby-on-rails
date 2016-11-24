@@ -12,5 +12,4 @@ class RecipeIngredient < ActiveRecord::Base
  
     
     accepts_nested_attributes_for :ingredient, :reject_if => :all_blank
-    
-end
+end 

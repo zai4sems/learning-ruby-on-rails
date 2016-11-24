@@ -1,21 +1,37 @@
+<% if@overhead.errors.any? %>
+<h2>The following errors prevented the overhead from getting created</h2>
+<ul>
+    <% @overhead.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+</ul>
+<% end %>
 <%= simple_form_for @overhead, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="container">
 <div class = 'form-group'>
-  <%= f.input :title, input_html: {class: 'form-control'} %>
-  <%= f.input :month_1, input_html: {class: 'form-control'} %>
-  <%= f.input :month_2, input_html: {class: 'form-control'} %>
-  <%= f.input :month_3, input_html: {class: 'form-control'} %>
-  <%= f.input :month_4, input_html: {class: 'form-control'} %>
-  <%= f.input :month_5, input_html: {class: 'form-control'} %>
-  <%= f.input :month_6, input_html: {class: 'form-control'} %>
-  <%= f.input :month_7, input_html: {class: 'form-control'} %>
-  <%= f.input :month_8, input_html: {class: 'form-control'} %>
-  <%= f.input :month_9, input_html: {class: 'form-control'} %>
-  <%= f.input :month_10, input_html: {class: 'form-control'} %>
-  <%= f.input :month_11, input_html: {class: 'form-control'} %>
-  <%= f.input :month_12, input_html: {class: 'form-control'} %>
   <%#= error_span(@overhead[:month_12]) %>
+  <table>
+    <tbody>
+      <tr>
+        <td><%= f.input :title, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_1, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_2, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_3, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_4, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_5, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_6, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_7, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_8, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_9, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_10, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_11, input_html: {class: 'form-control'} %></td>
+        <td><%= f.input :month_12, input_html: {class: 'form-control'} %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 overheads_path, :class => 'btn btn-default' %>
 <% end %>
+</div>

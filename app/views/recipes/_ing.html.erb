@@ -1,0 +1,14 @@
+<% f.recipe_ingredients.each do |recipe_ingredient| %>
+        <tr><%= form_for recipe_ingredient do |h|%>
+          <td><%= best_in_place recipe_ingredient.ingredient, :name %> </td>
+          <td><%= recipe_ingredient.ingredient_unit %></td>
+          <%#= recipe_ingredient.quantity %><td>
+              <div class="form-group">
+                  <%= best_in_place recipe_ingredient, :quantity %>
+              </div>
+              
+          </td>
+          <td><%= number_to_currency(recipe_ingredient.ingredient_price.to_f * recipe_ingredient.quantity.to_f, :unit => "RM") %></td>
+          <% end %>
+        </tr>
+<% end %>

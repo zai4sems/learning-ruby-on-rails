@@ -1,0 +1,34 @@
+
+var ready;
+ready = function () {
+
+$('#create_material').click(function(){
+    $('.material_name, .material_purchase_price, .material_unit, .material_volume').val("");
+    $('#errors_div').empty();
+});
+
+<% if @material.errors.any? %>
+    $('#errors_div').empty();
+    <% str2 = "The following errors prevented the material from getting created" + "<br/>" %>
+    $("#errors_div").append("<%= raw j str2 %>");
+    <% str = "" %>
+    <% @material.errors.full_messages.each do |error| %>
+        <% str+= error + "<br/>" %>
+    <% end %>
+    $("#errors_div").append("<%= raw j str %>");
+<% else %>
+    $("#mynewmaterial").modal('hide');
+    $(".material_name").val('');
+    $(".material_purchase_price").val('');
+    $(".material_volume").val('');
+    $(".material_unit").val('');
+    
+    $("#container_materials").append('<%= j render @material %>');
+    $("#material_<%= @material.id %>").hide().fadeIn(1000);
+    window.location.reload();
+<% end %>
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('turbolinks:render', ready);

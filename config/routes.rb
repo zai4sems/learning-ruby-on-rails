@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   
   root 'pages#home'
   get 'about', to: 'pages#about'
-  get 'my_recipe', to: "recipes#my_recipe"
+  get 'all_users', to: 'pages#all_users'
+  get 'my_recipes', to: "recipes#my_recipes"
   get 'search_ingredients', to: "ingredients#search"
+  get 'search_materials', to: "materials#search"
   
   get "recipe/new_release" => 'recipe#new_release', :as => :new_release
   
@@ -22,6 +24,11 @@ Rails.application.routes.draw do
 
   resources :overheads
   
+  resources :materials
+  
+  resources :recipe_materials
+  
+  resources :users, only: [:index, :edit, :update]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

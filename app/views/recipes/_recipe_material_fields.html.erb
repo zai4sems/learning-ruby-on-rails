@@ -1,0 +1,15 @@
+
+<div class>
+  <div class="nested-fields recipe-material-fields">
+    <div class="material_from_list">
+      <%= f.association :material, collection: Material.order(:material_name), :prompt => 'Choose an existing material', label: 'Material' %>
+    </div>
+    <div class="material_quantity">
+      <%= f.input :quantity, placeholder: 'quantity' %>
+    </div>
+    <%= link_to_add_association 'OR Create New', f, :material, :class => 'btn btn-primary btn-sm'%>
+    <%= link_to_remove_association "Remove", f, :class => 'btn btn-danger btn-sm'%>
+  </div>
+</div>
+<br>
+<br>

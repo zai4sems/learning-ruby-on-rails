@@ -1,0 +1,12 @@
+<% f.each do |ingredient| %>
+        <tr>
+        <td><%= ingredient.name %></td>
+        <td><%= number_to_currency(ingredient.purchase_price, :unit => "RM") %></td>
+        <td><%= ingredient.volume %></td>
+        <td><%= ingredient.unit %></td>
+        <td><%= number_to_currency(ingredient.price, :unit => "RM") %></td>
+        <td>
+            <%= link_to "Add to this recipe", recipe_ingredients_path(recipe_id: g.id, ingredient_id: ingredient.id), class: 'btn btn-primary btn-xs', method: :post %>
+        </td>
+        </tr>
+<% end %> 

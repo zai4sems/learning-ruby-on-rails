@@ -1,11 +1,34 @@
 
-$("#errors_div").html("<%= @ingredient.errors.full_messages %>")
-$("#mynewingredient").modal('hide');
-$(".ingredient_name").val('');
-$(".ingredient_purchase_price").val('');
-$(".ingredient_volume").val('');
-$(".ingredient_unit").val('');
+var ready;
+ready = function () {
 
-$("#container_ingredients").append('<%= j render @ingredient %>');
-$("#ingredient_<%= @ingredient.id %>").hide().fadeIn(1000);
-window.location.reload();
+$('#create_ingredient').click(function(){
+    $('.ingredient_name, .ingredient_purchase_price, .ingredient_unit, .ingredient_volume').val("");
+    $('#errors_div').empty();
+});
+
+<% if @ingredient.errors.any? %>
+    $('#errors_div').empty();
+    <% str2 = "The following errors prevented the ingredient from getting created" + "<br/>" %>
+    $("#errors_div").append("<%= raw j str2 %>");
+    <% str = "" %>
+    <% @ingredient.errors.full_messages.each do |error| %>
+        <% str+= error + "<br/>" %>
+    <% end %>
+    $("#errors_div").append("<%= raw j str %>");
+<% else %>
+    $("#mynewingredient").modal('hide');
+    $(".ingredient_name").val('');
+    $(".ingredient_purchase_price").val('');
+    $(".ingredient_volume").val('');
+    $(".ingredient_unit").val('');
+    
+    $("#container_ingredients").append('<%= j render @ingredient %>');
+    $("#ingredient_<%= @ingredient.id %>").hide().fadeIn(1000);
+    $('.best_in_place').best_in_place();
+<% end %>
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('turbolinks:render', ready);

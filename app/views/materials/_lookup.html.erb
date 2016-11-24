@@ -1,0 +1,30 @@
+<div id="material-lookup">
+    <h3>Search for Materials</h3>
+    <%= form_tag search_materials_path, remote: true, method: :get, id: 'material-lookup-form' do %>
+    <div class="form-group row no_padding text-center col-md-12">
+        <div class="col-md-10">
+            <%= text_field_tag :material, params[:material], placeholder: "Ingredient name", autofocus: true,
+                                                                        class: 'form-control search-box input-lg' %>
+        </div>
+        <div class="col-md-2">
+            <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+                <i class="fa fa-search"></i> Look up an material</i>
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+    <%= render 'common/spinner' %>
+    <% if !@material.material_name.nil? %>
+        <%#= object do |obj| %>
+        <div id="material-lookup-results" class="well results-block">
+            <strong>Name:</strong> <%= @material.material_name %>
+            <strong>Purchase Price:</strong> <%= @material.purchase_price %>
+            <strong>Unit:</strong> <%= @material.purchase_quantity %>
+            <strong>Price per unit:</strong> <%= @material.price %>
+            <%#= link_to "view", recipe_materials_path(recipe_id: params[:recipe], material_name: @material.name, 
+                material_id: @material.id ? @material.id : ''), class:'btn btn-xs btn-success', method: :post %>
+        </div>
+        <%# end %>
+    <% end %>
+    <div id="material-lookup-errors"></div>
+</div>

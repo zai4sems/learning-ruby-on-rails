@@ -1,30 +1,24 @@
-    
- 
 
-
-        <tr id="ingredient_<%= ingredient.id %>">
-        <td><%= ingredient.name %></td>
-        <td><%= number_to_currency(ingredient.purchase_price) %></td>
-        <td><%= ingredient.volume %></td>
-        <td><%= ingredient.unit %></td>
-        <td><%= number_to_currency(ingredient.price) %></td>
+      <tr id="ingredient_<%= ingredient.id %>">
+        <td><%= best_in_place ingredient, :name %></td>
+        <td><%= best_in_place ingredient, :purchase_price, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place ingredient, :volume %></td>
+        <td><%= best_in_place ingredient, :unit %></td>
+        <td><%= number_to_currency(ingredient.price, :unit => "RM") %></td>
         <td>
             <%#= link_to 'Edit', edit_ingredient_path(ingredient), :class => 'btn btn-default btn-xs', remote: true  %>
             <%#= link_to 'Show', ingredient_path(ingredient), :class => 'btn btn-default btn-xs' %>
-            <%#= link_to 'Delete', ingredient_path(ingredient), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-xs btn-danger' %>
+            <%#= link_to 'Delete', ingredient_path(ingredient), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-xs btn-danger fa fa-trash' %>
             
-            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdateingredient_<%= ingredient.id %>">
-                Edit
-            </button>
-            <%= link_to 'Delete', ingredient, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs', remote: true %>
+            <%= link_to '', ingredient, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs fa fa-trash', remote: true %>
         </td>
-        </tr>
+      </tr>
 
 
     
     
     
-
+<%# not use anymore %>
     <%= form_for(ingredient, :method => :put, remote: true) do |f| %>
         <div class="modal fade" id="myupdateingredient_<%= ingredient.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog">
@@ -50,10 +44,11 @@
                 <%= f.label :unit %>
                 <%= f.text_field :unit, class:"form-control" %>
               </div>
+              <div id="errors_div2"></div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= ingredient.id %>">Close</button>
-              <%= submit_tag "Update", class: "btn btn-primary" %>
+              <%= submit_tag "Update", class: "btn btn-primary"%>
             </div>
           </div>
         </div>
