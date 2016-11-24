@@ -27,6 +27,20 @@ config.action_mailer.delivery_method = :test
 
 config.action_mailer.default_url_options = { :host => 'learning-ruby-on-rails-huzai.c9users.io' }
 
+#---working google setup
+#config.action_mailer.default_url_options = { :host => 'learning-ruby-on-rails-huzai.c9users.io' }
+
+#config.action_mailer.delivery_method = :smtp
+
+#config.action_mailer.smtp_settings = {
+#  address: "smtp.gmail.com",
+#  port: 587,
+#  domain: "gmail.com",
+#  authentication: "plain",
+#  enable_starttls_auto: true,
+#  user_name: "zai4sems@gmail.com",
+#  password: "seed40321?"
+#}
 
 
   # Print deprecation notices to the Rails logger.
