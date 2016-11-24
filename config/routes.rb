@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   
-  root 'pages#home'
+  authenticated :user do
+    root :to => 'pages#dashboard', as: :authenticated_root
+  end
+  root :to => 'pages#home'
+  
+  #root 'pages#home'
   get 'about', to: 'pages#about'
   get 'all_users', to: 'pages#all_users'
   get 'my_recipes', to: "recipes#my_recipes"

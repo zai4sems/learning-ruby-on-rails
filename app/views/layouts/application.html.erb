@@ -70,14 +70,19 @@
         </div>
         <% end %>
         <div class="page-content-wrapper">
-            <div class="container-fluid"><a class="btn btn-link" role="button" href="#menu-toggle" id="menu-toggle"><i class="fa fa-bars"></i></a>
+            <div class="container-fluid">
                 <% if current_user %>
+                <a class="btn btn-link" role="button" href="#menu-toggle" id="menu-toggle"><i class="fa fa-bars"></i></a>
                     <ul class="nav navbar-right col-md-4">
                       <li class="col-md-4 user-name text-right">
                         <i class="fa fa-user"></i>
                         <%= current_user.full_name.present? ? current_user.full_name : current_user.email %>
                       </li>
                       <li class="col-md-4 logout"><%= link_to "logout", destroy_user_session_path, class: 'btn btn-xs btn-danger', method: :delete %></li>
+                    </ul>
+                <% else %>
+                  <ul class="nav navbar-right col-md-4">
+                      <li class="col-md-4 login"><%= link_to 'Login', new_user_session_path, class: 'btn btn-xs btn-info' %></li>
                     </ul>
                 <% end %>
                 <div class="row">
