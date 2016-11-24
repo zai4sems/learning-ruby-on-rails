@@ -24,7 +24,7 @@ class RecipeIngredientsController < ApplicationController
                 format.json { render :show, status: :created, location: @recipe_ingredient }
                 format.js
             else
-                format.html { render 'new', notice: "yuyuy" }
+                format.html { redirect_to recipe_path(@recipe_ingredient.recipe_id), notice: "Ingredient #{@recipe_ingredient.ingredient.name} already added" }
                 format.json { render json: @recipe_ingredient.errors, status: :unprocessable_entity }
                 format.js
             end
