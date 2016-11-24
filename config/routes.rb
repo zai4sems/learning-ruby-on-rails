@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root :to => 'pages#home'
   
   #root 'pages#home'
+  get 'home', to: 'pages#home'
   get 'about', to: 'pages#about'
   get 'all_users', to: 'pages#all_users'
   get 'my_recipes', to: "recipes#my_recipes"

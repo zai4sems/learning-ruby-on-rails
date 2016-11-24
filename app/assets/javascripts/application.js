@@ -22,9 +22,10 @@
 
 //= require cocoon
 //= require global
-//= require turbolinks
+
 //= require twitter/bootstrap
 //= require twitter/bootstrap/modal
+//= require turbolinks
 //= require_tree .
 
 
