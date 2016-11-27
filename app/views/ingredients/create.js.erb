@@ -26,6 +26,7 @@ $('#create_ingredient').click(function(){
     $("#container_ingredients").append('<%= j render @ingredient %>');
     $("#ingredient_<%= @ingredient.id %>").hide().fadeIn(1000);
     $('.best_in_place').best_in_place();
+    location.reload();
 <% end %>
 };
 

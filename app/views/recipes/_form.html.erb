@@ -10,16 +10,18 @@
       </ul>
       <% end %>
       
-    <%= simple_form_for @recipe, defaults: {input_html: {multipart: true, class:'form-control'}}  do |f| %>
-      <%= f.input :title, label: 'Recipe Name' %>
-      <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
-      <%= f.input :description, input_html: {rows:'3'} %>
-      <div class="col-md-4 no-padding">
-        <%= f.input :rate_per_hour %></div>
-      <div class="col-md-4 no-padding left-padding">
-        <%= f.input :time_spent_in_hour %></div>
-      <div class="col-md-4 no-padding left-padding">
-      <%= f.input :percentage_profit, label: 'Optional percentage profit to add' %></div>
+    <%= simple_form_for @recipe, defaults: {input_html: {multipart: true, class:'form-horizontal'}}  do |f| %>
+      <%= f.input :title, label: 'Recipe Name', input_html: {class: 'form-control'} %>
+      <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', input_html: {class: 'form-control'} %>
+      <%= f.input :description, input_html: {rows:'3', class: 'form-control'} %>
+      <div class="col-md-3 no-padding">
+        <%= f.input :serving_number, input_html: {class: 'form-control', min: 0, value: f.object.serving_number || '1'} %></div>
+      <div class="col-md-3 no-padding left-padding">
+        <%= f.input :rate_per_hour, input_html: {class: 'form-control', min: 0} %></div>
+      <div class="col-md-3 no-padding left-padding">
+        <%= f.input :time_spent_in_hour, input_html: {class: 'form-control', min: 0} %></div>
+      <div class="col-md-3 no-padding left-padding">
+      <%= f.input :percentage_profit, input_html: {class: 'form-control', min: 0}, label: 'Optional percentage profit to add' %></div>
       
       <div class="container">
         <h2><strong>Ingredients</strong></h2>
@@ -32,9 +34,33 @@
             <%= f.simple_fields_for :recipe_ingredients, defaults: {input_html: {class:'form-inline'}} do |recipe_ingredient| %>
               <%= render 'recipe_ingredient_fields', :f => recipe_ingredient %>
             <% end %>
-            <%= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
+            <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
           </tbody>
+          
         </table>
+        <%= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
+      </div>
+      
+      
+      <div class="container">
+        <h2><strong>Materials</strong></h2>
+          <h2><strong></strong></h2>
+        <table class="table">
+          <thead>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tbody id="recipe_materials">
+            <%= f.simple_fields_for :recipe_materials, defaults: {input_html: {class:'form-inline'}} do |recipe_material| %>
+              <%= render 'recipe_material_fields', :f => recipe_material %>
+            <% end %>
+            <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
+          </tbody>
+          
+        </table>
+        <%= link_to_add_association 'Add Material',f, :recipe_materials, :"data-association-insertion-node" => "tbody#recipe_materials", :"data-association-insertion-method" => "append", :partial => "recipe_material_fields", :class => "btn btn-default" %>
       </div>
       
       <br>

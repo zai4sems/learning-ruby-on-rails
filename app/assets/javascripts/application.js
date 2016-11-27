@@ -17,6 +17,8 @@
 //= require best_in_place.purr
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
+//= require dataTables/extras/dataTables.responsive
+//= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/jquery.dataTables
 
@@ -60,6 +62,13 @@ $("#menu-toggle").click(function(e) {
     $("#wrapper").toggleClass("toggled");
 });
 
+$('#table_datatable').DataTable({
+    responsive: true
+});
+
+$('#table2_datatable').DataTable({
+    responsive: true
+});
 
 };
 $(document).ready(ready);

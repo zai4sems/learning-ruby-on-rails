@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
     has_many :recipes
     has_many :ingredients
     has_many :overheads
+    has_many :materials
    
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)

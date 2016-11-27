@@ -1,22 +1,22 @@
 var ready;
 ready = function () {
-<% if @ingredient.errors.any? %>
+<% if @overhead.errors.any? %>
    
     $('#errors_div2').empty();
-    <% str2 = "The following errors prevented the ingredient from getting updated" + "<br/>" %>
+    <% str2 = "The following errors prevented the overhead from getting updated" + "<br/>" %>
     $("#errors_div2").append("<%= raw j str2 %>");
     <% str = "" %>
-    <% @ingredient.errors.full_messages.each do |error| %>
+    <% @overhead.errors.full_messages.each do |error| %>
         <% str+= error + "<br/>" %>
     <% end %>
     $("#errors_div2").append("<%= raw j str %>");
 <% else %>
     
-    $("#myupdateingredient_<%= @ingredient.id %>").modal('hide');
+    $("#myupdateoverhead_<%= @overhead.id %>").modal('hide');
 
-      $("#ingredient_<%= @ingredient.id %>").fadeOut(500, function(){
+      $("#overhead_<%= @overhead.id %>").fadeOut(500, function(){
          $(this).remove();
-         $("#container_ingredients").append('<%= j render @ingredient %>');
+         $("#container_overheads").append('<%= j render @overhead %>');
       });
       location.reload();
 <% end %>

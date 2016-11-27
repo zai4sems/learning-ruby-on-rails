@@ -25,7 +25,7 @@ $('#create_material').click(function(){
     
     $("#container_materials").append('<%= j render @material %>');
     $("#material_<%= @material.id %>").hide().fadeIn(1000);
-    window.location.reload();
+    location.reload();
 <% end %>
 };
 

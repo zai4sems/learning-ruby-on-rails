@@ -25,6 +25,9 @@ class RecipesController < ApplicationController
         @recipe.recipe_ingredients.each do |f|
             f.ingredient.user = current_user
         end
+        @recipe.recipe_materials.each do |f|
+            f.material.user = current_user
+        end
         
         begin
             if @recipe.save
@@ -63,9 +66,9 @@ class RecipesController < ApplicationController
         @ingredients = current_user.ingredients
         @recipe = Recipe.includes(:recipe_ingredients, :recipe_materials).find(params[:id])
         @recipe.calculate_cost
-        #@recipe.calculate_material_cost
+        @recipe.calculate_material_cost
         @labour = ((@recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*@recipe.time_spent_in_hour.to_f)
-        @cake_cost = (@recipe.cost + ((@recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*@recipe.time_spent_in_hour.to_f))
+        @cake_cost = (@recipe.cost.to_f + ((@recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*@recipe.time_spent_in_hour.to_f))
         @profit = (@recipe.percentage_profit.to_f/100)*@cake_cost.to_f
         @total = @profit.to_f + @cake_cost.to_f
     end
@@ -91,7 +94,7 @@ class RecipesController < ApplicationController
     
     def recipe_params
         #params.require(:recipe).permit(:id, :title, :image, :description, :instructions, :rate_per_hour, :time_spent_in_hour, :percentage_profit, :_destroy, recipe_ingredients_attributes: [:id, :_destroy, :ingredient_id, :quantity, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]])
-        params.require(:recipe).permit(:id, :title, :image, :description, :instructions, :rate_per_hour, :time_spent_in_hour, :percentage_profit, :_destroy, 
+        params.require(:recipe).permit(:id, :title, :image, :description, :instructions, :rate_per_hour, :time_spent_in_hour, :percentage_profit, :serving_number, :_destroy, 
         recipe_ingredients_attributes: [:id, :_destroy, :ingredient_id, :quantity, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :user_id, :_destroy]],
         recipe_materials_attributes: [:id, :_destroy, :material_id, :quantity, material_attributes: [:id, :material_name, :purchase_price, :purchase_quantity, :_destroy]])
         

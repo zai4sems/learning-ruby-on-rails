@@ -1,6 +1,6 @@
 <%- model_class = Recipe -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %> <%= @recipe.title %></h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -9,115 +9,200 @@
   <dd><%= @recipe.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @recipe.description %></dd>
-  
+</dl>
 
-    <hr>
-<div class="container">
-  <h2>Ingredients</h2>
-  <div class="row">
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewingredient">
-      View All Ingredients
-    </button>
-    
+<hr>
+
+<div class="row">
+  <div class="col-md-10">
+    <div class="panel panel-default">
+    	<div class="panel-heading panel-heading-recipe">
+    		<h3>Ingredients
+    		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewingredient">
+          View All Ingredients
+        </button></h3>
+                  <!-- Modal -->
+                
+                  <div class="modal fade" id="viewingredient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add new Ingredient</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="field">
+                          <table class="table table-striped" id="ingredients_list">
+                            <thead>
+                            <tr>
+                                <th>Ingredient Name</th>
+                                <th>Purchase price</th>
+                                <th>Purchase weight or volume</th>
+                                <th>Unit</th>
+                                <th>Price per single unit</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="container_ingredients_list">
+                                <%= render 'ingredient_list', f: @ingredients, g: @recipe %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="viewingredientclose">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!-- Modal -->
+    	</div>
+    	<div class="panel-body">
+        	<table class="display responsive no-wrap" id="table_datatable">
+            <thead>
+            <tr>
+                <th>Ingredient Name</th>
+                <th>Unit</th>
+                <th>Quantity</th>
+                <th>Cost to buy ingredients</th>
+            </tr>
+            </thead>
+            <tbody id="container_recipe_ingredient">
+                <%= render 'ing', f: @recipe %>
+                
+            </tbody>
+            <tbody>
+              <tr>
+                <td colspan="3" align="right"><strong>Total cost</strong></td>
+                <td colspan="1"><strong><%= number_to_currency(@recipe.cost, :unit => "RM") %></strong>   <input type="button" value="Update" class="btn btn-info btn-xs" onClick="window.location.reload()"></td>
+              </tr>
+            </tbody>
+          </table>
+    	</div>
+    </div>
   </div>
-  
-
-  
-  <!-- Modal -->
-      
-        <div class="modal fade" id="viewingredient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Add new Ingredient</h4>
-            </div>
-            <div class="modal-body">
-              <div class="field">
-                <table class="table table-striped" id="ingredients_list">
-                  <thead>
-                  <tr>
-                      <th>Ingredient Name</th>
-                      <th>Purchase price</th>
-                      <th>Purchase weight or volume</th>
-                      <th>Unit</th>
-                      <th>Price per single unit</th>
-                      <th>Action</th>
-                  </tr>
-                  </thead>
-                  <tbody id="container_ingredients_list">
-                      <%= render 'ingredient_list', f: @ingredients, g: @recipe %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="viewingredientclose">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- Modal -->
-
-    
-    
-    <table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Ingredient Name</th>
-        <th>Unit</th>
-        <th>Quantity</th>
-        <th>Cost to buy ingredients</th>
-    </tr>
-    </thead>
-    <tbody id="container_recipe_ingredient">
-        <%= render 'ing', f: @recipe %>
-        <tr>
-          <td colspan="3" align="right"><strong>Total ingredients cost</strong></td>
-          <td colspan="1"><strong><%= number_to_currency(@recipe.cost, :unit => "RM") %></strong>   <input type="button" value="Update" class="btn btn-info btn-xs" onClick="window.location.reload()"></td>
-        </tr>
-    </tbody>
-    </table>
-    
 </div>
-    
-    
-    
- <h3>Summary</h3>   
-  <div class="row">
-    <div class="col-md-3"><strong>Rate Per Hour:</strong></div>
-    <div class="col-md-1 text-right"><%= number_to_currency(@recipe.rate_per_hour, :unit => "RM") %></div>
-  </div>
-  <div class="row">
-    <div class="col-md-3"><strong>Time spent in hour:</strong></div>
-    <div class="col-md-1 text-right"><%= @recipe.time_spent_in_hour %></div>
-  </div>
-  <div class="row">
-    <div class="col-md-3"><strong>Overhead Cost Per Hour:</strong></div>
-    <div class="col-md-1 text-right"><%= number_to_currency(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f), :unit => "RM") %></div>
-    <div class="col-md-6 text-right"><strong>Labour Cost:</strong></div>
-    <div class="col-md-1 text-right"><%= number_to_currency(@labour, :unit => "RM") %></div>
-  </div>
-    <div class="row"><br>
-    <div class="col-md-3"><strong>Percentage profit to add:</strong></div>
-    <div class="col-md-1 text-right"><%= number_to_percentage(@recipe.percentage_profit) %></div>
-    <div class="col-md-6 text-right"><strong>Profit to add to price:</strong></div>
-    <div class="col-md-1 text-right"><%= number_to_currency(@profit, :unit => "RM") %></div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-10 text-right"><strong>Ingredients Cost:</strong></div>
-    <div class="col-md-1 text-right"><%= number_to_currency(@recipe.cost, :unit => "RM") %></div>
-  </div>
-  <div class="row">
-    <div class="col-md-10 text-right"><strong>Total Cost of CAKE(S):</strong></div>
-    <div class="col-md-1 text-right"><%= number_to_currency(@cake_cost, :unit => "RM") %></div>
-  </div>
-  <div class="row">
-    <div class="col-md-10 text-right"><strong>TOTAL cost of cake including profit:</strong></div>
-    <div class="col-md-1 text-right"><strong><%= number_to_currency(@total, :unit => "RM") %></strong></div>
-  </div>
 
+<div class="row">
+  <div class="col-md-10">
+    <div class="panel panel-default">
+    	<div class="panel-heading panel-heading-recipe">
+    		<h3>Non-Food Item</h3>
+    	</div>
+    	<div class="panel-body">
+        	<table class="display responsive no-wrap" id="table2_datatable">
+            <thead>
+            <tr>
+                <th>Non-food item</th>
+                <th>Price per unit</th>
+                <th>Quantity</th>
+                <th>Cost to buy Non-food item</th>
+            </tr>
+            </thead>
+              <tbody id="container_recipe_material">
+                <% @recipe.recipe_materials.each do |recipe_material| %>
+                  <tr>
+                    <td><%= recipe_material.material_material_name %></td>
+                    <td><%= number_to_currency(recipe_material.material_price, :unit => "RM") %></td>
+                    <td><%= recipe_material.quantity %></td>
+                    <td><%= number_to_currency(recipe_material.material_price.to_f * recipe_material.quantity.to_f, :unit => "RM") %></td>
+                  </tr>
+                <% end %>
+                  
+              </tbody>
+              <tbody>
+                <tr>
+                    <td colspan="3" align="right"><strong>Total cost</strong></td>
+                    <td colspan="1"><strong><%= number_to_currency(@recipe.material_cost, :unit => "RM") %></strong>   <input type="button" value="Update" class="btn btn-info btn-xs" onClick="window.location.reload()"></td>
+                  </tr>
+              </tbody>
+          </table>
+    	</div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+    
+    
+<div class="row">
+ <h3>Summary</h3>   
+  <div class="col-md-10 blog-main box text-center">
+      <div class="panel panel-default">
+      	<div class="panel-heading panel-heading-custom">
+      		<h4>Summary of <%= @recipe.title %> </h4>
+      	</div>
+      	<div class="panel-body">
+      	  <div class="table-responsive">
+             <table class="table">
+                <thead>
+                  <th class="col-md-3"></th>
+                  <th></th>
+                  <th class="col-md-3"></th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Rate Per Hour :  </td>
+                    <td> <%= number_to_currency(@recipe.rate_per_hour, :unit => "RM") %></td>
+                  </tr>
+                  <tr>
+                    <td>Time Spent in Hour : </td>
+                    <td><%= @recipe.time_spent_in_hour %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Overhead Cost Per Hour: </strong></td>
+                    <td><%= link_to number_to_currency(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f), :unit => "RM"), overheads_path %></td>
+                    <td><strong>Labour Cost:</strong></td>
+                    <td><%= number_to_currency(@labour, :unit => "RM") %></td>
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                    <td><strong>Percentage profit to add:</strong></td>
+                    <td><%= number_to_percentage(@recipe.percentage_profit) %></td>
+                    <td><strong>Profit to add to price:</strong></td>
+                    <td><%= number_to_currency(@profit, :unit => "RM") %></td>
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                    <td></td><td></td>
+                    <td><strong>Ingredients Cost:</strong></td>
+                    <td><%= number_to_currency(@recipe.cost, :unit => "RM") %></td>
+                  </tr>
+                  <tr>
+                    <td></td><td></td>
+                    <td><strong>Non-food items Cost:</strong></td>
+                    <td><%= number_to_currency(@recipe.material_cost, :unit => "RM") %></td>
+                  </tr>
+                  <tr>
+                    <td></td><td></td>
+                    <td><strong>Total Cost of CAKE(S):</strong></td>
+                    <td><%= number_to_currency(@cake_cost, :unit => "RM") %></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="info"><strong>TOTAL of cost of cake(s) including profit:</strong></td>
+                    <td class="info"><strong><%= number_to_currency(@total, :unit => "RM") %></td>
+                  </tr>
+                  <tr class="success">
+                    <td><strong>Number of servings :</strong></td>
+                    <td><%= @recipe.serving_number %></td>
+                    <td><strong>Cost Per Serving :</strong></td>
+                    <td><%= number_to_currency(@total.to_f / @recipe.serving_number.to_f, :unit => "RM") %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+      	</div>
+      </div>
+    </div>
+</div>
 
 
 

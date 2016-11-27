@@ -1,0 +1,138 @@
+
+      <tr id="overhead_<%= overhead.id %>">
+        <td><%= best_in_place overhead, :title %></td>
+        <td><%= best_in_place overhead, :month_1, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_2, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_3, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_4, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_5, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_6, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_7, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_8, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_9, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_10, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_11, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+        <td><%= best_in_place overhead, :month_12, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
+            <% @total = (overhead.month_1.to_f + overhead.month_2.to_f + overhead.month_3.to_f + overhead.month_4.to_f + overhead.month_5.to_f + overhead.month_6.to_f + overhead.month_7.to_f + overhead.month_8.to_f + overhead.month_9.to_f + overhead.month_10.to_f + overhead.month_11.to_f + overhead.month_12.to_f)  %>
+            <% overhead.save_total_cost(@total) %>
+        <td><%= overhead.total %></td> 
+        <td><%= overhead.updated_at %></td>
+        <td>
+            <button type="button" class="btn btn-default btn-xs fa fa-pencil-square-o" data-toggle="modal" data-target="#myupdateoverhead_<%= overhead.id %>">
+                
+            </button>
+            
+            <%= link_to '', overhead, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs fa fa-trash', remote: true %>
+            
+            <%= form_for(overhead, :method => :put, remote: true, :html => {:class => 'form-horizontal'}) do |f| %>
+                <div class="modal fade" id="myupdateoverhead_<%= overhead.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Edit Overhead</h4>
+                    </div>
+                    <div class="modal-body form-group">
+                        
+                        <div class="field">
+                            <%= f.label :title, class: "col-sm-4"%>
+                            <div class="col-sm-8">
+                              <%= f.text_field :title, class: "form-control overhead_name"%>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_1, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_1, step: 'any', class:"form-control overhead_month1" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_2, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_2, step: 'any', class:"form-control overhead_month2" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_3, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_3, step: 'any', class:"form-control overhead_month3" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_4, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_4, step: 'any', class:"form-control overhead_month4" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_5, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_5, step: 'any', class:"form-control overhead_month5" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_6, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_6, step: 'any', class:"form-control overhead_month6" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_7, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_7, step: 'any', class:"form-control overhead_month7" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_8, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_8, step: 'any', class:"form-control overhead_month8" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_9, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_9, step: 'any', class:"form-control overhead_month9" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_10, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_10, step: 'any', class:"form-control overhead_month10" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_11, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_11, step: 'any', class:"form-control overhead_month11" %>
+                            </div>
+                          </div><br><br>
+                          <div class="field">
+                            <%= f.label :month_12, class: "col-sm-4" %>
+                            <div class="col-sm-8">
+                              <%= f.number_field :month_12, step: 'any', class:"form-control overhead_month12" %>
+                            </div>
+                          </div>
+                        
+                        
+                      <div id="errors_div2"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= overhead.id %>">Close</button>
+                      <%= submit_tag "Update", class: "btn btn-primary"%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+        </td>
+      </tr>
+
+
+    
+    
+    
+    
+
+  
+    
+    

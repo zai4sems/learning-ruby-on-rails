@@ -63,9 +63,11 @@
                 <% end %>
                 <li><%= menu_item "Recipe", my_recipes_path %></li>
                 <li><%= menu_item "Ingredient", ingredients_path %></li>
+                <li><%= menu_item "Material", materials_path %></li>
                 <li><%= menu_item "Overhead", overheads_path %></li>
                 <li><%= link_to "My Profile", edit_registration_path(current_user)  %></li>
-                
+                <li class="divider"></li>
+          		  <li><%= link_to "logout", destroy_user_session_path, class: 'hidden-xs hidden-sm fa fa-sign-out', method: :delete %></li>
             </ul>
         </div>
         <% end %>
@@ -78,18 +80,15 @@
                         <i class="fa fa-user"></i>
                         <%= current_user.full_name.present? ? current_user.full_name : current_user.email %>
                       </li>
-                      <li class="col-md-4 logout"><%= link_to "logout", destroy_user_session_path, class: 'btn btn-xs btn-danger', method: :delete %></li>
+                      <li class="col-md-4 logout"><%= link_to "logout", destroy_user_session_path, class: 'btn btn-xs btn-danger fa fa-sign-out', method: :delete %></li>
                     </ul>
                 <% else %>
                   <ul class="nav navbar-right col-md-4">
-                      <li class="col-md-4 login"><%= link_to 'Login', new_user_session_path, class: 'btn btn-xs btn-info' %></li>
+                      <li class="col-md-4 login"><%= link_to 'Login', new_user_session_path, class: 'btn btn-xs btn-info fa fa-sign-in' %></li>
                     </ul>
                 <% end %>
                 <div class="row">
-                    <div class="col-md-9">
-                        <div class="page-header">
-                          
-                        </div>
+                    <div class="col-md-12">
                         <%= bootstrap_flash %>
                         <%= yield %>
                         <footer>

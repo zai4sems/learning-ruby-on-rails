@@ -1,18 +1,8 @@
-<h1>Listing all ingredients</h1>
-
-
-
-<div class="container">
-  <div class="row">
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewingredient">
-      <i class="fa fa-plus" aria-hidden="true"></i> New Ingredient
-    </button>
-  </div>
-  
-
-  
-  <!-- Modal -->
-      <%= form_for(@ingredient, remote: true, id: 'ingredient-popup-form') do |f| %>
+<h1>Ingredients  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mynewingredient">
+      <i class="fa fa-plus" aria-hidden="true"></i> Add Ingredient
+    </button></h1>
+    
+    <%= form_for(@ingredient, remote: true, id: 'ingredient-popup-form', :html => {:class => 'form-horizontal'}) do |f| %>
         <div class="modal fade" id="mynewingredient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -21,22 +11,32 @@
               <h4 class="modal-title" id="myModalLabel">Create new Ingredient</h4>
             </div>
             <div class="modal-body">
-              <div class="field">
-                <%= f.label :ingredient_name%><br>
-                <%= f.text_field :name, class: "form-control ingredient_name"%>
+             
+              <div class="field form-group">
+                <%= f.label :ingredient_name, class: "col-sm-4"%>
+                <div class="col-sm-8">
+                  <%= f.text_field :name, class: "form-control ingredient_name"%>
+                </div>
               </div>
-              <div class="field">
-                <%= f.label :purchase_price %>
-                <%= f.number_field :purchase_price, step: 'any', class:"form-control ingredient_purchase_price" %>
+              <div class="field form-group">
+                <%= f.label :purchase_price, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :purchase_price, step: 'any', class:"form-control ingredient_purchase_price" %>
+                </div>
               </div>
-              <div class="field">
-                <%= f.label :purchase_weight_or_volume %>
-                <%= f.number_field :volume, class:"form-control ingredient_volume" %>
+              <div class="field form-group">
+                <%= f.label :purchase_weight_or_volume, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :volume, class:"form-control ingredient_volume" %>
+                </div>
               </div>
-              <div class="field">
-                <%= f.label :unit %>
-                <%= f.text_field :unit, class:"form-control ingredient_unit" %>
+              <div class="field form-group">
+                <%= f.label :unit, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.text_field :unit, class:"form-control ingredient_unit" %>
+                </div>
               </div>
+              
               <div id="errors_div"></div>
             </div>
             <div class="modal-footer">
@@ -47,26 +47,34 @@
         </div>
       </div>
       <% end %>
-    <!-- Modal -->
-  
+      
+<div class="panel panel-default">
+	<div class="panel-heading panel-heading-custom">
+		Ingredient List
+	</div>
+	<div class="panel-body">
+    	<table class="display responsive no-wrap" id="table_datatable">
+        <thead>
+        <tr>
+            <th>Ingredient Name</th>
+            <th>Purchase price</th>
+            <th>Purchase weight or volume</th>
+            <th>Unit</th>
+            <th>Price per single unit</th>
+            <th>Last modified</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="container_ingredients">
+            <%= render @ingredients %>
+        </tbody>
+      </table>
+	</div>
 </div>
-<br>
-    <table class="table table-striped" id="all_ingredients_list">
-    <thead>
-    <tr>
-        <th>Ingredient Name</th>
-        <th>Purchase price</th>
-        <th>Purchase weight or volume</th>
-        <th>Unit</th>
-        <th>Price per single unit</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody id="container_ingredients">
-        <%= render @ingredients %>
-    </tbody>
-    </table>
 
-<br><br>
+
+
+
+
 
 

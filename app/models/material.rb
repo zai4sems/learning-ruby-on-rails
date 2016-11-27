@@ -1,6 +1,8 @@
 class Material < ActiveRecord::Base
     has_many :recipe_materials, dependent:  :destroy
     has_many :recipes, through: :recipe_materials
+    belongs_to :user
+    validates :user_id, presence: true
     
     validates :material_name, presence: true, length: { minimum: 3, maximum: 50}
     validates_uniqueness_of :material_name
@@ -24,9 +26,7 @@ class Material < ActiveRecord::Base
    self.purchase_price.to_f / self.purchase_quantity.to_f
    end
    
-   def find_by_name(name)
-       where(material_name: name).first
-   end
+   
    
 
 end

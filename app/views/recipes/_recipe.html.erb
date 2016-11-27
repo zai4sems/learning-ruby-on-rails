@@ -8,7 +8,22 @@
                 <%= image_tag recipe.image.url, size: "100x100" %>
                 <p><%= recipe.description %></p>
                 <br>
-                <p><%= number_to_currency(recipe.cost, :unit => "RM") %></p>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Ingredient Cost : </td>
+                            <td><%= number_to_currency(recipe.cost, :unit => "RM") %></td>
+                        </tr>
+                        <tr>
+                            <td>Non-food Cost(Materials) : </td>
+                            <td><%= number_to_currency(recipe.material_cost, :unit => "RM") %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grant Cost of Recipe : </strong></td>
+                            <td><strong><%= number_to_currency(recipe.cost.to_f + recipe.material_cost.to_f, :unit => "RM") %></strong></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             
             <div class="panel-body">
@@ -21,3 +36,4 @@
             </div>
         </div>
 </div>
+

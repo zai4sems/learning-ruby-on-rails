@@ -26,11 +26,13 @@ init_ingredient_lookup = function() {
 var ready;
 ready = function () {
     init_ingredient_lookup();
-    $('#all_ingredients_list').dataTable();
+    
     $('.best_in_place').best_in_place();
     $('.best_in_place').bind("ajax:success", function(){
         alert('Value updated, Click update to recalculate cost');  /*check update work or not */
     });
+    
+
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);

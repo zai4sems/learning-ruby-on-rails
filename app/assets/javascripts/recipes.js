@@ -27,7 +27,7 @@ $("#materials a.add_fields").
   data("association-insertion-position", 'before').
   data("association-insertion-node", 'this');
 
-$('#materials').on('cocoon:after-insert',
+$('#recipe_materials').on('cocoon:after-insert',
      function() {
          $(".recipe-material-fields a.add_fields").
              data("association-insertion-position", 'before').
@@ -40,6 +40,7 @@ $('#materials').on('cocoon:after-insert',
      });
 
 $('#ingredients_list').dataTable();
+$('#recipe_ingredient_list').dataTable();
 $('#recipes_list').dataTable();
 $('.best_in_place').best_in_place();
 

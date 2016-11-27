@@ -16,7 +16,7 @@ class MaterialsController < ApplicationController
     end
     
     def index
-       @materials = Material.all 
+       @materials = current_user.materials 
        @material = Material.new
        #@materials = Material.paginate(page: params[:page], per_pages: 5)
     end
@@ -30,6 +30,7 @@ class MaterialsController < ApplicationController
     
     def create
         @material = Material.new(material_params)
+        @material.user = current_user
         respond_to do |format|
             if @material.save 
                 format.html { redirect_to @material, notice: "Material was successfully created" }

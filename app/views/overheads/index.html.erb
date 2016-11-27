@@ -1,114 +1,206 @@
-<%- model_class = Overhead -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %> 
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_overhead_path,
-            :class => 'btn btn-primary' %></h1>
+<h1>Overheads  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mynewoverhead">
+      <i class="fa fa-plus" aria-hidden="true"></i> Create New
+    </button></h1>
+    
+<div class="panel panel-default">
+	<div class="panel-heading panel-heading-custom">
+		List of Overheads
+	</div>
+	<div class="panel-body">
+    <table class="display responsive no-wrap" id="all_overheads_list">
+      <thead><%- model_class = Overhead -%>
+        <tr>
+          <th><%= model_class.human_attribute_name(:title) %></th>
+          <th><%= model_class.human_attribute_name(:month_1) %></th>
+          <th><%= model_class.human_attribute_name(:month_2) %></th>
+          <th><%= model_class.human_attribute_name(:month_3) %></th>
+          <th><%= model_class.human_attribute_name(:month_4) %></th>
+          <th><%= model_class.human_attribute_name(:month_5) %></th>
+          <th><%= model_class.human_attribute_name(:month_6) %></th>
+          <th><%= model_class.human_attribute_name(:month_7) %></th>
+          <th><%= model_class.human_attribute_name(:month_8) %></th>
+          <th><%= model_class.human_attribute_name(:month_9) %></th>
+          <th><%= model_class.human_attribute_name(:month_10) %></th>
+          <th><%= model_class.human_attribute_name(:month_11) %></th>
+          <th><%= model_class.human_attribute_name(:month_12) %></th>
+          <th><%= model_class.human_attribute_name(:total) %></th>
+          <th>Last Modified</th>
+          <th><%=t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
+      </thead>
+      <tbody id="container_overheads">
+        <%= render @overheads %>
+      </tbody>
+      <tbody>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_1) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_2) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_3) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_4) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_5) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_6) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_7) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_8) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_9) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_10) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_11) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:month_12) %></strong></td>
+          <td><strong><%= current_user.overheads.sum(:total) %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+	</div>
 </div>
 
 
+<div class = "row">
 
-<table class="table table-striped" id="all_overheads_list">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:month_1) %></th>
-      <th><%= model_class.human_attribute_name(:month_2) %></th>
-      <th><%= model_class.human_attribute_name(:month_3) %></th>
-      <th><%= model_class.human_attribute_name(:month_4) %></th>
-      <th><%= model_class.human_attribute_name(:month_5) %></th>
-      <th><%= model_class.human_attribute_name(:month_6) %></th>
-      <th><%= model_class.human_attribute_name(:month_7) %></th>
-      <th><%= model_class.human_attribute_name(:month_8) %></th>
-      <th><%= model_class.human_attribute_name(:month_9) %></th>
-      <th><%= model_class.human_attribute_name(:month_10) %></th>
-      <th><%= model_class.human_attribute_name(:month_11) %></th>
-      <th><%= model_class.human_attribute_name(:month_12) %></th>
-      <th><%= model_class.human_attribute_name(:total) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @overheads.each do |overhead| %>
-      <tr>
-        <td><%= link_to overhead.title, edit_overhead_path(overhead) %></td>
-        <td><%= best_in_place overhead, :month_1 %></td>
-        <td><%= best_in_place overhead, :month_2 %></td>
-        <td><%= best_in_place overhead, :month_3 %></td>
-        <td><%= best_in_place overhead, :month_4 %></td>
-        <td><%= best_in_place overhead, :month_5 %></td>
-        <td><%= best_in_place overhead, :month_6 %></td>
-        <td><%= best_in_place overhead, :month_7 %></td>
-        <td><%= best_in_place overhead, :month_8 %></td>
-        <td><%= best_in_place overhead, :month_9 %></td>
-        <td><%= best_in_place overhead, :month_10 %></td>
-        <td><%= best_in_place overhead, :month_11 %></td>
-        <td><%= best_in_place overhead, :month_12 %></td>
-            <% @total = (overhead.month_1.to_f + overhead.month_2.to_f + overhead.month_3.to_f + overhead.month_4.to_f + overhead.month_5.to_f + overhead.month_6.to_f + overhead.month_7.to_f + overhead.month_8.to_f + overhead.month_9.to_f + overhead.month_10.to_f + overhead.month_11.to_f + overhead.month_12.to_f)  %>
-            <% overhead.save_total_cost(@total) %>
-        <td><%= overhead.total %></td> 
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_overhead_path(overhead), :class => 'btn btn-default btn-xs' %>
-          
-          <%= link_to '', overhead_path(overhead), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-xs btn-danger fa fa-trash' %>
-        </td>
-      </tr>
-    <% end %>
-    
-  </tbody>
-</table>
-<br>
-<h3>Overhead Summary</h3>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th><%= model_class.human_attribute_name(:month_1) %></th>
-      <th><%= model_class.human_attribute_name(:month_2) %></th>
-      <th><%= model_class.human_attribute_name(:month_3) %></th>
-      <th><%= model_class.human_attribute_name(:month_4) %></th>
-      <th><%= model_class.human_attribute_name(:month_5) %></th>
-      <th><%= model_class.human_attribute_name(:month_6) %></th>
-      <th><%= model_class.human_attribute_name(:month_7) %></th>
-      <th><%= model_class.human_attribute_name(:month_8) %></th>
-      <th><%= model_class.human_attribute_name(:month_9) %></th>
-      <th><%= model_class.human_attribute_name(:month_10) %></th>
-      <th><%= model_class.human_attribute_name(:month_11) %></th>
-      <th><%= model_class.human_attribute_name(:month_12) %></th>
-      <th><%= model_class.human_attribute_name(:total) %></th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr>
-        <td><strong>Total</strong></td>
-        <td><%= current_user.overheads.sum(:month_1) %></td>
-        <td><%= current_user.overheads.sum(:month_2) %></td>
-        <td><%= current_user.overheads.sum(:month_3) %></td>
-        <td><%= current_user.overheads.sum(:month_4) %></td>
-        <td><%= current_user.overheads.sum(:month_5) %></td>
-        <td><%= current_user.overheads.sum(:month_6) %></td>
-        <td><%= current_user.overheads.sum(:month_7) %></td>
-        <td><%= current_user.overheads.sum(:month_8) %></td>
-        <td><%= current_user.overheads.sum(:month_9) %></td>
-        <td><%= current_user.overheads.sum(:month_10) %></td>
-        <td><%= current_user.overheads.sum(:month_11) %></td>
-        <td><%= current_user.overheads.sum(:month_12) %></td>
-        <td><strong><%= current_user.overheads.sum(:total) %></strong></td>
-    </tr></tbody>
-</table>
-<div class="container">
-  <div class="row">
-    <div class="blog-main box">
-      <div class="panel panel-info">
-        <div class="panel-heading" id="reports">
-          <p><strong>Hours worked per week : </strong>  <%= current_user.hour_worked_per_week %></p>
-          <p><strong>No of weeks holiday per year : </strong>  <%= current_user.no_of_week_holiday_per_year %></p>
-          <p><strong>No of weeks worked per year : </strong> <%=  (52-current_user.no_of_week_holiday_per_year.to_f) %> / 52 (Total of week per year)</p>
-          <p><strong>Hours spent per Annum : </strong><%= ((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)  %></p>
-          <p class="text-right"><strong>Overhead Cost per hour :  <%= number_to_currency(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f), :unit => "RM") %></strong></p>
-        </div>
+    <div class="col-md-6 blog-main box text-center">
+      <div class="panel panel-default">
+      	<div class="panel-heading panel-heading-custom">
+      		Summary
+      	</div>
+      	<div class="panel-body">
+             <table class="table">
+               <tbody>
+                 <tr>
+                   <td><strong>Hours worked per week : </strong></td>
+                   <td><%= current_user.hour_worked_per_week %></td>
+                 </tr>
+                 <tr>
+                   <td><strong>No of weeks holiday per year : </strong></td>
+                   <td><%= current_user.no_of_week_holiday_per_year %></td>
+                 </tr>
+                 <tr>
+                   <td><strong>No of weeks worked per year : </strong></td>
+                   <td><%=  (52-current_user.no_of_week_holiday_per_year.to_f) %> / 52 (Total of week per year)</td>
+                 </tr>
+                 <tr>
+                   <td><strong>Hours spent per Annum : </strong></td>
+                   <td><%= ((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)  %></td>
+                 </tr>
+               </tbody>
+             </table>
+      	</div>
       </div>
     </div>
-  </div>
+    
+    <div class="col-md-6 blog-main box text-center">
+      <div class="panel panel-default">
+      	<div class="panel-heading panel-heading-custom">
+      		Cost Per Hour
+      	</div>
+      	<div class="panel-body">
+      	  <table class="table">
+               <tbody class="table">
+                 <tr>
+                   <td><strong>Overhead Cost per hour :</strong></td>
+                   <td><strong><%= number_to_currency(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f), :unit => "RM") %></strong></td>
+                 </tr>
+               </tbody>
+             </table>
+      	</div>
+      </div>
+    </div>
 </div>
+    
+    <%= form_for(@overhead, remote: true, id: 'overhead-popup-form', :html => {:class => 'form-group'}) do |f| %>
+        <div class="modal fade" id="mynewoverhead" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Create new Overhead</h4>
+            </div>
+            <div class="modal-body form-group">
+             
+              <div class="field">
+                <%= f.label :title, class: "col-sm-4"%>
+                <div class="col-sm-8">
+                  <%= f.text_field :title, class: "form-control overhead_title"%>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_1, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_1, step: 'any', class:"form-control overhead_month1" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_2, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_2, step: 'any', class:"form-control overhead_month2" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_3, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_3, step: 'any', class:"form-control overhead_month3" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_4, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_4, step: 'any', class:"form-control overhead_month4" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_5, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_5, step: 'any', class:"form-control overhead_month5" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_6, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_6, step: 'any', class:"form-control overhead_month6" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_7, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_7, step: 'any', class:"form-control overhead_month7" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_8, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_8, step: 'any', class:"form-control overhead_month8" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_9, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_9, step: 'any', class:"form-control overhead_month9" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_10, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_10, step: 'any', class:"form-control overhead_month10" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_11, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_11, step: 'any', class:"form-control overhead_month11" %>
+                </div>
+              </div><br><br>
+              <div class="field">
+                <%= f.label :month_12, class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= f.number_field :month_12, step: 'any', class:"form-control overhead_month12" %>
+                </div>
+              </div>
+              <div id="errors_div"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewoverheadclose">Close</button>
+              <%= submit_tag "Create", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      

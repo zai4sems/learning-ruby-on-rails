@@ -1,9 +1,11 @@
 class OverheadsController < ApplicationController
     
     before_action :set_overhead, only: [:edit, :show, :update, :destroy]
+    respond_to :html, :json, :js
     
     def index
         @overheads = current_user.overheads
+        @overhead = Overhead.new
     end
     
     def new
@@ -16,26 +18,34 @@ class OverheadsController < ApplicationController
     def create
         @overhead = Overhead.new(overhead_params)
         @overhead.user = current_user
-        if @overhead.save
-            flash[:notice] = "overhead was successfully created"
-            redirect_to overheads_path
-        else
-            render 'new'
+        respond_to do |format|
+            if @overhead.save 
+                format.html { redirect_to @overhead, flash[:notice] = "Overhead was successfully created" }
+                format.json {render :show, status: :created, location: @overhead }
+                format.js 
+                
+            else
+                format.html {render 'new'}
+                format.json {render json: @overhead.errors, status: :unprocessable_entity }
+                format.js 
+            end
         end
     end
     
     def update
-        
         respond_to do |format|
             if @overhead.update_attributes(overhead_params)
-                format.html { redirect_to @overhead, notice: "Overhead was successfully updated" }
+                format.html { redirect_to @overhead, flash[:notice] = "Overhead was successfully updated" }
                 format.json {respond_with_bip(@overhead) }
+                #format.json {render :show, status: :ok, location: @overhead }
+                format.js {render layout: false}
+                
             else
                 format.html {render 'edit'}
                 format.json {respond_with_bip(@overhead) }
+                format.js {render layout: false}
             end
         end
-        
     end
     
     def show
@@ -43,8 +53,11 @@ class OverheadsController < ApplicationController
     
     def destroy
         @overhead.destroy
-        flash[:notice] = "Overhead was successfully deleted"
-        redirect_to overheads_path
+        respond_to do |format|
+           format.html { redirect_to overheads_path, flash[:notice] = "Ingredient was successfully deleted"}
+           format.json { head :no_content}
+           format.js
+        end
     end
     
     def set_overhead

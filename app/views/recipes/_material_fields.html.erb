@@ -1,20 +1,17 @@
 
-<div class="form-group">
-    <div class="container-fluid">
-    <div class="row">
-      <div>
-          <div class="nested-fields">
-            <%= f.label :new_material_name %>
-            <%= f.text_field :material_name, class: "form-control" %>
-            
-            <%= f.label :purchase_price %>
-            <%= f.text_field :purchase_price, class: "form-control" %>
-            
-            <%= f.label :purchase_volume %>
-            <%= f.text_field :purchase_quantity, class: "form-control" %>
-            
-          </div>
-        </div>
-    </div>
-    </div>
-  </div>
+
+
+
+<tr class="nested-fields" id="recipe_materials">
+<td>
+  <%#= f.label :new_ingredient_name %>
+  <%#= f.text_field :name, class: "form-control" %>
+  <%= f.input :material_name, label: false, placeholder: "New Material Name", input_html: {class:'form-control'} %>
+</td>
+<td>
+  <%= f.input :purchase_price, label: false, placeholder: "Purchase Price", input_html: {class:'form-control',min: 0} %>
+</td>
+<td>
+  <%= f.input :purchase_quantity, label: false, placeholder: "Purchase Quantity/Volume", input_html: {class:'form-control',min: 0} %>
+</td>
+</tr>

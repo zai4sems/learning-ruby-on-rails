@@ -51,11 +51,10 @@ class IngredientsController < ApplicationController
         
         respond_to do |format|
             if @ingredient.update_attributes(ingredient_params)
-                #respond_with @ingredient
                 format.html { redirect_to @ingredient, notice: "Ingredient was successfully updated" }
                 format.json {respond_with_bip(@ingredient) }
                 #format.json {render :show, status: :ok, location: @ingredient }
-                format.js 
+                format.js {render layout: false}
                 
             else
                 format.html {render 'edit'}

@@ -5,7 +5,7 @@ class Ingredient < ActiveRecord::Base
     has_many :recipes, through: :recipe_ingredients
     validates :user_id, presence: true
     validates :name, presence: true, length: { minimum: 3, maximum: 50}
-    validates_uniqueness_of :name
+    #validates_uniqueness_of :name    #sebab banyak user
     validates :purchase_price, presence: true
     validates :volume, presence: true
     validates :unit, presence: true

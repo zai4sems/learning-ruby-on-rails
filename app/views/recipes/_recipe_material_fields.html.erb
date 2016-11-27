@@ -1,15 +1,15 @@
 
-<div class>
-  <div class="nested-fields recipe-material-fields">
-    <div class="material_from_list">
-      <%= f.association :material, collection: Material.order(:material_name), :prompt => 'Choose an existing material', label: 'Material' %>
-    </div>
-    <div class="material_quantity">
-      <%= f.input :quantity, placeholder: 'quantity' %>
-    </div>
-    <%= link_to_add_association 'OR Create New', f, :material, :class => 'btn btn-primary btn-sm'%>
-    <%= link_to_remove_association "Remove", f, :class => 'btn btn-danger btn-sm'%>
-  </div>
-</div>
-<br>
-<br>
+
+<tr class="nested-fields recipe-material-fields"  id="recipe_materials">
+  <td class="material_quantity"><%= f.input :quantity, label: false, placeholder: 'Quantity/Amount', input_html: {class:'form-control',min: 0} %></td>
+  <td class="material_from_list"><%= f.association :material,label_method: :material_name, collection: current_user.materials.order(:material_name), :prompt => 'Choose an existing material', label: false, input_html: {class:'form-control'} %></td>
+
+    <% if f.object.quantity.nil? && f.object.material.nil?%>
+      <td class="nested-field recipe-material-fields">
+      <%= link_to_add_association 'OR Create New', f, :material, :class => 'btn btn-primary btn-sm'%>
+      </td>
+    <% else %>
+    
+    <% end %>
+  <td class="col-md-1"><%= link_to_remove_association "", f, :class => 'btn btn-danger btn-sm fa fa-trash'%></td>
+</tr>

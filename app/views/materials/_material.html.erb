@@ -4,15 +4,59 @@
         <td><%= number_to_currency(material.purchase_price, :unit => "RM") %></td>
         <td><%= material.purchase_quantity %></td>
         <td><%= number_to_currency(material.price, :unit => "RM") %></td>
+        <td><%= material.updated_at %></td>
         <td>
             <%#= link_to 'Edit', edit_material_path(material), :class => 'btn btn-default btn-xs', remote: true  %>
             <%#= link_to 'Show', material_path(material), :class => 'btn btn-default btn-xs' %>
             <%#= link_to 'Delete', material_path(material), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-xs btn-danger' %>
             
-            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myupdatematerial_<%= material.id %>">
-                Edit
+            <button type="button" class="btn btn-default btn-xs fa fa-pencil-square-o" data-toggle="modal" data-target="#myupdatematerial_<%= material.id %>">
+                
             </button>
-            <%= link_to 'Delete', material, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs', remote: true %>
+            <%= link_to '', material, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs fa fa-trash', remote: true %>
+            
+            <%= form_for(material, :method => :put, remote: true, :html => {:class => 'form-group'}) do |f| %>
+                <div class="modal fade" id="myupdatematerial_<%= material.id %>" tabindex="-1" role="document" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Edit Material</h4>
+                    </div>
+                    
+                    <div class="modal-body form-group">
+                      <div class="field">
+                        <%= f.label :material_name, class: "col-sm-6" %>
+                        <div class="col-sm-6">
+                          <%= f.text_field :material_name, class: "form-control" %>
+                        </div>
+                      </div>
+                      <br><br>
+                      <div class="field">
+                        <%= f.label :purchase_price, class: "col-sm-6" %>
+                        <div class="col-sm-6">
+                          <%= f.number_field :purchase_price, class: "form-control" %>
+                        </div>
+                      </div>
+                      <br><br>
+                      <div class="field">
+                        <%= f.label :purchase_quantity, class: "col-sm-6" %>
+                        <div class="col-sm-6">
+                          <%= f.number_field :purchase_quantity, class: "form-control" %>
+                        </div>
+                      </div>
+                      
+                      
+                      <div id="errors_div2"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= material.id %>">Close</button>
+                      <%= submit_tag "Update", class: "btn btn-primary"%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
         </td>
       </tr>
 
@@ -21,38 +65,7 @@
     
     
 
-    <%= form_for(material, :method => :put, remote: true) do |f| %>
-        <div class="modal fade" id="myupdatematerial_<%= material.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Edit Material</h4>
-            </div>
-            <div class="modal-body">
-              <div class="field">
-                <%= f.label :material_name%><br>
-                <%= f.text_field :material_name, class: "form-control"%>
-              </div>
-              <div class="field">
-                <%= f.label :purchase_price %>
-                <%= f.number_field :purchase_price, step: 'any', class:"form-control" %>
-              </div>
-              <div class="field">
-                <%= f.label :purchase_quantity %>
-                <%= f.number_field :purchase_quantity, class:"form-control" %>
-              </div>
-              <div id="errors_div2"></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= material.id %>">Close</button>
-              <%= submit_tag "Update", class: "btn btn-primary" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
+    
   
     
     
