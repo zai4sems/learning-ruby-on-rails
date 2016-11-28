@@ -12,14 +12,14 @@ Rails.application.routes.draw do
       root :to => 'pages#dashboard', as: :authenticated_root
     end
     
-    
+    root :to => 'pages#dashboard'
     
     unauthenticated :user do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-  root :to => 'pages#dashboard'
-  #root 'pages#home'
+  
+  ##root 'pages#home'
   get 'home', to: 'pages#home'
   get 'about', to: 'pages#about'
   get 'all_users', to: 'pages#all_users'
