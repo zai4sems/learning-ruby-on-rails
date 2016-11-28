@@ -1,44 +1,69 @@
+
 <%= bootstrap_devise_error_messages! %>
-<div class="panel panel-default devise-bs">
-  <div class="panel-heading">
-    <h4><%= t('.sign_up', :default => "Sign up") %></h4>
-  </div>
-  <div class="panel-body">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <div class = "col-md-6 no-padding">
-          <%= f.label :first_name %>
-          <%= f.text_field :first_name, class: "form-control" %>
+<div class="row register-form">
+        <div class="col-md-8 col-md-offset-2">
+            <form class="form-horizontal custom-form">
+              <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
+                <h1>Register Form</h1>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <%= f.label :email, class: 'control-label'  %>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <%= f.label :first_name, class: 'control-label' %>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <%= f.text_field :first_name, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <%= f.label :last_name, class: 'control-label' %>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <%= f.text_field :last_name, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <%= f.label :hours_worked_per_week, class: 'control-label' %>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <%= f.number_field :hour_worked_per_week, class: "form-control", min: 0, value: f.object.hour_worked_per_week || '1' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <%= f.label :no_of_weeks_holiday_per_year, class: 'control-label' %>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <%= f.number_field :no_of_week_holiday_per_year, class: "form-control", min: 0 %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <%= f.label :password, class: 'control-label' %>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <%= f.password_field :password, class: "form-control" %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <%= f.label :password_confirmation, class: 'control-label' %>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <%= f.password_field :password_confirmation, class: "form-control" %>
+                    </div>
+                </div>
+                <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-default submit-button" %><br>
+                <%= render "devise/shared/links" %>
+            </form>
+            <% end %>
         </div>
-        <div class="col-md-6 no-padding left-padding">
-          <%= f.label :last_name %>
-          <%= f.text_field :last_name, class: "form-control" %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class = "col-md-6 no-padding">
-          <%= f.label :hours_worked_per_week %>
-          <%= f.number_field :hour_worked_per_week, class: "form-control", min: 0, value: f.object.hour_worked_per_week || '1' %>
-        </div>
-        <div class="col-md-6 no-padding left-padding">
-          <%= f.label :no_of_weeks_holiday_per_year %>
-          <%= f.number_field :no_of_week_holiday_per_year, class: "form-control", min: 0 %>
-        </div>
-      </div>
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
-      </div>
-      <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
-<%= render "devise/shared/links" %>
+    </div>

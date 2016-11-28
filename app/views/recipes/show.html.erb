@@ -2,15 +2,15 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %> <%= @recipe.title %></h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dd><%= image_tag(@recipe.image.url, size: "250x150") if @recipe.image? %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @recipe.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @recipe.description %></dd>
-</dl>
-
+<div class="col-md-10">
+  <dl class="dl-horizontal">
+    <dd><%= image_tag(@recipe.image.url, size: "250x150") if @recipe.image? %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+    <dd><%= @recipe.title %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+    <dd><%= @recipe.description %></dd>
+  </dl>
+</div>
 <hr>
 
 <div class="row">
