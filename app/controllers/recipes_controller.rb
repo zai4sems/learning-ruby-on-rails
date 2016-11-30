@@ -69,7 +69,7 @@ class RecipesController < ApplicationController
         @recipe.calculate_cost
         @recipe.calculate_material_cost
         @labour = ((@recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*@recipe.time_spent_in_hour.to_f)
-        @cake_cost = (@recipe.cost.to_f + ((@recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*@recipe.time_spent_in_hour.to_f))
+        @cake_cost = (@recipe.cost.to_f + @recipe.material_cost.to_f + ((@recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*@recipe.time_spent_in_hour.to_f))
         @profit = (@recipe.percentage_profit.to_f/100)*@cake_cost.to_f
         @total = @profit.to_f + @cake_cost.to_f
     end
