@@ -20,11 +20,11 @@ class RecipeMaterialsController < ApplicationController
         #@recipe_material = RecipeMaterial.new(recipe_material_params)
         respond_to do |format|
             if @recipe_material.save
-                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Ingredient #{@recipe_material.material.material_name} was successfully added"}
+                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Material #{@recipe_material.material.material_name} was successfully added"}
                 format.json { render :show, status: :created, location: @recipe_material }
                 format.js
             else
-                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Ingredient #{@recipe_material.material.material_name} already added" }
+                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Material #{@recipe_material.material.material_name} already added" }
                 format.json { render json: @recipe_material.errors, status: :unprocessable_entity }
                 format.js
             end

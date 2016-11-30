@@ -76,7 +76,7 @@ class RecipesController < ApplicationController
     
     def destroy
         @recipe.destroy
-        flash[:notice] = "recipe was successfully deleted"
+        flash[:notice] = "Recipe was successfully deleted"
         #redirect_to recipes_path
         redirect_to my_recipes_path
     end
