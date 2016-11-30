@@ -16,15 +16,15 @@ class RecipeMaterialsController < ApplicationController
     end
     
     def create
-        @recipe_material = RecipeMaterial.new(recipe_id: params[:recipe_id], ingredient_id: params[:ingredient_id])
+        @recipe_material = RecipeMaterial.new(recipe_id: params[:recipe_id], material_id: params[:material_id])
         #@recipe_material = RecipeMaterial.new(recipe_material_params)
         respond_to do |format|
             if @recipe_material.save
-                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Ingredient #{@recipe_material.ingredient.name} was successfully added"}
+                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Ingredient #{@recipe_material.material.material_name} was successfully added"}
                 format.json { render :show, status: :created, location: @recipe_material }
                 format.js
             else
-                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Ingredient #{@recipe_material.ingredient.name} already added" }
+                format.html { redirect_to recipe_path(@recipe_material.recipe_id), notice: "Ingredient #{@recipe_material.material.material_name} already added" }
                 format.json { render json: @recipe_material.errors, status: :unprocessable_entity }
                 format.js
             end

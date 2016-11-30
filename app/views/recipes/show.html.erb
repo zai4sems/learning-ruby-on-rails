@@ -15,50 +15,56 @@
 
 <div class="row">
   <div class="col-md-10">
-    <div class="panel panel-default">
-    	<div class="panel-heading panel-heading-recipe">
-    		<h3>Ingredients
-    		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewingredient">
-          View All Ingredients
-        </button></h3>
-                  <!-- Modal -->
-                
-                  <div class="modal fade" id="viewingredient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Add new Ingredient</h4>
-                      </div>
-                      <div class="modal-body">
-                        <div class="field">
-                          <table class="table table-striped" id="ingredients_list">
-                            <thead>
-                            <tr>
-                                <th>Ingredient Name</th>
-                                <th>Purchase price</th>
-                                <th>Purchase weight or volume</th>
-                                <th>Unit</th>
-                                <th>Price per single unit</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody id="container_ingredients_list">
-                                <%= render 'ingredient_list', f: @ingredients, g: @recipe %>
-                            </tbody>
-                          </table>
+    
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#Ingredient" data-toggle="tab">Ingredients</a></li>
+        <li><a href="#Material" data-toggle="tab">Materials</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="Ingredient">
+          <br>
+        		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewingredient">
+              View All Ingredients
+            </button>
+            <br><br>
+                      <!-- Modal -->
+                    
+                      <div class="modal fade" id="viewingredient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">List of Ingredients</h4>
+                          </div>
+                          <div class="modal-body">
+                            <div class="field">
+                              <table class="table table-striped" id="ingredients_list">
+                                <thead>
+                                <tr>
+                                    <th>Ingredient Name</th>
+                                    <th>Purchase price</th>
+                                    <th>Purchase weight or volume</th>
+                                    <th>Unit</th>
+                                    <th>Price per single unit</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody id="container_ingredients_list">
+                                    <%= render 'ingredient_list', f: @ingredients, g: @recipe %>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="viewingredientclose">Close</button>
+                          </div>
                         </div>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="viewingredientclose">Close</button>
-                      </div>
                     </div>
-                  </div>
-                </div>
-              <!-- Modal -->
-    	</div>
-    	<div class="panel-body">
-        	<table class="display responsive no-wrap" id="table_datatable">
+                  <!-- Modal -->
+          <table class="display responsive no-wrap" id="table_datatable">
             <thead>
             <tr>
                 <th>Ingredient Name</th>
@@ -78,19 +84,48 @@
               </tr>
             </tbody>
           </table>
-    	</div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-10">
-    <div class="panel panel-default">
-    	<div class="panel-heading panel-heading-recipe">
-    		<h3>Non-Food Item</h3>
-    	</div>
-    	<div class="panel-body">
-        	<table class="display responsive no-wrap" id="table2_datatable">
+        </div>
+        <div class="tab-pane fade" id="Material">
+          <br>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewmaterial">
+              View All Materials
+            </button>
+            <br><br>
+                      <!-- Modal -->
+                    
+                      <div class="modal fade" id="viewmaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">List of non-food items</h4>
+                          </div>
+                          <div class="modal-body">
+                            <div class="field">
+                              <table class="table table-striped" id="ingredients_list">
+                                <thead>
+                                <tr>
+                                    <th>Material Name</th>
+                                    <th>Purchase price</th>
+                                    <th>Purchase Quantity</th>
+                                    <th>Price per single item</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody id="container_ingredients_list">
+                                    <%= render 'material_list', f: @materials, g: @recipe %>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="viewingredientclose">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+          <table class="display responsive no-wrap" id="table2_datatable">
             <thead>
             <tr>
                 <th>Non-food item</th>
@@ -102,9 +137,9 @@
               <tbody id="container_recipe_material">
                 <% @recipe.recipe_materials.each do |recipe_material| %>
                   <tr>
-                    <td><%= recipe_material.material_material_name %></td>
+                    <td><%= best_in_place recipe_material.material, :material_name %></td>
                     <td><%= number_to_currency(recipe_material.material_price, :unit => "RM") %></td>
-                    <td><%= recipe_material.quantity %></td>
+                    <td><%= best_in_place recipe_material, :quantity %></td>
                     <td><%= number_to_currency(recipe_material.material_price.to_f * recipe_material.quantity.to_f, :unit => "RM") %></td>
                   </tr>
                 <% end %>
@@ -117,18 +152,11 @@
                   </tr>
               </tbody>
           </table>
-    	</div>
+        </div>
+      </div>
     </div>
-  </div>
 </div>
 
-
-  
-
-  
-  
-
-    
     
 <div class="row">
  <h3>Summary</h3>   

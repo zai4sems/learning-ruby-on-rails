@@ -1,7 +1,7 @@
 <% f.recipe_ingredients.each do |recipe_ingredient| %>
         <tr><%= form_for recipe_ingredient do |h|%>
           <td><%= best_in_place recipe_ingredient.ingredient, :name %> </td>
-          <td><%= recipe_ingredient.ingredient_unit %></td>
+          <td><%= best_in_place recipe_ingredient.ingredient, :unit %></td>
           <%#= recipe_ingredient.quantity %><td>
               <div class="form-group">
                   <%= best_in_place recipe_ingredient, :quantity %>

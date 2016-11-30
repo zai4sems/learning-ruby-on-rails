@@ -64,6 +64,7 @@ class RecipesController < ApplicationController
         @recipe_ingredient = RecipeIngredient.new
         @ingredient = Ingredient.new
         @ingredients = current_user.ingredients
+        @materials = current_user.materials
         @recipe = Recipe.includes(:recipe_ingredients, :recipe_materials).find(params[:id])
         @recipe.calculate_cost
         @recipe.calculate_material_cost

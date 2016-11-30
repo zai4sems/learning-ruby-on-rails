@@ -68,7 +68,6 @@
                 <li><%= menu_item "Overhead", overheads_path %></li>
                 <li><%= link_to "My Profile", edit_registration_path(current_user)  %></li>
                 <li class="divider"></li>
-          		  <li><%= link_to "logout", destroy_user_session_path, class: 'hidden-xs hidden-sm fa fa-sign-out', method: :delete %></li>
             </ul>
         </div>
         <% end %>

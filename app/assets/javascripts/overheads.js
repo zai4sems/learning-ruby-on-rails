@@ -11,9 +11,7 @@ ready = function () {
     });
     
     $('.best_in_place').best_in_place();
-    $('.best_in_place').bind("ajax:success", function(){
-        alert('Value updated, refresh to recalculate total cost summary');  /*check update work or not */
-    });
+
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);

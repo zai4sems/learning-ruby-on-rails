@@ -28,9 +28,7 @@ ready = function () {
     init_ingredient_lookup();
     
     $('.best_in_place').best_in_place();
-    $('.best_in_place').bind("ajax:success", function(){
-        alert('Value updated, Click update to recalculate cost');  /*check update work or not */
-    });
+    
     
 
 };

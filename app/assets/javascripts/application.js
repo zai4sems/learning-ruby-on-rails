@@ -56,6 +56,7 @@ $("#btn").on("click", function(event) {
 
 var ready;
 ready = function () {
+
     
 $("#menu-toggle").click(function(e) {
     e.preventDefault();

@@ -7,16 +7,20 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   
-  
+  devise_scope :user do
     authenticated :user do
       root :to => 'pages#dashboard', as: :authenticated_root
     end
     
-    root :to => 'devise/sessions#new'
     
-   
+    
+    unauthenticated :user do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
   
-  ##root 'pages#home'
+  root 'devise/sessions#new'
+  #root 'pages#dashboard'
   get 'home', to: 'pages#home'
   get 'about', to: 'pages#about'
   get 'all_users', to: 'pages#all_users'
