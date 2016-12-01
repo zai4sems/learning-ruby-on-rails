@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
          
-    after_create :send_admin_mail
+    #after_create :send_admin_mail
     
-      def send_admin_mail
-        AdminMailer.new_user_waiting_for_approval(self).deliver
-      end
+      #def send_admin_mail
+        #AdminMailer.new_user_waiting_for_approval(self).deliver
+      #end
          
     has_many :recipes
     has_many :ingredients
