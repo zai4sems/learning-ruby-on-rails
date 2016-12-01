@@ -30,6 +30,7 @@
           <tr>
             <% @recipe = Recipe.includes(:recipe_ingredients).find(recipe.id) %>
             <% @recipe.calculate_cost %>
+            <% @recipe.calculate_material_cost %>
             <td><%= link_to recipe.title, recipe_path(recipe) %></td>
             <td><%= image_tag recipe.image.url, size: "100x100" %></td>
             <td><%= number_to_currency(@recipe.cost, :unit => "RM") %></td>
