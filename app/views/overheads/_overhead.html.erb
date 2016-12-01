@@ -13,14 +13,11 @@
         <td><%= best_in_place overhead, :month_10, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
         <td><%= best_in_place overhead, :month_11, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
         <td><%= best_in_place overhead, :month_12, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
-            <% @total = (overhead.month_1.to_f + overhead.month_2.to_f + overhead.month_3.to_f + overhead.month_4.to_f + overhead.month_5.to_f + overhead.month_6.to_f + overhead.month_7.to_f + overhead.month_8.to_f + overhead.month_9.to_f + overhead.month_10.to_f + overhead.month_11.to_f + overhead.month_12.to_f)  %>
+            <td><% @total = (overhead.month_1.to_f + overhead.month_2.to_f + overhead.month_3.to_f + overhead.month_4.to_f + overhead.month_5.to_f + overhead.month_6.to_f + overhead.month_7.to_f + overhead.month_8.to_f + overhead.month_9.to_f + overhead.month_10.to_f + overhead.month_11.to_f + overhead.month_12.to_f)  %>
             <% overhead.save_total_cost(@total) %>
-        <td><%= overhead.total %></td> 
+        <%= overhead.total %></td> 
         <td><%= overhead.updated_at %></td>
         <td>
-            <button type="button" class="btn btn-default btn-xs fa fa-pencil-square-o" data-toggle="modal" data-target="#myupdateoverhead_<%= overhead.id %>">
-                
-            </button>
             
             <%= link_to '', overhead, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs fa fa-trash', remote: true %>
             
@@ -126,6 +123,7 @@
             <% end %>
         </td>
       </tr>
+      
 
 
     
