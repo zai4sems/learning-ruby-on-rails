@@ -1,13 +1,24 @@
-<h1>Overheads  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mynewoverhead">
-      <i class="fa fa-plus" aria-hidden="true"></i> Create New
-    </button></h1>
+
+    
+<div class= "row">
+  <div class = "container col-md-10">
+      <h1><i class="fa fa-money" aria-hidden="true"></i> Overheads  
+        <div class="pull-right">
+          <button type="button" class="btn custom-new-button" data-toggle="modal" data-target="#mynewoverhead">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add Overhead
+          </button>
+        </div>
+      </h1>
+    
+    
     
 <div class="panel panel-default">
 	<div class="panel-heading panel-heading-custom">
 		List of Overheads
 	</div>
 	<div class="panel-body">
-    <table class="display responsive no-wrap" id="all_overheads_list">
+	  <div class="table-responsive">
+    <table id="all_overheads_list">
       <thead><%- model_class = Overhead -%>
         <tr>
           <th><%= model_class.human_attribute_name(:title) %></th>
@@ -31,6 +42,7 @@
       <tbody id="container_overheads">
         <%= render @overheads %>
       </tbody>
+      
       <tbody>
         <tr>
           <td><strong>Total</strong></td>
@@ -49,7 +61,7 @@
           <td><strong><%= current_user.overheads.sum(:total) %></strong></td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
 	</div>
 </div>
 
@@ -114,6 +126,19 @@
               <h4 class="modal-title" id="myModalLabel">Create new Overhead</h4>
             </div>
             <div class="modal-body form-group">
+             
+             <div id="overhead_error" style="display:none;">
+                <div class="row">
+                    <div class="panel panel-danger">
+                      <div class="panel-heading">
+                        
+                        <div class="panel-body">
+                          <div id="overhead_errors_div"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
              
               <div class="field">
                 <%= f.label :title, class: "col-sm-4"%>
@@ -192,15 +217,16 @@
                 <div class="col-sm-8">
                   <%= f.number_field :month_12, step: 'any', class:"form-control overhead_month12" %>
                 </div>
-              </div>
-              <div id="errors_div"></div>
+              </div><br><br>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewoverheadclose">Close</button>
-              <%= submit_tag "Create", class: "btn btn-primary" %>
+              <%= submit_tag "Create", class: "btn custom-small-new-button" %>
             </div>
           </div>
         </div>
       </div>
       <% end %>
       
+</div>
+</div>

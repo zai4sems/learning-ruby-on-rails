@@ -1,22 +1,32 @@
 var ready;
 ready = function () {
+
+$('#edit_ingredient').click(function(){
+    $('#edit_ingredient_errors_div').empty();
+    $("#edit_ingredient_error").hide();
+});
+
+
+
+
 <% if @ingredient.errors.any? %>
    
-    $('#errors_div2').empty();
-    <% str2 = "The following errors prevented the ingredient from getting updated" + "<br/>" %>
-    $("#errors_div2").append("<%= raw j str2 %>");
+    $("#edit_ingredient_error").show();
+    $('#edit_ingredient_errors_div').empty();
+    <% str2 = "The following errors prevented the ingredient from getting changes" + "<br/>" %>
+    $("#edit_ingredient_errors_div").append("<strong><%= raw j str2 %></strong>");
     <% str = "" %>
     <% @ingredient.errors.full_messages.each do |error| %>
         <% str+= error + "<br/>" %>
     <% end %>
-    $("#errors_div2").append("<%= raw j str %>");
+    $("#edit_ingredient_errors_div").append("<%= raw j str %>");
 <% else %>
-    
+    $("#edit_ingredient_error").hide();
     $("#myupdateingredient_<%= @ingredient.id %>").modal('hide');
 
       $("#ingredient_<%= @ingredient.id %>").fadeOut(500, function(){
          $(this).remove();
-         $("#container_ingredients").append('<%= j render @ingredient %>');
+         $("#container_ingredients").append('<tr><%= j render @ingredient %></tr>');
       });
       location.reload();
 <% end %>

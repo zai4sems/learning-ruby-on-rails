@@ -1,6 +1,15 @@
-<h1>Ingredients  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mynewingredient">
-      <i class="fa fa-plus" aria-hidden="true"></i> Add Ingredient
-    </button></h1>
+
+    
+<div class= "row">
+  <div class = "container col-md-10">
+    <h1><i class="fa fa-th-list" aria-hidden="true"></i> Ingredients
+      <div class = "pull-right">
+        <button type="button" class="btn custom-new-button" data-toggle="modal" data-target="#mynewingredient">
+          <i class="fa fa-plus" aria-hidden="true"></i> Add Ingredient
+        </button>
+      </div> 
+    </h1>
+    
     
     <%= form_for(@ingredient, remote: true, id: 'ingredient-popup-form', :html => {:class => 'form-horizontal'}) do |f| %>
         <div class="modal fade" id="mynewingredient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -11,7 +20,18 @@
               <h4 class="modal-title" id="myModalLabel">Create new Ingredient</h4>
             </div>
             <div class="modal-body">
-             
+             <div id="show_ingredient_error" style="display:none;">
+                <div class="row">
+                    <div class="panel panel-danger">
+                      <div class="panel-heading">
+                        
+                        <div class="panel-body">
+                          <div id="ingredient_errors_div"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
               <div class="field form-group">
                 <%= f.label :ingredient_name, class: "col-sm-4"%>
                 <div class="col-sm-8">
@@ -37,11 +57,10 @@
                 </div>
               </div>
               
-              <div id="errors_div"></div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewingredientclose">Close</button>
-              <%= submit_tag "Create", class: "btn btn-primary" %>
+              <%= submit_tag "Create", class: "btn custom-small-new-button" %>
             </div>
           </div>
         </div>
@@ -72,8 +91,8 @@
 	</div>
 </div>
 
-
-
+</div>
+</div>
 
 
 

@@ -33,7 +33,7 @@
                         <%= f.label :hours_worked_per_week, class: 'control-label' %>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <%= f.number_field :hour_worked_per_week, class: "form-control", min: 0, value: f.object.hour_worked_per_week || '1' %>
+                        <%= f.number_field :hour_worked_per_week, class: "form-control", min: 1, step: :any  %>
                     </div>
                 </div>
                 <div class="form-group">
@@ -41,7 +41,7 @@
                         <%= f.label :no_of_weeks_holiday_per_year, class: 'control-label' %>
                     </div>
                     <div class="col-sm-6 input-column">
-                        <%= f.number_field :no_of_week_holiday_per_year, class: "form-control", min: 0 %>
+                        <%= f.number_field :no_of_week_holiday_per_year, placeholder: "hint: There are 52 weeks per year", class: "form-control", min: 0, step: :any  %>
                     </div>
                 </div>
                 <div class="form-group">

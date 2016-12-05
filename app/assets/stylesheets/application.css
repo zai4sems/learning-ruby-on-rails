@@ -17,6 +17,10 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  */
+ 
+ 
+ html, body { background: #FDF5F6; }
+ 
 .recipe-ingredient-fields { padding: 2px; border: 1px dashed #ddd; }
 
 
@@ -138,7 +142,7 @@ body {
   height:100%;
   margin-left:-250px;
   overflow-y:auto;
-  background:#10afe3; 
+  background:#6BBEBB; 
   -webkit-transition:all 0.5s ease;
   -moz-transition:all 0.5s ease;
   -o-transition:all 0.5s ease;
@@ -245,13 +249,26 @@ body {
 
 
 .panel-default > .panel-heading-custom {
-  background: #1ED0EA;
+  background: #FFB6C1;
   color: #fff;
   
 }
 
 .panel-default > .panel-heading-dashboard {
-  background: #1A4F8B;
+  background: #ff6a80;
   color: #fff;
   
+}
+
+h1 {
+  color: #6BBEBB;
+  font-weight: bold;
+}
+
+h2 {
+  color: #4F8E83;
+}
+
+.white{
+  color: #ffffff;
 }

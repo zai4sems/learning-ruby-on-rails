@@ -52,43 +52,45 @@
   <body>
 
   <%#= render 'layouts/navigation' %>
-  
+
   
       <% if current_user %>
       <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><%= link_to 'Recipe Management', root_path, class: "navbar-brand" %></li>
+                <li class="sidebar-brand"><%= link_to 'Bake for Cash', root_path, class: "navbar-brand" %></li>
+                <li class="divider"></li>
+                <li><%= menu_item "Dashboard", root_path %></li>
                 <% if current_user.admin? %>
-                  <li><%= menu_item "All Users", users_path %></li>
+                <li><%= menu_item "All Users", users_path %></li>
                 <% end %>
-                <li><%= menu_item "Recipe", my_recipes_path %></li>
+                <li><%= menu_item "Recipe", recipes_path %></li>
                 <li><%= menu_item "Ingredient", ingredients_path %></li>
                 <li><%= menu_item "Material", materials_path %></li>
                 <li><%= menu_item "Overhead", overheads_path %></li>
                 <li><%= link_to "My Profile", edit_registration_path(current_user)  %></li>
                 <li class="divider"></li>
-            </ul>
+              </ul>
         </div>
         <% end %>
         <div class="page-content-wrapper">
             <div class="container-fluid">
                 <% if current_user %>
                 <a class="btn btn-link" role="button" href="#menu-toggle" id="menu-toggle"><i class="fa fa-bars"></i></a>
-                    <ul class="nav navbar-right col-md-4">
-                      <li class="col-md-4 user-name text-right">
-                        <i class="fa fa-user"></i>
-                        <%= current_user.full_name.present? ? current_user.full_name : current_user.email %>
-                      </li>
-                      <li class="col-md-4 logout"><%= link_to " Logout ", destroy_user_session_path, class: 'btn btn-xs btn-danger fa fa-sign-out', method: :delete %></li>
-                    </ul>
-                <% else %>
-                  <ul class="nav navbar-right col-md-4">
-                      <li class="col-md-4 login"><%= link_to ' Login ', new_user_session_path, class: 'btn btn-xs btn-info fa fa-sign-in' %></li>
-                    </ul>
+                
                 <% end %>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
+                      <div class="row">
+                          <div class="pull-right">
+                            <% if current_user %>
+                              <i class="fa fa-user"></i><%= current_user.full_name.present? ? current_user.full_name : current_user.email %>
+                              <%= link_to " Logout ", destroy_user_session_path, class: 'btn btn-default fa fa-sign-out logout-button', method: :delete %>
+                            <% else %>
+                              <%= link_to ' Login ', new_user_session_path, class: 'btn btn-default fa fa-sign-in' %>
+                            <% end %>
+                          </div>
+                      </div>
                         <%= bootstrap_flash %>
                         <%= yield %>
                         <footer>

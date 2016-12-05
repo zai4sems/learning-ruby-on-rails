@@ -205,3 +205,100 @@ margin: 0 auto;
 
 }
 
+#logo {
+  font-family: "Droid sans", Raleway, Open Sans;
+  float: left;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.custom-button {
+  border-radius:2px;
+  background:#A4DCD1;
+  color:#ffffff;
+  font-weight:bold;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding:14px 22px;
+  border:0;
+  margin:30px;
+  outline:none;
+}
+
+.custom-main-button {
+  border-radius:2px;
+  background:#6BBEBB;
+  color:#ffffff;
+  font-weight:bold;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding:14px 22px;
+  border:0;
+  outline:none;
+}
+
+.custom-cancel-button {
+  border-radius:2px;
+  background:#ffffff;
+  color:#6BBEBB;
+  font-weight:bold;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding:14px 22px;
+  outline:none;
+}
+
+.custom-delete-button {
+  border-radius:2px;
+  background:#F55567;
+  color:#ffffff;
+  font-weight:bold;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding:14px 22px;
+  outline:none;
+}
+
+.custom-secondary-button {
+  border-radius:2px;
+  background:#DAF4F0;
+  color:#4F8E83;
+  font-weight:bold;
+  box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding:14px 22px;
+  border:0;
+  outline:none;
+}
+
+.custom-small-button {
+  border-radius:2px;
+  background:#ffffff;
+  color:#4F8E83;
+  font-weight:bold;
+  outline:none;
+}
+
+.custom-new-button {
+  border-radius:2px;
+  background:#ff8396;
+  color:#ffffff;
+  font-weight:bold;
+  outline:none;
+}
+
+.custom-small-new-button {
+  border-radius:2px;
+  background:#ff8396;
+  color:#ffffff;
+  font-weight:bold;
+  outline:none;
+}
+
+.logout-button {
+  background: #f4476b;
+  color:#ffffff;
+}
+
+.nav-tabs > li > a {
+  background-color: #ffb6c1;
+  color:#ffffff;
+}
+

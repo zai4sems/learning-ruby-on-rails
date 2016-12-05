@@ -1,4 +1,4 @@
-<h1>All Users</h1>
+<h1><i class="fa fa-users" aria-hidden="true"></i> All Users</h1>
 
 <%= link_to "All Users", :action => "index", :class => 'btn btn-success btn-sm'  %> || 
 <%= link_to "Users awaiting approval", :action => "index", :approved => "false" %>
@@ -14,9 +14,11 @@
                     <th>Email</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Recipes Created</th>
                     <th>Last Sign in at</th>
                     <th>Sign In Count</th>
                     <th>Approval Status</th>
+                    <th>Approved?</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -26,15 +28,30 @@
                     <td><%= user.email %></td>
                     <td><%= user.first_name %></td>
                     <td><%= user.last_name %></td>
+                    <td><%= user.recipes.count %></td>
                     <td><%= user.last_sign_in_at %></td>
                     <td><%= user.sign_in_count %></td>
                     <td><%= user.approved %></td>
-                    <td><%= form_for user do |f| %>
-                        <%= f.label :approved, 'Approved?' %>
-                        <%= f.check_box :approved %>
-                        <%= f.submit 'Save', :class => 'btn btn-success btn-sm' %>
-                    <% end %>
-                    </td>
+                    
+                        <% if (user == current_user) %>
+                            <td></td>
+                            <td></td>
+                        <% else %>
+                            <td>
+                            <%= form_for user do |f| %>
+                            
+                                <%#= f.label :approved, 'Approved?' %>
+                                <%= f.check_box :approved %>
+                                <%= f.submit 'Save', :class => 'btn btn-default custom-small-button' %>
+                            
+                            <% end %>
+                            </td>
+                            <td>
+                            <%= link_to '', user_path(user), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-xs btn-danger fa fa-trash' %>
+                            </td>
+                        <% end %>
+                        
+                    
                 </tr>
                 <% end %>
             </tbody>

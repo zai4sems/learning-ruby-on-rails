@@ -6,7 +6,7 @@
 
     <% if f.object.quantity.nil? && f.object.material.nil?%>
       <td class="nested-field recipe-material-fields">
-      <%= link_to_add_association 'OR Create New', f, :material, :class => 'btn btn-primary btn-sm'%>
+      <%= link_to_add_association 'OR Create New', f, :material, :class => 'btn btn-sm custom-small-new-button'%>
       </td>
     <% else %>
     

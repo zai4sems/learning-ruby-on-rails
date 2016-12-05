@@ -1,5 +1,4 @@
-
-      <tr id="ingredient_<%= ingredient.id %>">
+<tr id="ingredient_<%= ingredient.id %>">
         <td><%= best_in_place ingredient, :name %></td>
         <td><%= best_in_place ingredient, :purchase_price, :display_with => :number_to_currency, :helper_options => {:unit => "RM"} %></td>
         <td><%= best_in_place ingredient, :volume %></td>
@@ -9,12 +8,12 @@
         <td>
             <%#= link_to 'Edit', edit_ingredient_path(ingredient), :class => 'btn btn-default btn-xs', remote: true  %>
             <%#= link_to 'Show', ingredient_path(ingredient), :class => 'btn btn-default btn-xs' %>
-            <%#= link_to 'Delete', ingredient_path(ingredient), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-xs btn-danger fa fa-trash' %>
+            
             <button type="button" class="btn btn-default btn-xs fa fa-pencil-square-o" data-toggle="modal" data-target="#myupdateingredient_<%= ingredient.id %>">
                 
             </button>
-            
-            <%= link_to '', ingredient, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs fa fa-trash', remote: true %>
+            <%= link_to '', ingredient_path(ingredient), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-xs btn-danger fa fa-trash' %>
+            <%#= link_to '', ingredient, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs fa fa-trash', remote: true %>
             
             <%= form_for(ingredient, :method => :put, remote: true, :html => {:class => 'form-horizontal'}) do |f| %>
                 <div class="modal fade" id="myupdateingredient_<%= ingredient.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -24,7 +23,21 @@
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="myModalLabel">Edit Ingredient</h4>
                     </div>
-                    <div class="modal-body form-group">
+                    <div class="modal-body form-horizontal">
+                      
+                      <div id="edit_ingredient_error" style="display:none;">
+                        <div class="row">
+                            <div class="panel panel-danger">
+                              <div class="panel-heading">
+                                
+                                <div class="panel-body">
+                                  <div id="edit_ingredient_errors_div"></div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      
                         <div class="field">
                           <%= f.label :ingredient_name, class: "col-sm-6"%>
                           <div class="col-sm-6">
@@ -48,12 +61,13 @@
                           <div class="col-sm-6">
                             <%= f.text_field :unit, class:"form-control ingredient_unit" %>
                           </div>
-                        </div>
-                      <div id="errors_div2"></div>
+                        </div><br><br>
+                        
+                      
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= ingredient.id %>">Close</button>
-                      <%= submit_tag "Update", class: "btn btn-primary"%>
+                      <%= submit_tag "Update", class: "btn custom-small-new-button"%>
                     </div>
                   </div>
                 </div>
@@ -61,14 +75,3 @@
             <% end %>
         </td>
       </tr>
-
-
-    
-    
-    
-<%# not use anymore %>
-    
-
-  
-    
-    

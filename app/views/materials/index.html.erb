@@ -1,6 +1,14 @@
-<h1>Non-food items/Materials  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mynewmaterial">
-      <i class="fa fa-plus" aria-hidden="true"></i> Add Material
-    </button></h1>
+
+<div class= "row">
+  <div class = "container col-md-10">
+    <h1><i class="fa fa-th-list" aria-hidden="true"></i> Non-food items/Materials 
+      <div class="pull-right">
+        <button type="button" class="btn custom-new-button" data-toggle="modal" data-target="#mynewmaterial">
+          <i class="fa fa-plus" aria-hidden="true"></i> Add Material
+        </button>
+      </div>
+    </h1>
+
 
 <%= form_for(@material, remote: true, id: 'material-popup-form', :html => {:class => 'form-horizontal'}) do |f| %>
         <div class="modal fade" id="mynewmaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -12,6 +20,20 @@
             </div>
             
             <div class="modal-body">
+              
+              <div id="material_error" style="display:none;">
+                <div class="row">
+                    <div class="panel panel-danger">
+                      <div class="panel-heading">
+                        
+                        <div class="panel-body">
+                          <div id="material_errors_div"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              
               <div class="field form-group">
                 <%= f.label :material_name, class: "col-sm-4" %>
                 <div class="col-sm-8">
@@ -21,13 +43,13 @@
               <div class="field form-group">
                 <%= f.label :purchase_price, class: "col-sm-4" %>
                 <div class="col-sm-8">
-                  <%= f.text_field :purchase_price, class: "form-control material_name" %>
+                  <%= f.number_field :purchase_price, class: "form-control material_name" %>
                 </div>
               </div>
               <div class="field form-group">
                 <%= f.label :purchase_quantity, class: "col-sm-4" %>
                 <div class="col-sm-8">
-                  <%= f.text_field :purchase_quantity, class: "form-control material_name" %>
+                  <%= f.number_field :purchase_quantity, class: "form-control material_name" %>
                 </div>
               </div>
               
@@ -36,7 +58,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewmaterialclose">Close</button>
-              <%= submit_tag "Create", class: "btn btn-primary" %>
+              <%= submit_tag "Create", class: "btn custom-small-new-button" %>
             </div>
           </div>
         </div>
@@ -67,3 +89,5 @@
 	</div>
 </div>
 
+</div>
+</div>

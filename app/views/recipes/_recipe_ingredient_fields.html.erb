@@ -4,7 +4,7 @@
 
     <% if f.object.quantity.nil? && f.object.ingredient.nil? %>
       <td class="nested-field recipe-ingredient-fields">
-        <%= link_to_add_association 'OR Create New', f, :ingredient, :class => 'btn btn-primary btn-sm'%>
+        <%= link_to_add_association 'OR Create New', f, :ingredient, :class => 'btn btn-sm custom-small-new-button'%>
       </td>
     <% else %>
     

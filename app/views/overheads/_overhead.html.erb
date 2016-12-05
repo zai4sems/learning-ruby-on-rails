@@ -17,7 +17,9 @@
             <% overhead.save_total_cost(@total) %>
         <%= overhead.total %></td> 
         <td><%= overhead.updated_at %></td>
-        <td>
+        <td><button type="button" class="btn btn-default btn-xs fa fa-pencil-square-o" data-toggle="modal" data-target="#myupdateoverhead_<%= overhead.id %>">
+                
+            </button>
             
             <%= link_to '', overhead, method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-danger btn-xs fa fa-trash', remote: true %>
             
@@ -29,7 +31,20 @@
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="myModalLabel">Edit Overhead</h4>
                     </div>
-                    <div class="modal-body form-group">
+                    <div class="modal-body form-horizontal">
+                        
+                        <div id="edit_overhead_error" style="display:none;">
+                          <div class="row">
+                              <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                  
+                                  <div class="panel-body">
+                                    <div id="edit_overhead_errors_div"></div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
                         
                         <div class="field">
                             <%= f.label :title, class: "col-sm-4"%>
@@ -108,14 +123,12 @@
                             <div class="col-sm-8">
                               <%= f.number_field :month_12, step: 'any', class:"form-control overhead_month12" %>
                             </div>
-                          </div>
+                          </div><br><br>
                         
-                        
-                      <div id="errors_div2"></div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= overhead.id %>">Close</button>
-                      <%= submit_tag "Update", class: "btn btn-primary"%>
+                      <%= submit_tag "Update", class: "btn custom-small-new-button"%>
                     </div>
                   </div>
                 </div>

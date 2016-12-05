@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   
   resources :recipe_materials
   
-  resources :users, only: [:index, :edit, :update]
+  resources :users#, only: [:index, :edit, :update]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

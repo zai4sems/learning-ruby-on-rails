@@ -6,6 +6,7 @@ class Recipe < ActiveRecord::Base
     has_many :recipe_materials, dependent:  :destroy
     has_many :materials, through: :recipe_materials, :class_name => 'Material'
 
+    validates :serving_number, presence: true
     validates :user_id, presence: true
     validates :title, presence: true, length: { minimum: 3, maximum: 50}
     validate :image_size

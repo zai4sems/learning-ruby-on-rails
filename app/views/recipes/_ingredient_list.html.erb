@@ -6,7 +6,8 @@
         <td><%= ingredient.unit %></td>
         <td><%= number_to_currency(ingredient.price, :unit => "RM") %></td>
         <td>
-            <%= link_to "Add to this recipe", recipe_ingredients_path(recipe_id: g.id, ingredient_id: ingredient.id), class: 'btn btn-primary btn-xs', method: :post %>
+            <%= link_to "Add to this recipe", recipe_ingredients_path(recipe_id: g.id, ingredient_id: ingredient.id), class: 'btn btn-sm custom-small-new-button', method: :post %>
+            
         </td>
         </tr>
 <% end %> 

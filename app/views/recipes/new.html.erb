@@ -1,3 +1,12 @@
-<h1>New Recipe</h1>
+<div class="col-md-10 page-header clearfix">
+  <div class="pull-left">
+    <h1>New Recipe<small></small></h1>
+  </div>
+  <div class="pull-right">
+    <div class="btn-group">
+      <%= link_to 'Cancel', recipes_path, :class => 'custom-cancel-button' %>
+    </div>
+  </div>
+</div>
 
 <%= render 'form' %>

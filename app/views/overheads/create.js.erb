@@ -4,18 +4,20 @@ ready = function () {
 
 $('#create_overhead').click(function(){
     $('.overhead_title, .overhead_month1, .overhead_month2, .overhead_month3, .overhead_month4, .overhead_month5, .overhead_month6, .overhead_month7, .overhead_month8, .overhead_month9, .overhead_month10, .overhead_month11, .overhead_month12').val("");
-    $('#errors_div').empty();
+    $('#overhead_errors_div').empty();
+    $('#overhead_error').hide();
 });
 
 <% if @overhead.errors.any? %>
-    $('#errors_div').empty();
+    $('#overhead_error').show();
+    $('#overhead_errors_div').empty();
     <% str2 = "The following errors prevented the overhead from getting created" + "<br/>" %>
-    $("#errors_div").append("<%= raw j str2 %>");
+    $("#overhead_errors_div").append("<strong><%= raw j str2 %></strong>");
     <% str = "" %>
     <% @overhead.errors.full_messages.each do |error| %>
         <% str+= error + "<br/>" %>
     <% end %>
-    $("#errors_div").append("<%= raw j str %>");
+    $("#overhead_errors_div").append("<%= raw j str %>");
 <% else %>
     $("#mynewoverhead").modal('hide');
     $(".overhead_title").val('');
@@ -32,7 +34,7 @@ $('#create_overhead').click(function(){
     $(".overhead_month11").val('');
     $(".overhead_month12").val('');
     
-    $("#container_overheads").append('<%= j render @overhead %>');
+    $("#container_overheads").append('<tr><%= j render @overhead %></tr>');
     $("#overhead_<%= @overhead.id %>").hide().fadeIn(1000);
     $('.best_in_place').best_in_place();
     location.reload();

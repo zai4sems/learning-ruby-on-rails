@@ -1,31 +1,55 @@
 <%- model_class = Recipe -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %> <%= @recipe.title %></h1>
+  <div class = "row">
+  <div class="col-md-10">
+    <div class = "pull-right">
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                recipes_path, :class => 'custom-cancel-button'  %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_recipe_path(@recipe), :class => 'custom-main-button' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  recipe_path(@recipe),
+                  :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'custom-delete-button' %>
+    </div>
+  </div>
 </div>
-<div class="col-md-10">
-  <dl class="dl-horizontal">
-    <dd><%= image_tag(@recipe.image.url, size: "250x150") if @recipe.image? %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-    <dd><%= @recipe.title %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-    <dd><%= @recipe.description %></dd>
-  </dl>
 </div>
-<hr>
 
 <div class="row">
   <div class="col-md-10">
-    
+    <div class = "panel panel-default" style="background-color:#ffffff">
+      <div class="panel-body">
 
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#Ingredient" data-toggle="tab">Ingredients</a></li>
-        <li><a href="#Material" data-toggle="tab">Materials</a></li>
+<div class = "row">
+  <div class="col-md-10">
+    <div class = "container">
+      <dl class = "dl-horizontal">
+        <dd><%= image_tag(@recipe.image.url, size: "250x150") if @recipe.image? %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+        <dd><%= @recipe.title %></dd>
+        <br>
+        <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+        <dd><%= @recipe.description %></dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<hr>
+
+
+    
+      <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a href="#Ingredient" data-toggle="tab"><strong>Ingredients</strong></a></li>
+        <li><a href="#Material" data-toggle="tab"><strong>Materials</strong></a></li>
       </ul>
       
       <div class="tab-content">
         <div class="tab-pane fade in active" id="Ingredient">
           <br>
-        		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewingredient">
+        		<button type="button" class="btn btn-secondary custom-button" data-toggle="modal" data-target="#viewingredient">
               View All Ingredients
             </button>
             <br><br>
@@ -40,6 +64,7 @@
                           </div>
                           <div class="modal-body">
                             <div class="field">
+                              <div class="table-responsive">
                               <table class="table table-striped" id="ingredients_list">
                                 <thead>
                                 <tr>
@@ -55,6 +80,7 @@
                                     <%= render 'ingredient_list', f: @ingredients, g: @recipe %>
                                 </tbody>
                               </table>
+                              </div>
                             </div>
                           </div>
                           <div class="modal-footer">
@@ -64,30 +90,32 @@
                       </div>
                     </div>
                   <!-- Modal -->
-          <table class="display responsive no-wrap" id="table_datatable">
-            <thead>
-            <tr>
-                <th>Ingredient Name</th>
-                <th>Unit</th>
-                <th>Quantity</th>
-                <th>Cost to buy ingredients</th>
-            </tr>
-            </thead>
-            <tbody id="container_recipe_ingredient">
-                <%= render 'ing', f: @recipe %>
-                
-            </tbody>
-            <tbody>
-              <tr>
-                <td colspan="3" align="right"><strong>Total cost</strong></td>
-                <td colspan="1"><strong><%= number_to_currency(@recipe.cost, :unit => "RM") %></strong>   <input type="button" value="Update" class="btn btn-info btn-xs" onClick="window.location.reload()"></td>
-              </tr>
-            </tbody>
-          </table>
+                  <div class="table-responsive">
+                    <table class="table table-striped" id="recipe_ingredient">
+                      <thead>
+                      <tr>
+                          <th>Ingredient Name</th>
+                          <th>Unit</th>
+                          <th>Quantity</th>
+                          <th>Cost to buy ingredients</th>
+                      </tr>
+                      </thead>
+                      <tbody id="container_recipe_ingredient">
+                          <%= render 'ing', f: @recipe %>
+                          
+                      </tbody>
+                      <tbody>
+                        <tr>
+                          <td colspan="3" align="right"><strong>Total cost</strong></td>
+                          <td colspan="1"><strong><%= number_to_currency(@recipe.cost, :unit => "RM") %></strong>   <input type="button" value="Update" class="btn btn-info btn-xs" onClick="window.location.reload()"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
         </div>
         <div class="tab-pane fade" id="Material">
           <br>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#viewmaterial">
+          <button type="button" class="btn btn-secondary custom-button" data-toggle="modal" data-target="#viewmaterial">
               View All Materials
             </button>
             <br><br>
@@ -102,20 +130,22 @@
                           </div>
                           <div class="modal-body">
                             <div class="field">
-                              <table class="table table-striped" id="ingredients_list">
-                                <thead>
-                                <tr>
-                                    <th>Material Name</th>
-                                    <th>Purchase price</th>
-                                    <th>Purchase Quantity</th>
-                                    <th>Price per single item</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody id="container_ingredients_list">
-                                    <%= render 'material_list', f: @materials, g: @recipe %>
-                                </tbody>
-                              </table>
+                              <div class="table-responsive">
+                                <table class="table table-striped" id="materials_list">
+                                  <thead>
+                                  <tr>
+                                      <th>Material Name</th>
+                                      <th>Purchase price</th>
+                                      <th>Purchase Quantity</th>
+                                      <th>Price per single item</th>
+                                      <th>Action</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody id="container_ingredients_list">
+                                      <%= render 'material_list', f: @materials, g: @recipe %>
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
                           </div>
                           <div class="modal-footer">
@@ -124,46 +154,46 @@
                         </div>
                       </div>
                     </div>
-                    
-          <table class="display responsive no-wrap" id="table2_datatable">
-            <thead>
-            <tr>
-                <th>Non-food item</th>
-                <th>Price per unit</th>
-                <th>Quantity</th>
-                <th>Cost to buy Non-food item</th>
-            </tr>
-            </thead>
-              <tbody id="container_recipe_material">
-                <% @recipe.recipe_materials.each do |recipe_material| %>
-                  <tr>
-                    <td><%= best_in_place recipe_material.material, :material_name %></td>
-                    <td><%= number_to_currency(recipe_material.material_price, :unit => "RM") %></td>
-                    <td><%= best_in_place recipe_material, :quantity %></td>
-                    <td><%= number_to_currency(recipe_material.material_price.to_f * recipe_material.quantity.to_f, :unit => "RM") %></td>
-                  </tr>
-                <% end %>
-                  
-              </tbody>
-              <tbody>
-                <tr>
-                    <td colspan="3" align="right"><strong>Total cost</strong></td>
-                    <td colspan="1"><strong><%= number_to_currency(@recipe.material_cost, :unit => "RM") %></strong>   <input type="button" value="Update" class="btn btn-info btn-xs" onClick="window.location.reload()"></td>
-                  </tr>
-              </tbody>
-          </table>
+                 <div class="table-responsive">   
+                    <table class="table table-hover" id="recipe_material">
+                      <thead>
+                      <tr>
+                          <th>Non-food item</th>
+                          <th>Price per unit</th>
+                          <th>Quantity</th>
+                          <th>Cost to buy Non-food item</th>
+                      </tr>
+                      </thead>
+                        <tbody id="container_recipe_material">
+                          <% @recipe.recipe_materials.each do |recipe_material| %>
+                            <tr>
+                              <td><%= best_in_place recipe_material.material, :material_name %></td>
+                              <td><%= number_to_currency(recipe_material.material_price, :unit => "RM") %></td>
+                              <td><%= best_in_place recipe_material, :quantity %></td>
+                              <td><%= number_to_currency(recipe_material.material_price.to_f * recipe_material.quantity.to_f, :unit => "RM") %></td>
+                            </tr>
+                          <% end %>
+                            
+                        </tbody>
+                        <tbody>
+                          <tr>
+                              <td colspan="3" align="right"><strong>Total cost</strong></td>
+                              <td colspan="1"><strong><%= number_to_currency(@recipe.material_cost, :unit => "RM") %></strong>   <input type="button" value="Update" class="btn btn-info btn-xs" onClick="window.location.reload()"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
         </div>
+     
       </div>
-    </div>
-</div>
+ 
 
     
 <div class="row">
- <h3>Summary</h3>   
-  <div class="col-md-10 blog-main box text-center">
+  <div class="blog-main box text-center">
       <div class="panel panel-default">
       	<div class="panel-heading panel-heading-custom">
-      		<h4>Summary of <%= @recipe.title %> </h4>
+      		<h4><strong>Summary of <%= @recipe.title %></strong> </h4>
       	</div>
       	<div class="panel-body">
       	  <div class="table-responsive">
@@ -232,14 +262,25 @@
     </div>
 </div>
 
+<div class = "row">
+  <br>
+    <div class = "pull-right">
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                recipes_path, :class => 'custom-cancel-button'  %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_recipe_path(@recipe), :class => 'custom-main-button' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  recipe_path(@recipe),
+                  :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'custom-delete-button' %>
+                  
+    </div>
+  
+</div>
+<br>
 
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              my_recipes_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_recipe_path(@recipe), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              recipe_path(@recipe),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>

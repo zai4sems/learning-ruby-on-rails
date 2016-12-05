@@ -7,7 +7,7 @@ var ready;
 ready = function () {
     
     $('#all_overheads_list').DataTable({
-        responsive: true
+        /*responsive: true*/
     });
     
     $('.best_in_place').best_in_place();

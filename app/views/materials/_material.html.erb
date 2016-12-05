@@ -24,7 +24,21 @@
                       <h4 class="modal-title" id="myModalLabel">Edit Material</h4>
                     </div>
                     
-                    <div class="modal-body form-group">
+                    <div class="modal-body form-horizontal">
+                      
+                      <div id="edit_material_error" style="display:none;">
+                        <div class="row">
+                            <div class="panel panel-danger">
+                              <div class="panel-heading">
+                                
+                                <div class="panel-body">
+                                  <div id="edit_material_errors_div"></div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      
                       <div class="field">
                         <%= f.label :material_name, class: "col-sm-6" %>
                         <div class="col-sm-6">
@@ -45,13 +59,12 @@
                           <%= f.number_field :purchase_quantity, class: "form-control" %>
                         </div>
                       </div>
+                      <br><br>
                       
-                      
-                      <div id="errors_div2"></div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= material.id %>">Close</button>
-                      <%= submit_tag "Update", class: "btn btn-primary"%>
+                      <%= submit_tag "Update", class: "btn custom-small-new-button"%>
                     </div>
                   </div>
                 </div>

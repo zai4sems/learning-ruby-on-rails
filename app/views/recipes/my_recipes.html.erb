@@ -1,9 +1,13 @@
-<h1>Recipes <%= link_to 'New', new_recipe_path, :class => 'btn btn-primary' %></h1>
-<%= link_to raw("<i class=\"fa fa-list\" aria-hidden=\"true\"> List</i>"), 
+<h1><i class="fa fa-cutlery" aria-hidden="true"></i> Recipes </h1>
+
+
+<div class="container">
+    <div class = "pull-right">
+    <%= link_to raw("<i class=\"fa fa-list\" aria-hidden=\"true\"> List</i>"), 
           recipes_path, 
           class: "btn btn-default" %>
-<div class="container">
-    
+          <%= link_to 'Add Recipe', new_recipe_path, :class => 'btn custom-new-button' %>
+</div>
     <div class="row">
         <div class="text-center">
             

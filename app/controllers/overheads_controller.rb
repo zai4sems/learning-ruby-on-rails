@@ -38,12 +38,12 @@ class OverheadsController < ApplicationController
                 format.html { redirect_to @overhead, flash[:notice] = "Overhead was successfully updated" }
                 format.json {respond_with_bip(@overhead) }
                 #format.json {render :show, status: :ok, location: @overhead }
-                format.js {render layout: false}
+                format.js
                 
             else
                 format.html {render 'edit'}
                 format.json {respond_with_bip(@overhead) }
-                format.js {render layout: false}
+                format.js 
             end
         end
     end

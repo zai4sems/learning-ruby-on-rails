@@ -1,17 +1,24 @@
 var ready;
 ready = function () {
+
+$('#edit_material').click(function(){
+    $('#edit_material_errors_div').empty();
+    $("#edit_material_error").hide();
+});
+
+
 <% if @material.errors.any? %>
-   
-    $('#errors_div2').empty();
+    $('#edit_material_error').show();
+    $('#edit_material_errors_div').empty();
     <% str2 = "The following errors prevented the material from getting updated" + "<br/>" %>
-    $("#errors_div2").append("<%= raw j str2 %>");
+    $("#edit_material_errors_div").append("<strong><%= raw j str2 %></strong>");
     <% str = "" %>
     <% @material.errors.full_messages.each do |error| %>
         <% str+= error + "<br/>" %>
     <% end %>
-    $("#errors_div2").append("<%= raw j str %>");
+    $("#edit_material_errors_div").append("<%= raw j str %>");
 <% else %>
-    
+    $('#edit_material_error').hide();
     $("#myupdatematerial_<%= @material.id %>").modal('hide');
 
       $("#material_<%= @material.id %>").fadeOut(500, function(){

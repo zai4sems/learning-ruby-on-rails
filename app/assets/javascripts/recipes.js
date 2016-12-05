@@ -40,6 +40,7 @@ $('#recipe_materials').on('cocoon:after-insert',
      });
 
 $('#ingredients_list').dataTable();
+$('#materials_list').dataTable();
 $('#recipe_ingredient_list').dataTable();
 $('#recipes_list').dataTable();
 $('.best_in_place').best_in_place();

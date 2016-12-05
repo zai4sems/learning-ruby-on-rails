@@ -18,6 +18,7 @@ class RecipeIngredientsController < ApplicationController
     def create
         @recipe_ingredient = RecipeIngredient.new(recipe_id: params[:recipe_id], ingredient_id: params[:ingredient_id])
         #@recipe_ingredient = RecipeIngredient.new(recipe_ingredient_params)
+        @recipe_ingredient.quantity = 0
         respond_to do |format|
             if @recipe_ingredient.save
                 format.html { redirect_to recipe_path(@recipe_ingredient.recipe_id), notice: "Ingredient #{@recipe_ingredient.ingredient.name} was successfully added"}

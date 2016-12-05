@@ -5,17 +5,19 @@ ready = function () {
 $('#create_material').click(function(){
     $('.material_name, .material_purchase_price, .material_unit, .material_volume').val("");
     $('#errors_div').empty();
+    $('#material_error').hide();
 });
 
 <% if @material.errors.any? %>
-    $('#errors_div').empty();
+    $('#material_error').show();
+    $('#material_errors_div').empty();
     <% str2 = "The following errors prevented the material from getting created" + "<br/>" %>
-    $("#errors_div").append("<%= raw j str2 %>");
+    $("#material_errors_div").append("<strong><%= raw j str2 %></strong>");
     <% str = "" %>
     <% @material.errors.full_messages.each do |error| %>
         <% str+= error + "<br/>" %>
     <% end %>
-    $("#errors_div").append("<%= raw j str %>");
+    $("#material_errors_div").append("<%= raw j str %>");
 <% else %>
     $("#mynewmaterial").modal('hide');
     $(".material_name").val('');
