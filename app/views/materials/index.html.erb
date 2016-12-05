@@ -71,7 +71,8 @@
 		Non-food List / Materials
 	</div>
 	<div class="panel-body">
-    <table class="display responsive no-wrap" id="table_datatable">
+	  <div class="table-responsive">
+    <table id="all_materials_list">
       <thead>
         <tr>
             <th>Material Name</th>
@@ -86,6 +87,7 @@
           <%= render @materials %>
       </tbody>
     </table>
+    </div>
 	</div>
 </div>
 

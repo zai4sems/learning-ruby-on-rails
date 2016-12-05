@@ -9,7 +9,9 @@
 var ready;
 ready = function () {
    
-    
+    $('#all_materials_list').DataTable({
+        /*responsive: true*/
+    });
   
     $('form-test').addClass('form-group');
 

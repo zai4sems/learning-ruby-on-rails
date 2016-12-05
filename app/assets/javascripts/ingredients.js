@@ -29,6 +29,9 @@ ready = function () {
     
     $('.best_in_place').best_in_place();
     
+    $('#all_ingredients_list').DataTable({
+        /*responsive: true*/
+    });
     
 
 };

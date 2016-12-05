@@ -72,7 +72,8 @@
 		Ingredient List
 	</div>
 	<div class="panel-body">
-    	<table class="display responsive no-wrap" id="table_datatable">
+	  <div class="table-responsive">
+    	<table id="all_ingredients_list">
         <thead>
         <tr>
             <th>Ingredient Name</th>
@@ -88,6 +89,7 @@
             <%= render @ingredients %>
         </tbody>
       </table>
+      </div>
 	</div>
 </div>
 
