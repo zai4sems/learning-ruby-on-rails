@@ -2,8 +2,7 @@
 
 <div class="row register-form">
         <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal custom-form">
-              <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, role: "form" }) do |f| %>
+              <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, role: "form", class: 'form-horizontal custom-form' }) do |f| %>
                 <h1><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h1>
                 <div class="form-group">
                     <div class="col-sm-4 label-column">
@@ -15,7 +14,7 @@
                 </div>
                 <%= f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), class: "btn btn-default submit-button" %><br>
                 <%= render "devise/shared/links" %>
-            </form>
+            
             <% end %>
         </div>
     </div>
