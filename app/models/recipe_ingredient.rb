@@ -4,9 +4,9 @@ class RecipeIngredient < ActiveRecord::Base
     
     
     
-    validates :quantity, presence: true
+    #validates :quantity, presence: true
     validates_uniqueness_of :recipe_id, :scope => :ingredient_id
-    validates :quantity, :numericality => { :greater_than_or_equal_to => 0 }
+    validates :quantity,presence: true, :numericality => { :greater_than_or_equal_to => 0 }
     # validates :recipe_id, presence: true
     # validates :ingredient_id, presence: true
     delegate :name, to: :ingredient, prefix: true

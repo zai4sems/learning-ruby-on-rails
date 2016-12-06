@@ -34,19 +34,19 @@
       
         <%= f.input :title,hint: 'Recipe Name ', input_html: {class: 'form-control'} %>
         <br>
-        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', input_html: {class: 'form-control'} %>
+        <%#= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', input_html: {class: 'form-control'} %>
         <br>
         <%= f.input :description, input_html: {rows:'3', class: 'form-control'} %>
         <br>
         <div class="row">
         <div class="col-md-3 no-padding">
-          <%= f.input :serving_number, input_html: {class: 'form-control', min: 0} %></div>
+          <%= f.input :serving_number, input_html: {class: 'form-control', min: 0}, hint: 'Approximate number of serving.' %></div>
         <div class="col-md-3 no-padding left-padding">
-          <%= f.input :rate_per_hour, input_html: {class: 'form-control', min: 0} %></div>
+          <%= f.input :rate_per_hour, input_html: {class: 'form-control', min: 0}, hint: 'Your hourly wage.' %></div>
         <div class="col-md-3 no-padding left-padding">
-          <%= f.input :time_spent_in_hour, input_html: {class: 'form-control', min: 0} %></div>
+          <%= f.input :time_spent_in_hour, input_html: {class: 'form-control', min: 0}, hint: 'Time take for you to make this recipe.' %></div>
         <div class="col-md-3 no-padding left-padding">
-          <%= f.input :percentage_profit, input_html: {class: 'form-control', min: 0}, label: 'Optional percentage profit to add' %>
+          <%= f.input :percentage_profit, input_html: {class: 'form-control', min: 0}, label: 'Optional percentage profit to add', hint: 'Value in percentage(%).' %>
         </div></div>
         <br><br>
         
@@ -61,22 +61,24 @@
           <div class="tab-content">
             <div class="tab-pane fade in active" id="Ingredient">
                 <h2><strong>Ingredients</strong></h2>
-                <table class="table">
-                  <thead>
-                    <th>quantity</th>
-                    <th>Ingredient Name</th>
-                    <th>Purchase price</th>
-                    <th>Purchase Volume</th>
-                    <th>unit</th>
-                  </thead>
-                  <tbody id="recipe_ingredients">
-                    <%= f.simple_fields_for :recipe_ingredients, defaults: {input_html: {class:'form-inline'}} do |recipe_ingredient| %>
-                      <%= render 'recipe_ingredient_fields', :f => recipe_ingredient %>
-                    <% end %>
-                    <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
-                  </tbody>
-                  
-                </table>
+                <div class= "table-responsive">
+                  <table class="table">
+                    <thead>
+                      <th>quantity</th>
+                      <th>Ingredient Name</th>
+                      <th>Purchase price</th>
+                      <th>Purchase Volume</th>
+                      <th>unit</th>
+                    </thead>
+                    <tbody id="recipe_ingredients">
+                      <%= f.simple_fields_for :recipe_ingredients, defaults: {input_html: {class:'form-inline'}} do |recipe_ingredient| %>
+                        <%= render 'recipe_ingredient_fields', :f => recipe_ingredient %>
+                      <% end %>
+                      <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
+                    </tbody>
+                    
+                  </table>
+                  </div>
                 <%= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default custom-small-button" %>
                     
             </div>

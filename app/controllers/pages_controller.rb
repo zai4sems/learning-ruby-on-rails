@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     end
     
     def dashboard
-        
+        @recipes = current_user.recipes
     end
     
     def about

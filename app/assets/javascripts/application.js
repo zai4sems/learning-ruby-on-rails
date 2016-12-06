@@ -66,6 +66,7 @@ $("#menu-toggle").click(function(e) {
 
 $('#recipe_ingredient').dataTable();
 $('#recipe_material').dataTable();
+$('#recipes').dataTable();
 
 $('#table_datatable').DataTable({
     responsive: true

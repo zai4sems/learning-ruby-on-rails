@@ -1,13 +1,18 @@
 <div class="col-md-4 blog-main box text-center" id="recipe_<%= recipe.id %>">
     
         <div class="panel panel-info">
-            
-            <div class="panel-heading">
+        <% recipe.calculate_cost %>
+        <% recipe.calculate_material_cost %>
+        
+        
+
+            <div class="panel-heading panel-heading-grid">
                 <h3 class="panel-title"><strong><%= recipe.title %></strong></h3>
-                <h3 class="panel-title"><strong><%#= link_to "#{recipe.title}", recipe_path(recipe.id)%></strong></h3>
-                <%= image_tag recipe.image.url, size: "100x100" %>
-                <p><%= recipe.description %></p>
                 <br>
+                <h3 class="panel-title"><strong><%#= link_to "#{recipe.title}", recipe_path(recipe.id)%></strong></h3>
+                <%#= image_tag recipe.image.url, size: "100x100" %>
+                <p><%= recipe.description %></p>
+                <br><br>
                 <table class="table">
                     <tbody>
                         <tr>
@@ -21,6 +26,36 @@
                         <tr>
                             <td><strong>Grant Cost of Recipe : </strong></td>
                             <td><strong><%= number_to_currency(recipe.cost.to_f + recipe.material_cost.to_f, :unit => "RM") %></strong></td>
+                        </tr>
+                        <tr>
+                            <td>Labour Cost</td>
+                            <td><% @labour = ((recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*recipe.time_spent_in_hour.to_f) %>
+                            <%= number_to_currency(@labour, :unit => "RM") %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Recipe cost</td>
+                            <td><% @cake_cost = (recipe.cost.to_f + recipe.material_cost.to_f + ((recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*recipe.time_spent_in_hour.to_f)) %>
+                            <%= number_to_currency(@cake_cost, :unit => "RM") %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Profit to add to price:</td>
+                            <td><% @profit = (recipe.percentage_profit.to_f/100)*@cake_cost.to_f %>
+                            <%= number_to_currency(@profit, :unit => "RM") %>
+                            </td>
+                        </tr>
+                        <tr><% @total = @profit.to_f + @cake_cost.to_f %>
+                            <td>TOTAL cost of RECIPE(S) including profit:</td>
+                            <td><%= number_to_currency(@total, :unit => "RM") %></td>
+                        </tr>
+                        <tr>
+                            <td>Number of serving</td>
+                            <td><%= recipe.serving_number %></td>
+                        </tr>
+                        <tr>
+                            <td>Cost per serving</td>
+                            <td><%= number_to_currency(@total.to_f / recipe.serving_number.to_f, :unit => "RM") %></td>
                         </tr>
                     </tbody>
                 </table>

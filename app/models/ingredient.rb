@@ -6,8 +6,8 @@ class Ingredient < ActiveRecord::Base
     # validates :user_id, presence: true
     validates :name, presence: true, length: { minimum: 3, maximum: 50}
     #validates_uniqueness_of :name    #sebab banyak user
-    validates :purchase_price, presence: true
-    validates :volume, presence: true
+    validates :purchase_price, presence: true, :numericality => { :greater_than => 0 }
+    validates :volume, presence: true, :numericality => { :greater_than => 0 }
     validates :unit, presence: true
     
    #accepts_nested_attributes_for :recipe_ingredients, reject_if: :all_blank, allow_destroy: true

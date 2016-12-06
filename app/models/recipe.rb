@@ -7,16 +7,19 @@ class Recipe < ActiveRecord::Base
     has_many :recipe_materials, dependent:  :destroy
     has_many :materials, through: :recipe_materials, :class_name => 'Material'
     
-    validates :serving_number, presence: true
-    validates :time_spent_in_hour, presence: true
+    validates :serving_number, presence: true, :numericality => { :greater_than => 0 }
+    validates :time_spent_in_hour, presence: true, :numericality => { :greater_than => 0 }
+    validates :rate_per_hour, :numericality => { :greater_than => 0 }
+    validates :percentage_profit, :numericality => { :greater_than => 0 }
+    
     validates :user_id, presence: true
     validates :title, presence: true, length: { minimum: 3, maximum: 50}
     validate :image_size
     
     mount_uploader :image, PictureUploader
     
-   accepts_nested_attributes_for :recipe_ingredients, :allow_destroy => true, reject_if: proc { |attributes| attributes['quantity'].blank? }
-   accepts_nested_attributes_for :ingredients, reject_if: proc { |attributes| attributes['name'].blank? }
+   accepts_nested_attributes_for :recipe_ingredients, :allow_destroy => true, reject_if: :all_blank
+   accepts_nested_attributes_for :ingredients, reject_if: :all_blank
    
     accepts_nested_attributes_for :recipe_materials, :reject_if => :all_blank, :allow_destroy => true
    accepts_nested_attributes_for :materials, :reject_if => :all_blank

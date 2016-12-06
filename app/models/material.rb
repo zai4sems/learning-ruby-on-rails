@@ -6,8 +6,8 @@ class Material < ActiveRecord::Base
     
     validates :material_name, presence: true, length: { minimum: 3, maximum: 50}
     validates_uniqueness_of :material_name
-    validates :purchase_price, presence: true
-    validates :purchase_quantity, presence: true
+    validates :purchase_price, presence: true, :numericality => { :greater_than => 0 }
+    validates :purchase_quantity, presence: true, :numericality => { :greater_than => 0 }
     
     
     

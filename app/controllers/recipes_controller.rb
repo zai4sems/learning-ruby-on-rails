@@ -3,7 +3,8 @@ class RecipesController < ApplicationController
     before_action :set_recipe, only: [:edit, :update, :destroy]
    
     def my_recipes
-        @recipes = current_user.recipes.paginate(page: params[:page], per_page: 6)
+        @recipes = current_user.recipes.paginate(page: params[:page], per_page: 9)
+        
     end
     
     

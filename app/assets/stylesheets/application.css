@@ -260,6 +260,12 @@ body {
   
 }
 
+.panel-info > .panel-heading-grid {
+  background: #6BBEBB;
+  color: #fff;
+  
+}
+
 h1 {
   color: #6BBEBB;
   font-weight: bold;

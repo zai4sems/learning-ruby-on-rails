@@ -25,19 +25,23 @@
       
       <div class="panel panel-default">
       	<div class="panel-heading panel-heading-custom">
-      		Non-food List / Materials
+      		List of Recipes
       	</div>
       	<div class="panel-body">
-          <table class="display responsive no-wrap" id="table_datatable">
+      	  <div class="table-responsive">
+          <table class="table" id="recipes">
             <thead>
               <tr>
                 <th><%= model_class.human_attribute_name(:title) %></th>
-                <th><%= model_class.human_attribute_name(:image) %></th>
                 <th>Ingredients Cost</th>
                 <th>Non-food item cost (Materials)</th>
                 <th>Grant cost of Recipe</th>
-                <th>Number of Servings</th>
-                <th>Grant Cost Per Serving</th>
+                <th>Labour Cost</th>
+                <th>Recipe cost</th>
+                <th>Profit to add to price:</th>
+                <th>TOTAL cost of RECIPE(S) including profit:</th>
+                <th>Number of serving</th>
+                <th>Cost per serving</th>
                 <th><%=t '.actions', :default => t("helpers.actions") %></th>
               </tr>
             </thead>
@@ -48,12 +52,38 @@
                   <% @recipe.calculate_cost %>
                   <% @recipe.calculate_material_cost %>
                   <td><%= link_to recipe.title, recipe_path(recipe) %></td>
-                  <td><%= image_tag recipe.image.url, size: "100x100" %></td>
                   <td><%= number_to_currency(@recipe.cost, :unit => "RM") %></td>
                   <td><%= number_to_currency(@recipe.material_cost, :unit => "RM") %></td>
                   <td><%= number_to_currency(@recipe.cost.to_f + @recipe.material_cost.to_f, :unit => "RM") %></td>
-                  <td><%= @recipe.serving_number %></td>
-                  <td><%= number_to_currency((@recipe.cost.to_f + @recipe.material_cost.to_f) / @recipe.serving_number.to_i, :unit => "RM") %></td>
+                  
+                  
+                        
+                            
+                            <td><% @labour = ((recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*recipe.time_spent_in_hour.to_f) %>
+                            <%= number_to_currency(@labour, :unit => "RM") %>
+                            </td>
+                        
+                            
+                            <td><% @cake_cost = (recipe.cost.to_f + recipe.material_cost.to_f + ((recipe.rate_per_hour.to_f+(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f)))*recipe.time_spent_in_hour.to_f)) %>
+                            <%= number_to_currency(@cake_cost, :unit => "RM") %>
+                            </td>
+                       
+                            
+                            <td><% @profit = (recipe.percentage_profit.to_f/100)*@cake_cost.to_f %>
+                            <%= number_to_currency(@profit, :unit => "RM") %>
+                            </td>
+                        
+                            <% @total = @profit.to_f + @cake_cost.to_f %>
+                            
+                            <td><%= number_to_currency(@total, :unit => "RM") %></td>
+                        
+                            
+                            <td><%= recipe.serving_number %></td>
+                        
+                            
+                            <td><%= number_to_currency(@total.to_f / recipe.serving_number.to_f, :unit => "RM") %></td>
+                                          
+                  
                   <td>
                           
                     <%= link_to '', edit_recipe_path(recipe), :class => 'btn btn-default btn-xs fa fa-pencil-square-o'%>
@@ -70,6 +100,7 @@
               <% end %>
             </tbody>
           </table>
+          </div>
       	</div>
       </div>
       

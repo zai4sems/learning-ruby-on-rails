@@ -215,17 +215,17 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Rate Per Hour :  </td>
+                    <td>Rate per hour :  </td>
                     <td> <%= number_to_currency(@recipe.rate_per_hour, :unit => "RM") %></td>
                   </tr>
                   <tr>
-                    <td>Time Spent in Hour : </td>
+                    <td>Time spent in hour : </td>
                     <td><%= @recipe.time_spent_in_hour %></td>
                   </tr>
                   <tr>
-                    <td><strong>Overhead Cost Per Hour: </strong></td>
+                    <td><strong>Overhead cost per hour: </strong></td>
                     <td><%= link_to number_to_currency(current_user.overheads.sum(:total)/((52-current_user.no_of_week_holiday_per_year.to_f)*current_user.hour_worked_per_week.to_f), :unit => "RM"), overheads_path %></td>
-                    <td><strong>Labour Cost:</strong></td>
+                    <td><strong>Labour cost:</strong></td>
                     <td><%= number_to_currency(@labour, :unit => "RM") %></td>
                   </tr>
                   <tr></tr>
@@ -238,29 +238,29 @@
                   <tr></tr>
                   <tr>
                     <td></td><td></td>
-                    <td><strong>Ingredients Cost:</strong></td>
+                    <td><strong>Ingredients cost:</strong></td>
                     <td><%= number_to_currency(@recipe.cost, :unit => "RM") %></td>
                   </tr>
                   <tr>
                     <td></td><td></td>
-                    <td><strong>Non-food items Cost:</strong></td>
+                    <td><strong>Non-food items cost:</strong></td>
                     <td><%= number_to_currency(@recipe.material_cost, :unit => "RM") %></td>
                   </tr>
                   <tr>
                     <td></td><td></td>
-                    <td><strong>Total Cost of CAKE(S):</strong></td>
+                    <td><strong>Total cost of RECIPE(S):</strong></td>
                     <td><%= number_to_currency(@cake_cost, :unit => "RM") %></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td></td>
-                    <td class="info"><strong>TOTAL of cost of cake(s) including profit:</strong></td>
+                    <td class="info"><strong>TOTAL of cost of RECIPE(S) including profit:</strong></td>
                     <td class="info"><strong><%= number_to_currency(@total, :unit => "RM") %></td>
                   </tr>
                   <tr class="success">
                     <td><strong>Number of servings :</strong></td>
                     <td><%= @recipe.serving_number %></td>
-                    <td><strong>Cost Per Serving :</strong></td>
+                    <td><strong>Cost per serving :</strong></td>
                     <td><%= number_to_currency(@total.to_f / @recipe.serving_number.to_f, :unit => "RM") %></td>
                   </tr>
                 </tbody>
