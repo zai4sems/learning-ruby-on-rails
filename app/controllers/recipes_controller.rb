@@ -17,31 +17,48 @@ class RecipesController < ApplicationController
     end
     
     def edit
+        #@recipe.recipe_ingredients.build
     end
     
     def create
         @recipe = Recipe.new(recipe_params)
         @recipe.user = current_user
-        @recipe.recipe_ingredients.each do |f|
-            f.ingredient.user = current_user
+        #@recipe = current_user.recipes.build(recipe_params)
+        
+        unless @recipe.recipe_ingredients.nil?
+            @recipe.recipe_ingredients.each do |f|
+                
+                unless f.ingredient.nil?
+                    f.ingredient.user = current_user
+                end
+            end
         end
-        @recipe.recipe_materials.each do |f|
-            f.material.user = current_user
+        
+        if @recipe.recipe_materials.nil?
+        else
+            @recipe.recipe_materials.each do |f|
+                
+                if f.material.nil?
+                else
+                    f.material.user = current_user
+                end
+            end
         end
+        
         
         begin
             if @recipe.save
-            flash[:notice] = "recipe was successfully created"
+            flash[:notice] = "Recipe was successfully created"
             redirect_to recipe_path(@recipe)
             else
-                flash[:notice] = "Recipe cannot be created"
+                flash[:danger] = "Recipe cannot be created"
                 render 'new'
             end
         rescue ActiveRecord::RecordNotUnique
             respond_to do |format|
             format.html { render :action => 'new' }
             format.html
-            flash[:notice] = "Unable to proceed because there were same ingredient being used"
+            flash[:danger] = "Unable to proceed because there were same ingredient being used"
             end
         end
     end
@@ -51,8 +68,27 @@ class RecipesController < ApplicationController
     def update
        #@recipe.cost = @recipe.calculate_cost
        #@recipe.ingredients.build
+        
+            @recipe.recipe_ingredients.each do |f|
+                #f.ingredient.user = current_user
+                
+                f.ingredient.user = current_user
+            end
+        
+        
+        if @recipe.recipe_materials.nil?
+        else
+            @recipe.recipe_materials.each do |f|
+                
+                if f.material.nil?
+                else
+                    f.material.user = current_user
+                end
+            end
+        end
+        
        if @recipe.update(recipe_params)
-           flash[:notice] = "recipe was successfully updated"
+           flash[:notice] = "Recipe was successfully updated"
            redirect_to recipe_path(@recipe)
        else
            render 'edit'
@@ -62,7 +98,8 @@ class RecipesController < ApplicationController
     
     def show
         @recipe_ingredient = RecipeIngredient.new
-        @ingredient = Ingredient.new
+        #@ingredient = @recipe_ingredient.ingredients.build
+        #@ingredient = Ingredient.new
         @ingredients = current_user.ingredients
         @materials = current_user.materials
         @recipe = Recipe.includes(:recipe_ingredients, :recipe_materials).find(params[:id])

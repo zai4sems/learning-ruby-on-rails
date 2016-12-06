@@ -30,23 +30,41 @@
         
        
         
-      <%= simple_form_for @recipe, defaults: {input_html: {multipart: true, class:'form-horizontal'}}  do |f| %>
+      <%= form_for @recipe do |f| %>
       
-        <%= f.input :title,hint: 'Recipe Name ', input_html: {class: 'form-control'} %>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+        
+        <%= f.label :serving_number %>
+        <%= f.number_field :serving_number %>
+        
+        <%= f.label :time_spent_in_hour %>
+        <%= f.number_field :time_spent_in_hour %>
+        
+        <div class="ing">
+          <%= f.fields_for :recipe_ingredients do |builder| %>
+            <%= render 'field_fields', f: builder %>
+            
+              <br>
+          <% end %>
+          
+          <%= link_to_add_fields "Add ingredient", f, :recipe_ingredients %>
+        </div>
+
         <br>
-        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', input_html: {class: 'form-control'} %>
+        <%#= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', input_html: {class: 'form-control'} %>
         <br>
-        <%= f.input :description, input_html: {rows:'3', class: 'form-control'} %>
+        <%#= f.input :description, input_html: {rows:'3', class: 'form-control'} %>
         <br>
         <div class="row">
         <div class="col-md-3 no-padding">
-          <%= f.input :serving_number, input_html: {class: 'form-control', min: 0} %></div>
+          <%#= f.input :serving_number, input_html: {class: 'form-control', min: 0} %></div>
         <div class="col-md-3 no-padding left-padding">
-          <%= f.input :rate_per_hour, input_html: {class: 'form-control', min: 0} %></div>
+          <%#= f.input :rate_per_hour, input_html: {class: 'form-control', min: 0} %></div>
         <div class="col-md-3 no-padding left-padding">
-          <%= f.input :time_spent_in_hour, input_html: {class: 'form-control', min: 0} %></div>
+          <%#= f.input :time_spent_in_hour, input_html: {class: 'form-control', min: 0} %></div>
         <div class="col-md-3 no-padding left-padding">
-          <%= f.input :percentage_profit, input_html: {class: 'form-control', min: 0}, label: 'Optional percentage profit to add' %>
+          <%#= f.input :percentage_profit, input_html: {class: 'form-control', min: 0}, label: 'Optional percentage profit to add' %>
         </div></div>
         <br><br>
         
@@ -63,21 +81,17 @@
                 <h2><strong>Ingredients</strong></h2>
                 <table class="table">
                   <thead>
-                    <th>quantity</th>
-                    <th>Ingredient Name</th>
-                    <th>Purchase price</th>
-                    <th>Purchase Volume</th>
-                    <th>unit</th>
+                    
                   </thead>
                   <tbody id="recipe_ingredients">
-                    <%= f.simple_fields_for :recipe_ingredients, defaults: {input_html: {class:'form-inline'}} do |recipe_ingredient| %>
-                      <%= render 'recipe_ingredient_fields', :f => recipe_ingredient %>
-                    <% end %>
+                    <%#= f.simple_fields_for :recipe_ingredients, defaults: {input_html: {class:'form-inline'}} do |recipe_ingredient| %>
+                      <%#= render 'recipe_ingredient_fields', :f => recipe_ingredient %>
+                    <%# end %>
                     <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
                   </tbody>
                   
                 </table>
-                <%= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default custom-small-button" %>
+                <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default custom-small-button" %>
                     
             </div>
             <div class="tab-pane fade in" id="Material">
@@ -86,14 +100,14 @@
                   <thead>
                   </thead>
                   <tbody id="recipe_materials">
-                    <%= f.simple_fields_for :recipe_materials, defaults: {input_html: {class:'form-inline'}} do |recipe_material| %>
-                      <%= render 'recipe_material_fields', :f => recipe_material %>
-                    <% end %>
+                    <%#= f.simple_fields_for :recipe_materials, defaults: {input_html: {class:'form-inline'}} do |recipe_material| %>
+                      <%#= render 'recipe_material_fields', :f => recipe_material %>
+                    <%# end %>
                     <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
                   </tbody>
                   
                 </table>
-                <%= link_to_add_association 'Add Material',f, :recipe_materials, :"data-association-insertion-node" => "tbody#recipe_materials", :"data-association-insertion-method" => "append", :partial => "recipe_material_fields", :class => "btn btn-default custom-small-button" %>
+                <%#= link_to_add_association 'Add Material',f, :recipe_materials, :"data-association-insertion-node" => "tbody#recipe_materials", :"data-association-insertion-method" => "append", :partial => "recipe_material_fields", :class => "btn btn-default custom-small-button" %>
               
             </div>
           </div>
@@ -104,7 +118,7 @@
         
         <div class="pull-right">
             <%= link_to 'Cancel', recipes_path, class: "btn btn-default custom-cancel-button" %>
-            <%= f.button :submit, :disable_with => 'Please wait ...', :class => 'custom-main-button' %>
+            <%= f.submit 'Enter', :class => 'custom-main-button' %>
         </div>
         
       <% end %>

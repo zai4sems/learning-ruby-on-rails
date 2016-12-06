@@ -1,13 +1,84 @@
-<tr class="nested-fields recipe-ingredient-fields"  id="recipe_ingredients">
-  <td class="ingredient_quantity"><%= f.input :quantity, label: false, placeholder: 'Quantity/Amount needed', input_html: {class:'form-control',min: 0} %></td>
-  <td class="ingredient_from_list"><%= f.association :ingredient, collection: current_user.ingredients.order(:name), :prompt => 'Choose an existing ingredient', label: false, input_html: {class:'form-control'} %></td>
-
-    <% if f.object.quantity.nil? && f.object.ingredient.nil? %>
-      <td class="nested-field recipe-ingredient-fields">
-        <%= link_to_add_association 'OR Create New', f, :ingredient, :class => 'btn btn-sm custom-small-new-button'%>
-      </td>
-    <% else %>
+<tr class="nested-fields recipe-ingredient-fields ">
+  <td class="ingredient_quantity">
+    <%= f.input :quantity, label: false, placeholder: 'Quantity/Amount needed', input_html: {class:'form-control',min: 0} %>
+    </td>
+        <script>
+          $('.recipe_select').on('change', function(){
+            var bapak = $(this).closest(".nested-fields");
+            console.log(bapak);
+            // alert( $(this).find(":selected").val() );
+            // $('#ayam').value(result.price)
+            // console.log($(this).find(":selected").attr("data-price"));
+             $(bapak).find('.purchase_price_text').val($(this).find(":selected").attr("data-price"));
+             $(bapak).find('.volume_text').val($(this).find(":selected").attr("data-volume"));
+             $(bapak).find('.unit_text').val($(this).find(":selected").attr("data-unit"));
+          });
+             
+        </script>
+      
+        <% if f.object.ingredient.nil? %>
+          
+          <td class="nested-field recipe-ingredient-fields links">
+            <div class="ingredient_from_list">
+              
+              <%= f.association :ingredient, collection: current_user.ingredients.order(:name).map { |g| [g.name, g.id, {'data-price' => g.purchase_price, 'data-volume' => g.volume, 'data-unit' => g.unit}] }, :prompt => 'Choose an existing ingredient', label: false, input_html: {class:'form-control recipe_select', id:'recipe_select' } %>
+              
+              
+              <%#= f.select :ingredient, current_user.ingredients.order(:name).map { |g| [g.name, g.id, {'data-price' => g.purchase_price, 'data-volume' => g.volume, 'data-unit' => g.unit}] }, {include_blank: 'Choose an existing ingredient'}, { class:'form-control recipe_select' } %>
+              
+              
+              <% if false %>
+              <select class="form-control recipe_select" id="recipe_select" name="recipe[recipe_ingredients_attributes][ingredient_id]">
+                <% current_user.ingredients.each do |ingredient| %>
+                  <option value="<%= ingredient.id %>" data-price="<%= ingredient.purchase_price %>"><%= ingredient.name %></option>
+                <% end %>
+              </select>
+              <% end %>
+              </div>
+            <%= link_to_add_association 'OR Create New', f, :ingredient, :class => 'btn btn-sm custom-small-new-button' %>
+          </td>
+          <%= f.simple_fields_for :ingredient do |g| %>
+            <td>
+            <%= g.input :purchase_price, label: false, placeholder: "Purchase Price", input_html: {class:'form-control purchase_price_text',min: 0, required: true} %>
+            </td>
+            <td>
+            <%= g.input :volume, label: false, placeholder: "Purchase Quantity/Volume", input_html: {class:'form-control volume_text',min: 0} %>
+            </td>
+            <td>
+            <%= g.input :unit, label: false, placeholder: "Unit", input_html: {class:'form-control unit_text'} %>
+            </td>
+          <% end %>
+        <% else %>
+          <%= f.simple_fields_for :ingredient do |g| %>
+            <td>
+            <%= g.input :name, label: false, placeholder: "New Ingredient Name", input_html: {class:'form-control'} %>
+            </td>
+            <td>
+            <%= g.input :purchase_price, label: false, placeholder: "Purchase Price", input_html: {class:'form-control',min: 0} %>
+            </td>
+            <td>
+            <%= g.input :volume, label: false, placeholder: "Purchase Quantity/Volume", input_html: {class:'form-control',min: 0} %>
+            </td>
+            <td>
+            <%= g.input :unit, label: false, placeholder: "Unit", input_html: {class:'form-control'} %>
+            </td>
+          <% end %>
+        <% end %>
+        
+      
+  
+        
+        
+        
+        <%# if @recipe.recipe_ingredients.any? %>
+       
+        
+        <% if f.object.quantity.nil? && f.object.ingredient.nil? %>
+          <td class="nested-field recipe-ingredient-fields links">
+            <%= link_to_add_association 'OR Create New', f, :ingredient, :class => 'btn btn-sm custom-small-new-button' %>
+          </td>
+        <% else %>
+        <% end %>
     
-    <% end %>
   <td class="col-md-1"><%= link_to_remove_association "", f, :class => 'btn btn-danger btn-sm fa fa-trash'%></td>
 </tr>

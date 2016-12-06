@@ -1,29 +1,10 @@
 var ready;
 ready = function () {
 
-$('#create_recipe_ingredient').click(function(){
-    $('.ingredient_name, .ingredient_purchase_price, .ingredient_unit, .ingredient_volume').val("");
-    $('#errors_div').empty();
-});
+$('#new_recipe_ingredient').remove();
+$('#new_link').show();
+$('#incomplete_tasks').append('<%= j render(@recipe_ingredient) %>');
 
-<% if @recipe_ingredient.errors.any? %>
-    $('#errors_div').empty();
-    <% str2 = "The following errors prevented the ingredient from getting created" + "<br/>" %>
-    $("#errors_div").append("<%= raw j str2 %>");
-    <% str = "" %>
-    <% @recipe_ingredient.errors.full_messages.each do |error| %>
-        <% str+= error + "<br/>" %>
-    <% end %>
-    $("#errors_div").append("<%= raw j str %>");
-<% else %>
-    $("#mynewingredient").modal('hide');
-    $(".ingredient_name").val('');
-    $(".ingredient_purchase_price").val('');
-    $(".ingredient_volume").val('');
-    $(".ingredient_unit").val('');
-    
-    
-<% end %>
 };
 
 $(document).ready(ready);

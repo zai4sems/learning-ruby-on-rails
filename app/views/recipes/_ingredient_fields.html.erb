@@ -1,16 +1,7 @@
-<tr class="nested-fields" id="recipe_ingredients">
-<td>
+
+<td class="nested-fields">
   <%#= f.label :new_ingredient_name %>
   <%#= f.text_field :name, class: "form-control" %>
-  <%= f.input :name, label: false, placeholder: "New Ingredient Name", input_html: {class:'form-control'} %>
+  <%= f.input :name,required: true, label: false, placeholder: "New Ingredient Name", input_html: {class:'form-control'} %>
+  <%= f.input :user_id, as: :hidden, :input_html => { :value => current_user.id } %>
 </td>
-<td>
-  <%= f.input :purchase_price, label: false, placeholder: "Purchase Price", input_html: {class:'form-control',min: 0} %>
-</td>
-<td>
-  <%= f.input :volume, label: false, placeholder: "Purchase Quantity/Volume", input_html: {class:'form-control',min: 0} %>
-</td>
-<td>
-  <%= f.input :unit, label: false, placeholder: "Unit", input_html: {class:'form-control'} %>
-</td>
-</tr>

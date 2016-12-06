@@ -1,0 +1,18 @@
+<fieldset>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+      <%= f.fields_for :ingredient do |h| %>
+        <%= h.label :name %>
+        <%= h.text_field :name %>
+        
+        <%= h.label :purchase_price %>
+        <%= h.number_field :purchase_price %>
+        
+        <%= h.label :purchase_quantity %>
+        <%= h.number_field :volume %>
+        
+        <%= h.label :unit %>
+        <%= h.text_field :unit %>
+      <% end %>
+      <%= link_to "[remove]", '#', class: "remove_fields" %>
+</fieldset>

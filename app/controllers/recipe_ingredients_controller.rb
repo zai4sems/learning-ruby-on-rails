@@ -16,6 +16,7 @@ class RecipeIngredientsController < ApplicationController
     end
     
     def create
+        
         @recipe_ingredient = RecipeIngredient.new(recipe_id: params[:recipe_id], ingredient_id: params[:ingredient_id])
         #@recipe_ingredient = RecipeIngredient.new(recipe_ingredient_params)
         @recipe_ingredient.quantity = 0
@@ -65,7 +66,7 @@ class RecipeIngredientsController < ApplicationController
     end
     
     def recipe_ingredient_params
-        params.require(:recipe_ingredient).permit(:recipe_id, :ingredient_id, :quantity)
+        params.require(:recipe_ingredient).permit(:recipe_id, :ingredient_id, :quantity, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :user_id, :_destroy])
     end
     
 end

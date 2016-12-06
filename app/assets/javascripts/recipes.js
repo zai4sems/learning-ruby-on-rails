@@ -4,7 +4,12 @@
 var ready;
 ready = function () {
 
-$("#ingredients a.add_fields").
+$('#recipe_select').on('change', function(){
+   alert('ayam'); 
+});
+
+
+$("#recipe_ingredients a.add_fields").
   data("association-insertion-position", 'before').
   data("association-insertion-node", 'this');
 

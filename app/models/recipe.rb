@@ -3,22 +3,28 @@ class Recipe < ActiveRecord::Base
     belongs_to :user
     has_many :recipe_ingredients, dependent:  :destroy
     has_many :ingredients, through: :recipe_ingredients, :class_name => 'Ingredient'
+    
     has_many :recipe_materials, dependent:  :destroy
     has_many :materials, through: :recipe_materials, :class_name => 'Material'
-
+    
     validates :serving_number, presence: true
+    validates :time_spent_in_hour, presence: true
     validates :user_id, presence: true
     validates :title, presence: true, length: { minimum: 3, maximum: 50}
     validate :image_size
     
     mount_uploader :image, PictureUploader
     
-   accepts_nested_attributes_for :recipe_ingredients, :allow_destroy => true
-   accepts_nested_attributes_for :ingredients, :reject_if => :all_blank
+   accepts_nested_attributes_for :recipe_ingredients, :allow_destroy => true, reject_if: proc { |attributes| attributes['quantity'].blank? }
+   accepts_nested_attributes_for :ingredients, reject_if: proc { |attributes| attributes['name'].blank? }
    
-    accepts_nested_attributes_for :recipe_materials, :allow_destroy => true
+    accepts_nested_attributes_for :recipe_materials, :reject_if => :all_blank, :allow_destroy => true
    accepts_nested_attributes_for :materials, :reject_if => :all_blank
    
+   
+    def reject_recipe_item(attributed)
+        attributed[:name].blank?
+    end
 
    
    def calculate_cost

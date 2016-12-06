@@ -289,6 +289,8 @@ GEM
       trollop (~> 2.1)
     rdoc (4.2.2)
       json (~> 1.4)
+    reject_deeply_nested (0.4.0)
+      activesupport
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     sass (3.4.22)
@@ -365,6 +367,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.5)
   rails_12factor
+  reject_deeply_nested
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple_form (~> 3.2, >= 3.2.1)
