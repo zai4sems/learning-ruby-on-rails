@@ -1,7 +1,7 @@
 class Ingredient < ActiveRecord::Base
     
     belongs_to :user
-    has_many :recipe_ingredients, dependent:  :destroy
+    has_many :recipe_ingredients, dependent:  :destroy, inverse_of: :ingredient
     has_many :recipes, through: :recipe_ingredients
     # validates :user_id, presence: true
     validates :name, presence: true, length: { minimum: 3, maximum: 50}

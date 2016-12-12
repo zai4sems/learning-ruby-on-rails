@@ -30,6 +30,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
 
 gem 'slim', '~> 3.0', '>= 3.0.7'
 

@@ -49,12 +49,12 @@
               <% @recipes.each do |recipe| %>
                 <tr>
                   <% @recipe = Recipe.includes(:recipe_ingredients).find(recipe.id) %>
-                  <% @recipe.calculate_cost %>
-                  <% @recipe.calculate_material_cost %>
+                  <% recipe.calculate_cost %>
+                  <% recipe.calculate_material_cost %>
                   <td><%= link_to recipe.title, recipe_path(recipe) %></td>
-                  <td><%= number_to_currency(@recipe.cost, :unit => "RM") %></td>
-                  <td><%= number_to_currency(@recipe.material_cost, :unit => "RM") %></td>
-                  <td><%= number_to_currency(@recipe.cost.to_f + @recipe.material_cost.to_f, :unit => "RM") %></td>
+                  <td><%= number_to_currency(recipe.cost, :unit => "RM") %></td>
+                  <td><%= number_to_currency(recipe.material_cost, :unit => "RM") %></td>
+                  <td><%= number_to_currency(recipe.cost.to_f + recipe.material_cost.to_f, :unit => "RM") %></td>
                   
                   
                         

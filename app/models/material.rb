@@ -1,11 +1,11 @@
 class Material < ActiveRecord::Base
-    has_many :recipe_materials, dependent:  :destroy
+    has_many :recipe_materials, dependent:  :destroy, inverse_of: :material
     has_many :recipes, through: :recipe_materials
     belongs_to :user
     validates :user_id, presence: true
     
     validates :material_name, presence: true, length: { minimum: 3, maximum: 50}
-    validates_uniqueness_of :material_name
+    #validates_uniqueness_of :material_name
     validates :purchase_price, presence: true, :numericality => { :greater_than => 0 }
     validates :purchase_quantity, presence: true, :numericality => { :greater_than => 0 }
     

@@ -40,6 +40,7 @@
           <%= f.simple_fields_for :ingredient do |g| %>
             <td>
             <%= g.input :purchase_price, label: false, placeholder: "Purchase Price", input_html: {class:'form-control purchase_price_text',min: 0, required: true} %>
+            <%= g.input :user_id, as: :hidden, :input_html => { :value => current_user.id } %>
             </td>
             <td>
             <%= g.input :volume, label: false, placeholder: "Purchase Quantity/Volume", input_html: {class:'form-control volume_text',min: 0} %>
@@ -52,6 +53,7 @@
           <%= f.simple_fields_for :ingredient do |g| %>
             <td>
             <%= g.input :name, label: false, placeholder: "New Ingredient Name", input_html: {class:'form-control'} %>
+            <%= g.input :user_id, as: :hidden, :input_html => { :value => current_user.id } %>
             </td>
             <td>
             <%= g.input :purchase_price, label: false, placeholder: "Purchase Price", input_html: {class:'form-control',min: 0} %>

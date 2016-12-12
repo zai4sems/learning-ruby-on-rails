@@ -35,12 +35,10 @@ class RecipesController < ApplicationController
             end
         end
         
-        if @recipe.recipe_materials.nil?
-        else
+        unless @recipe.recipe_materials.nil?
             @recipe.recipe_materials.each do |f|
                 
-                if f.material.nil?
-                else
+                unless f.material.nil?
                     f.material.user = current_user
                 end
             end
@@ -70,11 +68,14 @@ class RecipesController < ApplicationController
        #@recipe.cost = @recipe.calculate_cost
        #@recipe.ingredients.build
         
+        unless @recipe.recipe_ingredients.nil?
             @recipe.recipe_ingredients.each do |f|
-                #f.ingredient.user = current_user
                 
-                f.ingredient.user = current_user
+                unless f.ingredient.nil?
+                    f.ingredient.user = current_user
+                end
             end
+        end
         
         
         if @recipe.recipe_materials.nil?
@@ -134,8 +135,8 @@ class RecipesController < ApplicationController
     def recipe_params
         #params.require(:recipe).permit(:id, :title, :image, :description, :instructions, :rate_per_hour, :time_spent_in_hour, :percentage_profit, :_destroy, recipe_ingredients_attributes: [:id, :_destroy, :ingredient_id, :quantity, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :_destroy]])
         params.require(:recipe).permit(:id, :title, :image, :description, :instructions, :rate_per_hour, :time_spent_in_hour, :percentage_profit, :serving_number, :_destroy, 
-        recipe_ingredients_attributes: [:id, :_destroy, :ingredient_id, :quantity, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :user_id, :_destroy]],
-        recipe_materials_attributes: [:id, :_destroy, :material_id, :quantity, material_attributes: [:id, :material_name, :purchase_price, :purchase_quantity, :_destroy]])
+        recipe_ingredients_attributes: [:id, :_destroy, :recipe_id, :ingredient_id, :quantity, ingredient_attributes: [:id, :name, :purchase_price, :volume, :unit, :user_id, :_destroy]],
+        recipe_materials_attributes: [:id, :_destroy, :recipe_id, :material_id, :quantity, material_attributes: [:id, :material_name, :purchase_price, :purchase_quantity, :user_id, :_destroy]])
         
         
     end

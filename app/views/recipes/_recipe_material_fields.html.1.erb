@@ -1,8 +1,5 @@
 
 
-
-
-
 <tr class="nested-fields recipe-material-fields">
   <td class="material_quantity">
     <%= f.input :quantity, label: false, placeholder: 'Quantity/Amount', input_html: {class:'form-control',min: 0} %>
@@ -21,7 +18,6 @@
         
         <% if f.object.material.nil? %>
           <td class = "nested-field recipe-material-fields links">
-            
             <div class = "material_from_list">
               <%= f.association :material, collection: current_user.materials.order(:material_name).map { |g| [g.material_name, g.id, {'data-price' => g.purchase_price, 'data-volume' => g.purchase_quantity}] }, :prompt => 'Choose an existing material', label: false, input_html: {class:'form-control recipe_select', id:'recipe_select' } %>
             </div>

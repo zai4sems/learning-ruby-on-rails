@@ -1,8 +1,8 @@
 class RecipeIngredient < ActiveRecord::Base
-    belongs_to :ingredient
+    belongs_to :ingredient, inverse_of: :recipe_ingredients
     belongs_to :recipe
     
-    
+    validates_presence_of :ingredient
     
     #validates :quantity, presence: true
     validates_uniqueness_of :recipe_id, :scope => :ingredient_id
@@ -14,7 +14,7 @@ class RecipeIngredient < ActiveRecord::Base
     delegate :price, to: :ingredient, prefix: true
     delegate :price, to: :recipe, prefix: true
     
-    # validates_associated :ingredient, :recipe
+    # validates_associated :ingredient
  
      accepts_nested_attributes_for :ingredient, reject_if: proc { |attributes| attributes['name'].blank? }
     

@@ -27,12 +27,11 @@
             </div>
         </div>
         <% end %>
-        
-       
+  
         
       <%= simple_form_for @recipe, defaults: {input_html: {multipart: true, class:'form-horizontal'}}  do |f| %>
       
-        <%= f.input :title,hint: 'Recipe Name ', input_html: {class: 'form-control'} %>
+        <%= f.input :title, validate: { presence: true, uniqueness: false } ,hint: 'Recipe Name ', input_html: {class: 'form-control'} %>
         <br>
         <%#= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', input_html: {class: 'form-control'} %>
         <br>
@@ -44,7 +43,7 @@
         <div class="col-md-3 no-padding left-padding">
           <%= f.input :rate_per_hour, input_html: {class: 'form-control', min: 0}, hint: 'Your hourly wage.' %></div>
         <div class="col-md-3 no-padding left-padding">
-          <%= f.input :time_spent_in_hour, input_html: {class: 'form-control', min: 0}, hint: 'Time take for you to make this recipe.' %></div>
+          <%= f.input :time_spent_in_hour, input_html: {class: 'form-control', min: 0}, hint: 'Time taken for you to make this recipe(etc 1 is equavalent to 1 hour / 0.5 is equavalent to 30 minutes.' %></div>
         <div class="col-md-3 no-padding left-padding">
           <%= f.input :percentage_profit, input_html: {class: 'form-control', min: 0}, label: 'Optional percentage profit to add', hint: 'Value in percentage(%).' %>
         </div></div>
@@ -64,10 +63,10 @@
                 <div class= "table-responsive">
                   <table class="table">
                     <thead>
-                      <th>quantity</th>
+                      <th>Quantity</th>
                       <th>Ingredient Name</th>
-                      <th>Purchase price</th>
-                      <th>Purchase Volume</th>
+                      <th>Purchase Price</th>
+                      <th>Purchase Quantity</th>
                       <th>unit</th>
                     </thead>
                     <tbody id="recipe_ingredients">
@@ -84,17 +83,23 @@
             </div>
             <div class="tab-pane fade in" id="Material">
                 <h2><strong>Non-food items</strong></h2>
-                <table class="table">
-                  <thead>
-                  </thead>
-                  <tbody id="recipe_materials">
-                    <%= f.simple_fields_for :recipe_materials, defaults: {input_html: {class:'form-inline'}} do |recipe_material| %>
-                      <%= render 'recipe_material_fields', :f => recipe_material %>
-                    <% end %>
-                    <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
-                  </tbody>
-                  
-                </table>
+                <div class= "table-responsive">
+                  <table class="table">
+                    <thead>
+                      <th>Quantity</th>
+                      <th>Material Name</th>
+                      <th>Purchase Price</th>
+                      <th>Purchase Quantity</th>
+                    </thead>
+                    <tbody id="recipe_materials">
+                      <%= f.simple_fields_for :recipe_materials, defaults: {input_html: {class:'form-inline'}} do |recipe_material| %>
+                        <%= render 'recipe_material_fields', :f => recipe_material %>
+                      <% end %>
+                      <%#= link_to_add_association 'Add an Ingredient',f, :recipe_ingredients, :"data-association-insertion-node" => "tbody#recipe_ingredients", :"data-association-insertion-method" => "append", :partial => "recipe_ingredient_fields", :class => "btn btn-default" %>
+                    </tbody>
+                    
+                  </table>
+                </div>
                 <%= link_to_add_association 'Add Material',f, :recipe_materials, :"data-association-insertion-node" => "tbody#recipe_materials", :"data-association-insertion-method" => "append", :partial => "recipe_material_fields", :class => "btn btn-default custom-small-button" %>
               
             </div>

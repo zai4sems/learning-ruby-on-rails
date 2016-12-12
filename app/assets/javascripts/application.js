@@ -27,6 +27,8 @@
 
 //= require twitter/bootstrap
 //= require twitter/bootstrap/modal
+//= require rails.validations
+//= require rails.validations.simple_form
 //= require turbolinks
 //= require_tree .
 

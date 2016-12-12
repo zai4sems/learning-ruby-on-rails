@@ -4,9 +4,9 @@
 var ready;
 ready = function () {
 
-$('#recipe_select').on('change', function(){
-   alert('ayam'); 
-});
+//$('#recipe_select').on('change', function(){
+   //alert('ayam'); 
+//});
 
 
 $("#recipe_ingredients a.add_fields").
