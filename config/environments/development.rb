@@ -39,7 +39,7 @@ config.action_mailer.default_url_options = { :host => 'learning-ruby-on-rails-hu
 #  authentication: "plain",
 #  enable_starttls_auto: true,
 #  user_name: "zai4sems@gmail.com",
-#  password: "seed40321?"
+#  password: "pass"
 #}
 
 
